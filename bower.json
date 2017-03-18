@@ -19,10 +19,14 @@
   ],
   "dependencies": {
     "angular-material": "^1.1.1",
+<<<<<<< HEAD
+    "angular": "^1.5.8"
+=======
     "angular": "^1.5.8",
     "material-design-icons": "^3.0.1"
   },
   "devDependencies": {
     "angular-ui-router": "^0.4.2"
+>>>>>>> ccbb5d4d6a4c31e510ec045c137ec21635496af8
   }
 }
