@@ -391,6 +391,47 @@
 
 
     }])
+    .controller('researchDataCtrl',['$scope','researchData',function($scope,researchData){
+      $scope.classes = [
+            { name: 'Patent', value: '1' },
+            { name: 'IPR', value: '2' },
+              { name: 'Revenue', value: '3' }
+          ];
+          $scope.checkUserEntry= function(userData){
+            var $Udata = angular.toJson(userData);
+            unitTestData.checkEntryUnitTest($scope,$Udata).then(function(userData){
+              if(userData.data==0){
+                  $scope.serverRespFalse = false;
+                  $scope.serverRespTrue = true;
+                }
+              else {
+                  $scope.serverRespFalse = true;
+                  $scope.serverRespTrue = false;
+              }
+
+            });
+          }
+      $scope.researchDataEntry = function() {
+        
+      };
+      $scope.choices = [{}];
+       $scope.saveForm = function(data){
+         var $data = angular.toJson(data);
+         researchData.submitData($data).then(function(data){
+           console.log(data.data);
+         })
+
+       }
+       $scope.addNewChoice = function() {
+         $scope.choices.push({});
+       };
+
+       $scope.removeChoice = function(item) {
+         $scope.choices.splice(item, 1);
+         };
+
+
+    }])
 
 
     //#################################################### DIRECTIVES
@@ -524,6 +565,16 @@
 
         }
 
+      }
+    }])
+    .factory('researchData',['$http',function($http){
+      return {
+       checkEntryResearch: function($scope,data){
+          return $http.post('/ksm/data/proctor/checkResearch.php',data);
+        },
+        storeResearchData: function(scope,data){
+          return $http.post('/ksm/data/proctor/storeResearchData.php',data);
+        }
       }
     }])
     .factory('unitTestData',['$http',function($http){
