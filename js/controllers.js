@@ -23,8 +23,11 @@
         Authenticate.logIn($scope,$data).then(function(data){
            console.log(data.data);
            var user = data.data;
-           if(user){
+           if(user[0].account_type==0){
              $state.go('user.home',{});
+           }
+           else if(user[0].account_type==2){
+             $state.go('admin.adminHome',{});
            }
            else {
              $scope.incorrectPassword();
@@ -108,9 +111,40 @@
         user.fetchPhoto($scope);
 
     }])
-    .controller('sformCtrl',['$scope',function($scope){
-        $scope.message = "Hi this a test msg";
+    .controller('adminHomeCtrl',['$scope',function($scope){
+        $scope.message = "ADMIN HOME PAGE";
     }])
+
+    .controller('adminBasicDetailsCtrl',['$scope',function($scope){
+        $scope.adminBasicDetail = function(data){
+        var $data = angular.toJson(data);
+        user.adminBasicDetail($scope,$data).then(function(data){
+
+          $scope.adminBasicDetailsForm.$setUntouched();
+          $scope.user= " ";
+          $scope.adminBasicDetailsForm.$setPristine();
+
+        });
+      }
+      $scope.branchList = [
+            { name: 'Computer Engineering', value: 'Computer' },
+            { name: 'Mechanical Engineering', value: 'Mechanical' },
+            { name: 'Electronics and Telecommunication ', value: 'ENTC' },
+            { name: 'IT Engineering ', value: 'IT' },
+            { name: 'Civil Engineering ', value: 'Civil' }
+          ];
+       $scope.designationList = [
+            { name: 'Principal', value: '1' },
+            { name: 'Dean', value: '2' },
+            { name: 'Head of Department ', value: '3' },
+            { name: 'Professor ', value: '4' },
+            { name: 'Associate Professor ', value: '5' },
+            { name: 'Assisstant Professor ', value: '6' },
+            { name: 'Lab Assisstant ', value: '7' }
+          ]
+    }])
+
+
     .controller('profileMenuCtrl',['$scope','Authenticate','$state',function($scope,Authenticate,$state){
         $scope.logout = function(){
           Authenticate.logout();

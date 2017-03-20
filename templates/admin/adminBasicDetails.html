@@ -1,0 +1,79 @@
+<div layout="column" layout-gt-md="row">
+  <div flex="20" style="max-width:20%;"></div>
+  <div flex="60">
+    <br>
+    <br>
+    <h1 class="md-display-1">Admin Basic Details</h1>
+    
+    <md-content>
+        <md-tabs md-dynamic-height md-border-bottom>
+          <!-- ######################### TAB 1 ####################### -->
+          <md-tab label="Basic Details">
+            <md-card>
+              <md-card-title>
+                <md-card-title-text>
+                  <span class="md-headline">Basic Details</span>
+                </md-card-title-text>
+              </md-card-title>
+              <md-card-content>
+                <md-content class="md-padding">
+                  <div layout="column">
+                    <form ng-submit="adminBasicDetail(user)" name="adminBasicDetailsForm" novalidate>
+
+                  <!-- fname : {{form1.firstname.$pristine}}
+                  fname : {{form1.firstname.$untouched}} -->
+                    <!-- <md-subheader class="md-primary">Unread Messages</md-subheader> -->
+                    <div layout="row">
+
+                      <md-input-container flex>
+                           <label>First Name</label>
+                           <input ng-model="user.firstname" name="firstname" type="text" autocomplete="off" ng-required="true">
+                      </md-input-container>
+
+                      <md-input-container flex>
+                           <label>Last Name</label>
+                           <input ng-model="user.lastname" type="text" autocomplete="off" ng-required="true">
+                      </md-input-container>
+                    </div>
+                    <div layout="row">
+                      <md-input-container flex>
+                           <label>Staff ID</label>
+                           <input ng-model="user.staffID" type="text" autocomplete="off" ng-required="true">
+                      </md-input-container>
+                      <md-input-container class="md-block" flex-gt-sm>
+                              <label>Branch</label>
+                              <md-select ng-model="user.branch">
+                              <md-option ng-value="branch.value" ng-repeat="branch in branchList" ng-required="true">{{branch.name}}</md-option>
+                              </md-select>
+                      </md-input-container>
+                      <md-input-container class="md-block" flex-gt-sm>
+                              <label>Designation</label>
+                              <md-select ng-model="user.designation">
+                              <md-option ng-value="designation.value" ng-repeat="designation in designationList" ng-required="true">{{designation.name}}</md-option>
+                              </md-select>
+                      </md-input-container>
+                    </div>
+                    <div layout="row">
+                      <md-input-container flex>
+                           <label>Email</label>
+                           <input ng-model="user.email" type="email" autocomplete="off" ng-required="true">
+                      </md-input-container>
+                      <md-input-container flex>
+                           <label>Phone Number(M)</label>
+                           <input ng-required="true" type="number"  ng-model="user.phone"  />
+                           <!-- min="1111111111"
+                             max="9999999999" ng-pattern="/^1234567890$/"step="any" name="rate" -->
+                      </md-input-container>
+                    </div>
+                    </div>
+                    <md-button type="submit" class="md-primary">Submit</md-button>
+                  </form>
+                  </div>
+                </md-content>
+              </md-card-content>
+            </md-card>
+        </md-tab>
+      </md-tabs>
+    </md-content>
+  <div flex="20" style="max-width:20%;"></div>
+</div>
