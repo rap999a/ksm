@@ -23,8 +23,11 @@
         Authenticate.logIn($scope,$data).then(function(data){
            console.log(data.data);
            var user = data.data;
-           if(user){
+           if(user[0].account_type==0){
              $state.go('user.home',{});
+           }
+           else if(user[0].account_type==1){
+             $state.go('staff.staffHome',{});
            }
            else {
              $scope.incorrectPassword();
@@ -102,8 +105,41 @@
     .controller('userHomeCtrl',['$scope',function($scope){
         $scope.message = "heelo";
     }])
-    .controller('sformCtrl',['$scope',function($scope){
-        $scope.message = "Hi this a test msg";
+    .controller('staffDetailsCtrl',['$scope',function($scope){
+        $scope.staffBasicDetail = function(data){
+        var $data = angular.toJson(data);
+        user.staffBasicDetail($scope,$data).then(function(data){
+
+          $scope.staffDetailsForm.$setUntouched();
+          $scope.user= " ";
+          $scope.staffDetailsForm.$setPristine();
+
+        });
+      }
+
+      $scope.branchList = [
+            { name: 'Computer Engineering', value: 'Computer' },
+            { name: 'Mechanical Engineering', value: 'Mechanical' },
+            { name: 'Electronics and Telecommunication ', value: 'ENTC' },
+            { name: 'Information Technology ', value: 'IT' },
+            { name: 'Civil Engineering', value: 'ENTC' }
+          ];
+      $scope.designationList = [
+            { name: 'Principal', value: '1' },
+            { name: 'Dean', value: '2' },
+            { name: 'HOD ', value: '3' },
+            { name: 'Professor ', value: '4' },
+            { name: 'Associate Professor ', value: '5' },
+            { name: 'Assistant Professor ', value: '6' },
+            { name: 'LAB Assistant ', value: '7' }
+          ];
+        
+    }])
+    .controller('staffHomeCtrl',['$scope',function($scope){
+        $scope.message = "Hi this a hii msg";
+    }])
+    .controller('studentPtgCtrl',['$scope',function($scope){
+        $scope.message = "Hi this a hii msg";
     }])
     .controller('profileMenuCtrl',['$scope','Authenticate','$state',function($scope,Authenticate,$state){
         $scope.logout = function(){
@@ -281,6 +317,90 @@
             };
 
      })
+    .controller('criticalAnalysisDataCtrl',function($scope,criticalAnalysis){
+    $scope.serverResp = 0;
+    $scope.classes = [
+      { name: 'First Year', value: '1' },
+      { name: 'Second Year', value: '2' },
+      { name: 'Third Year', value: '3' },
+      { name: 'Fourth Year', value: '4' }
+    ];
+      $scope.semester = [
+      { name: 'I', value: '1' },
+      { name: 'II', value: '2' }
+    ];
+          $scope.criticalAnalysisEntry = function(data){
+            var $data = angular.toJson(data);
+            criticalAnalysis.storeSession($data).then(function(){
+                $scope.serverResp = 1;
+                // console.log("hasd");
+            });
+          }
+          $scope.saveData = function(data){
+            var $data = angular.toJson(data);
+            criticalAnalysis.saveData(data).then(function(data){
+              console.log(data);
+              $scope.serverResp = 0;
+              $scope.criticalForm.$setUntouched();
+              $scope.choices= " ";
+              $scope.criticalForm.$setPristine();
+            });
+          }
+          $scope.choices = [{}];
+          $scope.addNewChoice = function() {
+            $scope.choices.push({});
+          };
+
+          $scope.removeChoice = function(item) {
+            $scope.choices.splice(item, 1);
+            };
+
+     })
+    .controller('ptgRecordDataCtrl',function($scope,ptgRecordData){
+    $scope.serverResp = 0;
+    $scope.classes = [
+      { name: 'First Year', value: '1' },
+      { name: 'Second Year', value: '2' },
+      { name: 'Third Year', value: '3' },
+      { name: 'Fourth Year', value: '4' }
+    ];
+    $scope.years = [
+      { name: '2014-15', value: '1' },
+      { name: '2015-16', value: '2' },
+      { name: '2016-17', value: '3' },
+      { name: '2017-18', value: '4' }
+    ];
+      $scope.semester = [
+      { name: 'I', value: '1' },
+      { name: 'II', value: '2' }
+    ];
+          $scope.ptgRecordEntry = function(data){
+            var $data = angular.toJson(data);
+            ptgRecordData.storeSession($data).then(function(){
+                $scope.serverResp = 1;
+
+            });
+          }
+          $scope.saveData = function(data){
+            var $data = angular.toJson(data);
+            ptgRecordData.saveData(data).then(function(data){
+              console.log(data);
+              $scope.serverResp = 0;
+              $scope.ptgRecordForm.$setUntouched();
+              $scope.choices= " ";
+              $scope.ptgRecordForm.$setPristine();
+            });
+          }
+          $scope.choices = [{}];
+          $scope.addNewChoice = function() {
+            $scope.choices.push({});
+          };
+
+          $scope.removeChoice = function(item) {
+            $scope.choices.splice(item, 1);
+            };
+
+     })
      .controller('univExamCtrl',['$scope','univExamData',function($scope,univExamData){
        $scope.results = [
          {name:'Passed',value:'1'},
@@ -386,8 +506,32 @@
     .controller('SelfDevCtrl',['$scope','SelfDevData',function($scope,SelfDevData){
 
       $scope.SelfDevEntry = function() {
-        
+
       };
+    }])
+    .controller('acadAchievementCtrl',['$scope','achievementData',function($scope,achievementData){
+
+      $scope.achievementEntry = function() {
+
+      };
+    }])
+    .controller('pracCtrl',['$scope','pracData',function($scope,pracData){
+
+      $scope.choices = [{}];
+      $scope.pracEntry = function(data){
+        var $data = angular.toJson(data);
+        pracData.submitData($data).then(function(data){
+          console.log(data.data);
+        })
+
+      }
+      $scope.addNewChoice = function() {
+        $scope.choices.push({});
+      };
+
+      $scope.removeChoice = function(item) {
+        $scope.choices.splice(item, 1);
+        };
 
 
     }])
@@ -552,6 +696,24 @@
           return $http.post('/ksm/data/proctor/saveMeetingData.php',data);
         }
       }
+    }]).factory('ptgRecordData',['$http',function($http){
+      return {
+        storeSession: function(data){
+          return $http.post('/ksm/data/proctor/storeSession.php',data);
+        },
+        saveData: function(data){
+          return $http.post('/ksm/data/proctor/saveptgRecordData.php',data);
+        }
+      }
+    }]).factory('criticalAnalysis',['$http',function($http){
+      return {
+        storeSession: function(data){
+          return $http.post('/ksm/data/proctor/storeSession.php',data);
+        },
+        saveData: function(data){
+          return $http.post('/ksm/data/proctor/savecriticalAnalysisData.php',data);
+        }
+      }
     }])
     .factory('academicData',['$http',function($http){
       return {
@@ -564,13 +726,29 @@
       }
     }])
     .factory('SelfDevData',['$http',function($http){
-      return {
-        SelfDevEntry: function(scope,data){
+       return {
+       SelfDevEntry: function(scope,data){
 
-        }
+       }
 
       }
     }])
+    .factory('achievementData',['$http',function($http){
+      return {
+      achievementEntry: function(scope,data){
+
+      }
+
+     }
+   }])
+    .factory('pracData',['$http',function($http){
+      return {
+      pracEntry: function(scope,data){
+
+      }
+
+     }
+   }])
     .factory('extraCurriData',['$http',function($http){
       return {
         submitData: function(scope,data){

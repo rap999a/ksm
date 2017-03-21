@@ -438,71 +438,501 @@
                 </md-content>
                 </md-card-content>
             </md-card>
-            </md-tab>
+           
+            <!-- ############################ CARD 5- Practical performance ############################ -->
+            <md-card>
+                <md-card-title>
+                    <md-card-title-text>
+                      <span class="md-headline">Practical Performance</span>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-card-content>
+                  <md-content class="md-padding" ng-controller= "pracCtrl">
+                    <div layout="column">
+                      <form name="practicalForm" ng-submit="pracEntry(choices)" novalidate>
+                          <div  data-ng-repeat="choice in choices">
 
-          </md-tab>
-          <!-- ######################### TAB 3 ####################### -->
+                          <div layout="row">
+                            <md-input-container flex>
+                              <label>Name of Subject</label>
+                              <input ng-model="choice.name" type="text" autocomplete="off" ng-required="true">
+                            </md-input-container>
+                            <md-input-container flex>
+                              <label>Percentage Scored </label>
+                              <input ng-model="choice.percent" type="number" autocomplete="off" ng-required="true">
+                            </md-input-container>
 
-          <md-tab label="PTG">
-          <md-card>
+                          </div>
+
+                          </div>
+                          <md-button class="addfields" ng-click="addNewChoice()">Add fields</md-button>
+                          <md-button class="remove" ng-show="!$first" ng-click="removeChoice($index)">Remove</md-button>
+                          <md-button type="submit">Save</md-button>
+                      </form>
+                    </div>
+                  </md-content>
+                  </md-card-content>
+              </md-card>
+
+            <!-- ######################### Card 6 - Academic Achievements ####################### -->
+
+
+            <md-card>
               <md-card-title>
                   <md-card-title-text>
-                    <span class="md-headline">Student Meetings</span>
+                    <span class="md-headline">Academic Achievements</span>
                   </md-card-title-text>
               </md-card-title>
-              <md-card-content ng-controller="studentMeetDataCtrl">
-                <div layout="column">
-                  <form ng-submit="studMeetEntry(studentMeetData)" name="meetingForm" novalidate>
-                    <div layout="row">
-                        <md-input-container flex>
-                            <label>Class</label>
-                            <md-select ng-model="studentMeetData.class">
-                            <md-option ng-value="class.value" ng-repeat="class in classes" ng-required="true">{{class.name}}</md-option>
-                        </md-input-container>
+              <md-card-content ng-controller="acadAchievementCtrl">
+                  <div layout="column">
+                    <form ng-submit="achievementEntry(achievementData)" name="AcadAchievementForm" novalidate>
+                    <md-card-title>
+                        <md-card-title-text>
+                          <span class="md-title">1. University Rank Holder</span>(Among the top 10 position holders of the university)
+                        </md-card-title-text>
+                    </md-card-title>
+                      <br>
+                      <div layout="row">
+                        <div flex="5"></div>
+                        <div flex="80">
+                      <md-radio-group ng-model="achievementData.choice1">
+                      <md-radio-button value="1" class="md-primary">Yes</md-radio-button>
+                      <md-radio-button value="0" class="md-primary">No</md-radio-button>
+                    </md-radio-group>
+                  </div>
+                  <div flex="10"></div>
+                </div>
 
-                        <md-input-container flex>
-                            <label>Semester</label>
-                            <md-select ng-model="studentMeetData.sem">
-                            <md-option ng-value="sem.value" ng-repeat="sem in semester" ng-required="true">{{sem.name}}</md-option>
-                        </md-input-container>
+                    <md-card-title>
+                        <md-card-title-text>
+                          <span class="md-title">2. Year Topper</span>(Topper of the respective year of the respective branch)
+                        </md-card-title-text>
+                    </md-card-title>
+                    <br>
+                    <div layout="row">
+                      <div flex="5"></div>
+                      <div flex="80">
+                    <md-radio-group ng-model="achievementData.choice2">
+                    <md-radio-button value="1" class="md-primary">Yes</md-radio-button>
+                    <md-radio-button value="0" class="md-primary">No</md-radio-button>
+                  </md-radio-group>
+                </div>
+                <div flex="10"></div>
+              </div>
+
+                  <md-card-title>
+                      <md-card-title-text>
+                        <span class="md-title">3. Subject Topper</span>(Topper of one or more subjects of the respective year of the respective branch)
+                      </md-card-title-text>
+                  </md-card-title>
+
+                  <br>
+                  <div layout="row">
+                    <div flex="5"></div>
+                    <div flex="80">
+                    <md-radio-group ng-model="achievementData.choice3" >
+                    <md-radio-button value="1" class="md-primary">Yes</md-radio-button>
+                    <md-radio-button value="0" class="md-primary">No</md-radio-button>
+                  </md-radio-group>
+                </div>
+                <div flex="10"></div>
+              </div>
+
+
+                  <md-card-title>
+                      <md-card-title-text>
+                        <span class="md-title">Distinction</span>
+                      </md-card-title-text>
+                  </md-card-title>
+                  <br>
+                  <div layout="row">
+                    <div flex="5"></div>
+                    <div flex="80">
+                      <md-radio-group ng-model="achievementData.choice4" >
+                      <md-radio-button value="1" class="md-primary">Yes</md-radio-button>
+                      <md-radio-button value="0" class="md-primary">No</md-radio-button>
+                      </md-radio-group>
+
                     </div>
-                    <md-button type="submit" class="md-primary">Submit</md-button>
-                  </form>
-                  <div ng-show="serverResp">
-                    <form  name="studMeetForm" ng-submit="saveData(choices)" novalidate >
-                      <div data-ng-repeat="choice in choices" layout="column">
-                        <div layout="row">
-                          <md-input-container flex>
-                              <label>Date of Meeting</label>
-                              <input ng-model="choice.dom" type="text" placeholder="dd-mm-yyyy" autocomplete="off" ng-required="true">
-                          </md-input-container>
+                    <div flex="10"></div>
+                  </div>
 
-                          <md-input-container flex>
-                            <label>Details of the discussion in PTG meeting</label>
-                            <input type="d" ng-model="choice.meetingDetails" autocomplete="off" ng-required="true">
-                          </md-input-container>
-                          <md-input-container flex>
-                            <label>Remarks by the PTG</label>
-                            <input type="d" ng-model="choice.remarks" autocomplete="off" ng-required="true">
-                          </md-input-container>
-                        </div>
-                        </div>
-                        <div layout="row">
-                          <md-button type="submit">Save</md-button>
-                        </div>
-                      </form>
+                  <md-card-title>
+                      <md-card-title-text>
+                        <span class="md-title">First Class</span>
+                      </md-card-title-text>
+                  </md-card-title>
+                  <br>
+                  <div layout="row">
+                    <div flex="5"></div>
+                    <div flex="80">
+                      <md-radio-group ng-model="achievementData.choice5" >
+                      <md-radio-button value="1" class="md-primary">Yes</md-radio-button>
+                      <md-radio-button value="0" class="md-primary">No</md-radio-button>
+                      </md-radio-group>
+
+                    </div>
+                    <div flex="10"></div>
+                  </div>
+
+                  <div layout="row">
+                    <md-button type="submit">SUBMIT</md-button>
+                  </div>
+
+                    </form>
+                  </div>
+                </md-card-content>
+              </md-card>
+          </md-tab>
+
+<!-- ######################### TAB - Self-Development ####################### -->
+
+          <md-tab label="Self-Development">
+          <md-card>
+
+            <md-card-content ng-controller="SelfDevCtrl">
+                <div layout="column">
+                  <form ng-submit="SelfDevEntry(SelfDevData)" name="SelfDevForm" novalidate>
+                  <md-card-title>
+                      <md-card-title-text>
+                        <span class="md-title">1. Communication Skill Development</span>
+                      </md-card-title-text>
+                  </md-card-title>
+
+                    <br>
                     <div layout="row">
-                      <md-button ng-click="addNewChoice()">Add</md-button>
-                      <md-button button  ng-click="removeChoice($index)">Delete</md-button>
+                      <div flex="5"></div>
+                      <div flex="80">
+                    <md-radio-group ng-model="SelfDevData.choice1">
+                    <md-radio-button value="1" class="md-primary">Yes</md-radio-button>
+                    <md-radio-button value="0" class="md-primary">No</md-radio-button>
+                  </md-radio-group>
+                </div>
+                <div flex="10"></div>
+              </div>
+
+
+                    <div layout="column" ng-show="SelfDevData.choice1 == 1">
+                    <div layout="row">
+                      <md-input-container flex>
+                            <label>Name</label>
+                            <input ng-model="SelfDevData.name1" type="text" autocomplete="off" ng-required="true">
+                        </md-input-container>
+                          <md-input-container flex>
+                              <label>Duration</label>
+                              <input ng-model="SelfDevData.duration1" type="text" autocomplete="off" ng-required="true">
+                          </md-input-container>
+                    </div>
+                    <div layout="row">
+                            <md-input-container flex>
+                            <label>Details</label>
+                              <input ng-model="SelfDevData.details1" type="text" autocomplete="off" ng-required="true">
+                            </md-input-container>
                     </div>
                   </div>
 
+                  <md-card-title>
+                      <md-card-title-text>
+                        <span class="md-title">2. Aptitude Training</span>
+                      </md-card-title-text>
+                  </md-card-title>
+                  <br>
+                  <div layout="row">
+                    <div flex="5"></div>
+                    <div flex="80">
+                  <md-radio-group ng-model="SelfDevData.choice2">
+                  <md-radio-button value="1" class="md-primary">Yes</md-radio-button>
+                  <md-radio-button value="0" class="md-primary">No</md-radio-button>
+                </md-radio-group>
+              </div>
+              <div flex="10"></div>
+            </div>
 
+                  <div layout="column" ng-show="SelfDevData.choice2 == 1">
+                  <div layout="row">
+                    <md-input-container flex>
+                          <label>Name</label>
+                          <input ng-model="SelfDevData.name2" type="text" autocomplete="off" ng-required="true">
+                      </md-input-container>
+                        <md-input-container flex>
+                            <label>Duration</label>
+                            <input ng-model="SelfDevData.duration2" type="text" autocomplete="off" ng-required="true">
+                        </md-input-container>
+                  </div>
+                  <div layout="row">
+                          <md-input-container flex>
+                          <label>Details</label>
+                            <input ng-model="SelfDevData.details2" type="text" autocomplete="off" ng-required="true">
+                          </md-input-container>
+                  </div>
+                </div>
+
+                <md-card-title>
+                    <md-card-title-text>
+                      <span class="md-title">3.Technical Skill Development</span>
+                    </md-card-title-text>
+                </md-card-title>
+                  <br>
+                  <div layout="row">
+                    <div flex="5"></div>
+                    <div flex="80">
+                  <md-radio-group ng-model="SelfDevData.choice3" >
+                  <md-radio-button value="1" class="md-primary">Yes</md-radio-button>
+                  <md-radio-button value="0" class="md-primary">No</md-radio-button>
+                </md-radio-group>
+              </div>
+              <div flex="10"></div>
+            </div>
+
+                  <div layout="column" ng-show="SelfDevData.choice3 == 1">
+                  <div layout="row">
+                    <md-input-container flex>
+                          <label>Name</label>
+                          <input ng-model="SelfDevData.name3" type="text" autocomplete="off" ng-required="true">
+                      </md-input-container>
+                        <md-input-container flex>
+                            <label>Duration</label>
+                            <input ng-model="SelfDevData.duration3" type="text" autocomplete="off" ng-required="true">
+                        </md-input-container>
+                  </div>
+                  <div layout="row">
+                          <md-input-container flex>
+                          <label>Details</label>
+                            <input ng-model="SelfDevData.details3" type="text" autocomplete="off" ng-required="true">
+                          </md-input-container>
+                  </div>
+                </div>
+                <md-card-title>
+                    <md-card-title-text>
+                      <span class="md-title">4. Preparation for Higher Study</span>
+                    </md-card-title-text>
+                </md-card-title>
+                <br>
+                <div layout="row">
+                  <div flex="5"></div>
+                  <div flex="80">
+                  <md-radio-group ng-model="SelfDevData.choice4" >
+                  <md-radio-button value="1" class="md-primary">Yes</md-radio-button>
+                  <md-radio-button value="0" class="md-primary">No</md-radio-button>
+                </md-radio-group>
+              </div>
+              <div flex="10"></div>
+            </div>
+
+                  <div layout="column" ng-show="SelfDevData.choice4 == 1">
+                  <div layout="row">
+                    <md-input-container flex>
+                          <label>Name</label>
+                          <input ng-model="SelfDevData.name4" type="text" autocomplete="off" ng-required="true">
+                      </md-input-container>
+                        <md-input-container flex>
+                            <label>Duration</label>
+                            <input ng-model="SelfDevData.duration4" type="text" autocomplete="off" ng-required="true">
+                        </md-input-container>
+                  </div>
+                  <div layout="row">
+                          <md-input-container flex>
+                          <label>Details</label>
+                            <input ng-model="SelfDevData.details4" type="text" autocomplete="off" ng-required="true">
+                          </md-input-container>
+                  </div>
+                </div>
+
+
+                <md-card-title>
+                    <md-card-title-text>
+                      <span class="md-title">5. Entrepreneurship Development Program</span>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <br>
+                <div layout="row">
+                  <div flex="5"></div>
+                  <div flex="80">
+                  <md-radio-group ng-model="SelfDevData.choice5" >
+                  <md-radio-button value="1" class="md-primary">Yes</md-radio-button>
+                  <md-radio-button value="0" class="md-primary">No</md-radio-button>
+                </md-radio-group>
+              </div>
+              <div flex="10"></div>
+            </div>
+
+                  <div layout="column" ng-show="SelfDevData.choice5 == 1">
+                  <div layout="row">
+                    <md-input-container flex>
+                          <label>Name</label>
+                          <input ng-model="SelfDevData.name5" type="text" autocomplete="off" ng-required="true">
+                      </md-input-container>
+                        <md-input-container flex>
+                            <label>Duration</label>
+                            <input ng-model="SelfDevData.duration5" type="text" autocomplete="off" ng-required="true">
+                        </md-input-container>
+                  </div>
+                  <div layout="row">
+                          <md-input-container flex>
+                          <label>Details</label>
+                            <input ng-model="SelfDevData.details5" type="text" autocomplete="off" ng-required="true">
+                          </md-input-container>
+                  </div>
+                </div>
+
+                <md-card-title>
+                    <md-card-title-text>
+                      <span class="md-title">6. Language Training</span>
+                    </md-card-title-text>
+                </md-card-title>
+                <br>
+                <div layout="row">
+                  <div flex="5"></div>
+                  <div flex="80">
+                  <md-radio-group ng-model="SelfDevData.choice6" >
+                  <md-radio-button value="1" class="md-primary">Yes</md-radio-button>
+                  <md-radio-button value="0" class="md-primary">No</md-radio-button>
+                </md-radio-group>
+              </div>
+              <div flex="10"></div>
+            </div>
+
+                  <div layout="column" ng-show="SelfDevData.choice6 == 1">
+                  <div layout="row">
+                    <md-input-container flex>
+                          <label>Name</label>
+                          <input ng-model="SelfDevData.name6" type="text" autocomplete="off" ng-required="true">
+                      </md-input-container>
+                        <md-input-container flex>
+                            <label>Duration</label>
+                            <input ng-model="SelfDevData.duration6" type="text" autocomplete="off" ng-required="true">
+                        </md-input-container>
+                  </div>
+                  <div layout="row">
+                          <md-input-container flex>
+                          <label>Details</label>
+                            <input ng-model="SelfDevData.details6" type="text" autocomplete="off" ng-required="true">
+                          </md-input-container>
+                  </div>
+                </div>
+
+
+                <md-card-title>
+                    <md-card-title-text>
+                      <span class="md-title">7.Finishing School</span>
+                    </md-card-title-text>
+                </md-card-title>
+                <br>
+                <div layout="row">
+                  <div flex="5"></div>
+                  <div flex="80">
+                  <md-radio-group ng-model="SelfDevData.choice7" >
+                  <md-radio-button value="1" class="md-primary">Yes</md-radio-button>
+                  <md-radio-button value="0" class="md-primary">No</md-radio-button>
+                </md-radio-group>
+              </div>
+              <div flex="10"></div>
+            </div>
+
+                  <div layout="column" ng-show="SelfDevData.choice7 == 1">
+                  <div layout="row">
+                    <md-input-container flex>
+                          <label>Name</label>
+                          <input ng-model="SelfDevData.name7" type="text" autocomplete="off" ng-required="true">
+                      </md-input-container>
+                        <md-input-container flex>
+                            <label>Duration</label>
+                            <input ng-model="SelfDevData.duration7" type="text" autocomplete="off" ng-required="true">
+                        </md-input-container>
+                  </div>
+                  <div layout="row">
+                          <md-input-container flex>
+                          <label>Details</label>
+                            <input ng-model="SelfDevData.details7" type="text" autocomplete="off" ng-required="true">
+                          </md-input-container>
+                  </div>
+                </div>
+
+
+                <md-card-title>
+                    <md-card-title-text>
+                      <span class="md-title">8.Spiritual and Holistic Development Program</span>
+                    </md-card-title-text>
+                </md-card-title>
+                <br>
+                <div layout="row">
+                  <div flex="5"></div>
+                  <div flex="80">
+                    <md-radio-group ng-model="SelfDevData.choice8" >
+                    <md-radio-button value="1" class="md-primary">Yes</md-radio-button>
+                    <md-radio-button value="0" class="md-primary">No</md-radio-button>
+                    </md-radio-group>
+
+                  </div>
+                  <div flex="10"></div>
+                </div>
+
+
+                  <div layout="column" ng-show="SelfDevData.choice8 == 1">
+                  <div layout="row">
+                    <md-input-container flex>
+                          <label>Name</label>
+                          <input ng-model="SelfDevData.name8" type="text" autocomplete="off" ng-required="true">
+                      </md-input-container>
+                        <md-input-container flex>
+                            <label>Duration</label>
+                            <input ng-model="SelfDevData.duration8" type="text" autocomplete="off" ng-required="true">
+                        </md-input-container>
+                  </div>
+                  <div layout="row">
+                          <md-input-container flex>
+                          <label>Details</label>
+                            <input ng-model="SelfDevData.details8" type="text" autocomplete="off" ng-required="true">
+                          </md-input-container>
+                  </div>
+                </div>
+                <md-card-title>
+                    <md-card-title-text>
+                      <span class="md-title">9. Internship or Summer Training </span>
+                    </md-card-title-text>
+                </md-card-title>
+                <br>
+                <div layout="row">
+                  <div flex="5"></div>
+                  <div flex="80">
+                  <md-radio-group ng-model="SelfDevData.choice9" >
+                  <md-radio-button value="1" class="md-primary">Yes</md-radio-button>
+                  <md-radio-button value="0" class="md-primary">No</md-radio-button>
+                </md-radio-group>
+              </div>
+              <div flex="10"></div>
+            </div>
+
+                  <div layout="column" ng-show="SelfDevData.choice9 == 1">
+                  <div layout="row">
+                    <md-input-container flex>
+                          <label>Name</label>
+                          <input ng-model="SelfDevData.name9" type="text" autocomplete="off" ng-required="true">
+                      </md-input-container>
+                        <md-input-container flex>
+                            <label>Duration</label>
+                            <input ng-model="SelfDevData.duration9" type="text" autocomplete="off" ng-required="true">
+                        </md-input-container>
+                  </div>
+                  <div layout="row">
+                          <md-input-container flex>
+                          <label>Details</label>
+                            <input ng-model="SelfDevData.details9" type="text" autocomplete="off" ng-required="true">
+                          </md-input-container>
+                  </div>
+                </div>
+
+                <div layout="row">
+                  <md-button type="submit">SUBMIT</md-button>
+                </div>
+
+                  </form>
                 </div>
               </md-card-content>
             </md-card>
-          </md-tab>  
-          <!-- ######################### TAB 4 ####################### -->
+          </md-tab>
+          <!-- ######################### TAB 3 ####################### -->
 
           <md-tab label="Research And Innovation">
             <md-tabs>

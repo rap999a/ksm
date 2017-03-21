@@ -30,22 +30,34 @@ var app = null;
         controller:'pformCtrl',
         data: {authenticate : true}
       })
-      .state('user.sform',{
-        url:'/user/staff-form',
-        templateUrl:'templates/staff/staff.html',
-        controller:'sformCtrl',
+      .state('staff.staffDetails',{
+        url:'/staff/staffDetails',
+        templateUrl:'templates/staff/staffDetails.html',
+        controller:'staffDetailsCtrl',
         data: {authenticate : true}
       })
-      .state('user.shform',{
-        url:'/user/staffhome-form',
-        templateUrl:'templates/staff/staff_home.html',
-        controller:'shformCtrl',
+      .state('staff.staffHome',{
+        url:'/staff/staffhome',
+        templateUrl:'templates/staff/home.html',
+        controller:'staffHomeCtrl',
+        data: {authenticate : true}
+      })
+      .state('staff.studentPtg',{
+        url:'/staff/studentPtg',
+        templateUrl:'templates/staff/studentPtg.html',
+        controller:'studentPtgCtrl',
         data: {authenticate : true}
       })
       .state('user',{
         abstract: true,
         // url:'/user',
+        
         templateUrl:'templates/user/base.html',
+        data: {authenticate : true}
+      })
+      .state('staff',{
+        abstract: true,
+        templateUrl:'templates/staff/base.html',
         data: {authenticate : true}
       })
       .state('user.home',{
