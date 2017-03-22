@@ -23,8 +23,11 @@
         Authenticate.logIn($scope,$data).then(function(data){
            console.log(data.data);
            var user = data.data;
-           if(user){
+           if(user[0].account_type==0){
              $state.go('user.home',{});
+           }
+           else if(user[0].account_type==2){
+             $state.go('admin.home',{});
            }
            else {
              $scope.incorrectPassword();
@@ -99,6 +102,7 @@
 
     }])
 
+
     .controller('userHomeCtrl',['$scope','user',function($scope,user){
         $scope.message = "heelo";
         user.fetchProctorBasic($scope);
@@ -108,9 +112,236 @@
         user.fetchPhoto($scope);
 
     }])
-    .controller('sformCtrl',['$scope',function($scope){
-        $scope.message = "Hi this a test msg";
+    .controller('adminHomeCtrl',['$scope',function($scope){
+        $scope.message = "ADMIN HOME PAGE";
     }])
+
+
+
+    
+    .controller('staffValidateCtrl',['$scope',function($scope){
+
+        $scope.staffValidate = function(data){
+        var $data = angular.toJson(data);
+        staffData.staffValidate($scope,$data).then(function(data){
+
+
+          $scope.staffValidateForm.$setUntouched();
+          $scope.user= " ";
+          $scope.staffValidateForm.$setPristine();
+
+        });
+      }
+
+      $scope.branchList = [
+            { name: 'Computer Engineering', value: 'Computer' },
+            { name: 'Mechanical Engineering', value: 'Mechanical' },
+            { name: 'Electronics and Telecommunication ', value: 'ENTC' },
+            { name: 'IT Engineering ', value: 'IT' },
+            { name: 'Civil Engineering ', value: 'Civil' }
+          ];
+
+      $scope.faculties = [
+            { name: 'Dr. J. S. Umale', wanted: false },
+            { name: 'Dr. Sonali Patil', wanted: false },
+            { name: 'Prof. Sagar Salunkhe', wanted: false },
+            { name: 'Prof. Sushma Vispute', wanted: false }
+           ];
+      
+
+    }])
+
+    .controller('validateCertificateCtrl',['$scope','$mdDialog',function($scope){
+
+        $scope.validateCertificate = function(data){
+        var $data = angular.toJson(data);
+        staffData.validateCertificate($scope,$data).then(function(data){
+
+
+          $scope.validateCertificateForm.$setUntouched();
+          $scope.user= " ";
+          $scope.validateCertificateForm.$setPristine();
+
+        });
+      }
+
+       $scope.students = [
+            { name: 'Sneha Kewlani', value: '1' },
+            { name: 'Kshitij Malhara', value: '2'},
+            { name: 'Priyanka Kakade', value:'3' },
+            { name: 'Rohit Keswani', value: '4' }
+           ];
+
+      $scope.certificates = [
+            { name: 'Java Certificate', wanted: false },
+            { name: 'German Certificate', wanted: false },
+            { name: 'Aptitude Certificate', wanted: false },
+            { name: 'Personality Development Certificate', wanted: false }
+           ];
+
+       $scope.showAdvanced = function(ev) {
+            $mdDialog.show({
+                controller: DialogController,
+                templateUrl: 'viewImage.tmpl.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose:true,
+                fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+            })
+            .then(function(answer) {
+               $scope.status = 'You said the information was "' + answer + '".';
+            }, function() {
+                $scope.status = 'You cancelled the dialog.';
+            });
+      };
+      
+       function DialogController($scope, $mdDialog) {
+    $scope.hide = function() {
+      $mdDialog.hide();
+    };
+
+    $scope.cancel = function() {
+      $mdDialog.cancel();
+    };
+
+    $scope.answer = function(answer) {
+      $mdDialog.hide(answer);
+    };
+  }
+
+
+    }])
+
+    .controller('selfDevelopmentMarksCtrl',['$scope',function($scope){
+
+        $scope.staffValidate = function(data){
+        var $data = angular.toJson(data);
+        staffData.staffValidate($scope,$data).then(function(data){
+
+
+          $scope.staffValidateForm.$setUntouched();
+          $scope.user= " ";
+          $scope.staffValidateForm.$setPristine();
+
+        });
+      }
+
+     $scope.students = [
+            { name: 'Sneha Kewlani', value: '1' },
+            { name: 'Kshitij Malhara', value: '2'},
+            { name: 'Priyanka Kakade', value:'3' },
+            { name: 'Rohit Keswani', value: '4' }
+           ];
+
+      $scope.categories = [
+            { name: 'Communication Skill Development' },
+            { name: 'Aptitude Training' },
+            { name: 'Technical Skill Development'},
+            { name: 'Preparation for Higher Study' },
+            { name: 'Entrepreneurship Development Program'},
+            { name: 'Language Training'},
+            { name: 'Finishing School'},
+            { name: 'Spiritual and Holistic Development Program'}
+           ]; 
+
+       $scope.grades = [
+        { name: 'A / 10 marks', value:'10' },
+        { name: 'B / 5 marks' , value:'7' },
+        { name: 'C / 3 marks' , value:'3' }
+       ];
+
+
+      
+
+    }])
+
+.controller('assignPtgCtrl',['$scope',function($scope){
+
+        $scope.assignPtg = function(data){
+        var $data = angular.toJson(data);
+        staffData.assignPtg($scope,$data).then(function(data){
+
+
+          $scope.assignPtgForm.$setUntouched();
+          $scope.user= " ";
+          $scope.assignPtgForm.$setPristine();
+
+        });
+      }
+
+      $scope.branchList = [
+            { name: 'Computer Engineering', value: 'Computer' },
+            { name: 'Mechanical Engineering', value: 'Mechanical' },
+            { name: 'Electronics and Telecommunication ', value: 'ENTC' },
+            { name: 'IT Engineering ', value: 'IT' },
+            { name: 'Civil Engineering ', value: 'Civil' }
+          ];
+
+       $scope.classes = [
+            { name: 'F.E.', value: '1' },
+            { name: 'S.E.', value: '2' },
+              { name: 'T.E.', value: '3' },
+                { name: 'B.E.', value: '4' }
+          ];
+      $scope.semester = [
+            { name: 'I', value: '1' },
+            { name: 'II', value: '2' }
+
+          ];
+
+      $scope.divisions = [
+            { name: 'A / NO DIVISION', value: 'A' },
+            { name: 'B', value: 'B' },
+            { name: 'C', value: 'C' },
+            { name: 'D', value: 'D' },
+            { name: 'E', value: 'E' },
+            { name: 'F', value: 'F' },
+            { name: 'G', value: 'G' },
+            { name: 'H', value: 'H' },
+            { name: 'I', value: 'I' },
+            { name: 'J', value: 'J' },
+            { name: 'K', value: 'K' }
+          ];
+      $scope.students = [
+            { name: 'Sneha Kewlani', wanted: false },
+            { name: 'Kshitij Malhara', wanted: false },
+            { name: 'Priyanka Kakade', wanted: false },
+            { name: 'Rohit Keswani', wanted: false }
+           ];
+
+    }])
+
+
+    .controller('adminBasicDetailsCtrl',['$scope',function($scope){
+        $scope.adminBasicDetail = function(data){
+        var $data = angular.toJson(data);
+        user.adminBasicDetail($scope,$data).then(function(data){
+
+          $scope.adminBasicDetailsForm.$setUntouched();
+          $scope.user= " ";
+          $scope.adminBasicDetailsForm.$setPristine();
+
+        });
+      }
+      $scope.branchList = [
+            { name: 'Computer Engineering', value: 'Computer' },
+            { name: 'Mechanical Engineering', value: 'Mechanical' },
+            { name: 'Electronics and Telecommunication ', value: 'ENTC' },
+            { name: 'IT Engineering ', value: 'IT' },
+            { name: 'Civil Engineering ', value: 'Civil' }
+          ];
+       $scope.designationList = [
+            { name: 'Principal', value: '1' },
+            { name: 'Dean', value: '2' },
+            { name: 'Head of Department ', value: '3' },
+            { name: 'Professor ', value: '4' },
+            { name: 'Associate Professor ', value: '5' },
+            { name: 'Assisstant Professor ', value: '6' },
+            { name: 'Lab Assisstant ', value: '7' }
+          ]
+    }])
+
+
     .controller('profileMenuCtrl',['$scope','Authenticate','$state',function($scope,Authenticate,$state){
         $scope.logout = function(){
           Authenticate.logout();

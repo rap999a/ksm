@@ -1,0 +1,234 @@
+<div layout="column" layout-gt-md="row">
+  <div flex="20" style="max-width:20%;"></div>
+  <div flex="60">
+    <br>
+    <br>    
+                                   <!-- CARD 1 Staff Validation By ADMIN -->
+    
+            <md-card>
+              <md-card-title>
+                <md-card-title-text>
+                  <span class="md-headline">Staff Validation</span>
+                </md-card-title-text>
+              </md-card-title>
+
+              <md-card-content>
+                <md-content class="md-padding" ng-controller="staffValidateCtrl">
+
+                  <div layout="column">
+                    <form ng-submit="checkBranch(userData)" name="staffValidateForm" novalidate>                    
+                      <div layout="row">
+                        <md-input-container class="md-block" flex-gt-sm>
+                                <label>Branch</label>
+                                <md-select ng-model="userData.branch">
+                                <md-option ng-value="branch.value" ng-repeat="branch in branchList" ng-required="true">{{branch.name}}</md-option>
+                                </md-select>
+                        </md-input-container>
+                      </div>
+                      <md-button type="submit" class="md-primary">Submit</md-button>
+                     </form>
+                  </div>
+
+                   <div layout="column">
+                      <form ng-submit="staffValidate(staffData)" novalidate>
+                        <div layout="row">
+                          <md-list  ng-cloak>
+
+                            <md-subheader class="md-no-sticky">List of Faculties for validation</md-subheader>
+                              <md-list-item ng-repeat="faculty in faculties">
+                                <p> {{ faculty.name }} </p>
+                                <md-checkbox class="md-secondary" ng-model="faculty.wanted"></md-checkbox>
+                              </md-list-item>
+                          </md-list>
+                        </div>
+                        <md-button type="submit" class="md-primary">Submit</md-button>
+                      </form>
+                    </div>
+    
+               </md-content>
+            </md-card-content>
+          </md-card>
+
+        
+                                      <!-- CARD 2 Assign PTG to the students by ADMIN-->
+          <md-card>
+              <md-card-title>
+                <md-card-title-text>
+                  <span class="md-headline">PTG Assignment to Students</span>
+                </md-card-title-text>
+              </md-card-title>
+             
+              <md-card-content ng-controller="assignPtgCtrl">
+                <md-content class="md-padding">
+                  <div layout="column">
+                    <form ng-submit="checkUser(userData)" name="assignPtgForm" novalidate>
+
+                      <div layout="row">
+                        <md-input-container class="md-block" flex-gt-sm>
+                                <label>Branch</label>
+                                <md-select ng-model="userData.branch">
+                                <md-option ng-value="branch.value" ng-repeat="branch in branchList" ng-required="true">{{branch.name}}</md-option>
+                                </md-select>
+                        </md-input-container>
+                         <md-input-container flex>
+                                <label>Class</label>
+                                <md-select ng-model="userData.class">
+                                  <md-option ng-value="class.value" ng-repeat="class in classes" ng-required="true">{{class.name}}</md-option>
+                                </md-select>
+                              </md-input-container>
+                      </div>
+                      <div layout="row">
+                              <md-input-container flex>
+                                <label>Semester</label>
+                                <md-select ng-model="userData.sem">
+                                  <md-option ng-value="sem.value" ng-repeat="sem in semester" ng-required="true">{{sem.name}}</md-option>
+                                </md-select>
+                              </md-input-container>
+                              <md-input-container flex>
+                                <label>Current Division</label>
+                                <md-select ng-model="userData.div">
+                                  <md-option ng-value="division.value" ng-repeat="division in divisions" ng-required="true">{{division.name}}</md-option>
+                                </md-select>
+                              </md-input-container>
+                      </div>
+                      <md-button type="submit" class="md-primary">Submit</md-button>   
+                    </form>
+                  </div>
+
+                  <div layout="column">
+                     <form ng-submit=assignPtg(user) novalidate>
+                      <div layout="row">
+                          <md-list  ng-cloak>
+                            <md-subheader class="md-no-sticky">List of Students</md-subheader>
+                              <md-list-item ng-repeat="student in students">
+                                <p> {{ student.name }} </p>
+                                <md-checkbox class="md-secondary" ng-model="student.wanted"></md-checkbox>
+                              </md-list-item>
+                          </md-list>  
+
+                         
+                          <div layout="row">
+                            <div flex="20"></div>
+                             <div flex="90">
+                                <md-radio-group ng-model="user.staff">
+                                  <md-subheader class="md-no-sticky">List of Faculty</md-subheader>
+                                  <md-radio-button value="Dr. J. S. Umale" class="md-primary">Dr. J. S. Umale</md-radio-button>
+                                  <md-radio-button value="Prof. Sushma Vispute"> Prof. Sushma Vispute </md-radio-button>
+                                  <md-radio-button value="Dr. Sonali Patil">Dr. Sonali Patil</md-radio-button>
+                                </md-radio-group>
+                              </div>
+                            <div flex="10"></div>
+                          </div>  
+
+                      </div>
+                      <md-button type="submit" class="md-primary">Submit</md-button>   
+                    </form>
+                  </div>  
+                </md-content>
+            </md-card-content>
+          </md-card>
+
+                                         <!-- CARD 3 Self Development Markssssssss (In STAFF Module )-->
+
+          <md-card>
+              <md-card-title>
+                <md-card-title-text>
+                  <span class="md-headline">Self Development Marks Allotment</span>
+                </md-card-title-text>
+              </md-card-title>
+              <md-card-content>
+                <md-content class="md-padding" ng-controller="selfDevelopmentMarksCtrl">
+                  <div layout="column">
+                    <form ng-submit="selectStudent(userData)" name="selfDevelopmentMarksForm" novalidate>                    
+                      <div layout="row">
+                        <md-input-container class="md-block" flex-gt-sm>
+                                <label>Select Student</label>
+                                <md-select ng-model="userData.student">
+                                <md-option ng-value="student.value" ng-repeat="student in students" ng-required="true">{{student.name}}</md-option>
+                                </md-select>
+                        </md-input-container>
+                      </div>
+                      <md-button type="submit" class="md-primary">Submit</md-button>
+                     </form>
+                  </div>
+
+                   <div layout="column" >
+                      <form ng-submit="selfDevelopmentMarks(markCategoryData)" novalidate>
+                        <div layout="row">
+                          <md-list  ng-cloak>
+
+                            <md-subheader class="md-no-sticky">Self Development Categories</md-subheader>
+                              <md-list-item ng-repeat="category in categories">
+                                <p> {{ category.name }} </p>
+                                 <md-button type="submit" class="md-primary" ng-click="">View details</md-button>
+                                <md-input-container class="md-block" flex-gt-sm>
+                                  <label>Allot Grades</label>
+                                  <md-select ng-model="markCategoryData.grade">
+                                  <md-option ng-value="grade.value" ng-repeat="grade in grades" ng-required="true">{{grade.name}}</md-option>
+                                  </md-select>
+                                </md-input-container>
+                                <!-- <md-checkbox class="md-secondary" ng-model="faculty.wanted"></md-checkbox> -->
+                              </md-list-item>
+                          </md-list>
+                        </div>
+                        <md-button type="submit" class="md-primary">Submit</md-button>
+                      </form>
+                    </div>
+                 
+
+                             <!-- CARD 4 Certificate Validation by staff (In STAFF Module )-->
+
+          <md-card>
+              <md-card-title>
+                <md-card-title-text>
+                  <span class="md-headline">Certificate Validation</span>
+                </md-card-title-text>
+              </md-card-title>
+              <md-card-content>
+                <md-content class="md-padding" ng-controller="validateCertificateCtrl">
+                  <div layout="column">
+                    <form ng-submit="selectStudent(userData)" name="validateCertificateForm" novalidate>                    
+                      <div layout="row">
+                        <md-input-container class="md-block" flex-gt-sm>
+                                <label>Select Student</label>
+                                <md-select ng-model="userData.student">
+                                <md-option ng-value="student.value" ng-repeat="student in students" ng-required="true">{{student.name}}</md-option>
+                                </md-select>
+                        </md-input-container>
+                      </div>
+                      <md-button type="submit" class="md-primary">Submit</md-button>
+                     </form>
+                  </div>
+
+                   <div layout="column" >
+                      <form ng-submit="validateCertificate(certificateData)" novalidate>
+                        <div layout="row">
+                          <md-list  ng-cloak>
+
+                            <md-subheader class="md-no-sticky">List of achieved certificates</md-subheader>
+                              <md-list-item ng-repeat="certificate in certificates">
+                                <p> {{ certificate.name }} </p>
+                                 <md-button class="md-primary md-raised" ng-click="showAdvanced($event)">
+                                    View Image
+                                 </md-button>
+                                 <md-checkbox class="md-secondary" ng-model="certificate.wanted"></md-checkbox>
+                              </md-list-item>
+                          </md-list>
+                        </div>
+                        <md-button type="submit" class="md-primary">Submit</md-button>
+                      </form>
+                    </div>
+                 
+
+    
+               </md-content>
+            </md-card-content>
+          </md-card>
+
+
+
+
+
+      </div>
+   <div flex="20" style="max-width:20%;"></div>
+</div>

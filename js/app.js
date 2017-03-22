@@ -31,22 +31,34 @@ var app = null;
         controller:'pformCtrl',
         data: {authenticate : true}
       })
-      .state('user.sform',{
-        url:'/user/staff-form',
-        templateUrl:'templates/staff/staff.html',
-        controller:'sformCtrl',
+      .state('admin.home',{
+        url:'/admin/home',
+        templateUrl:'templates/admin/home.html',
+        controller:'adminHomeCtrl',
         data: {authenticate : true}
       })
-      .state('user.shform',{
-        url:'/user/staffhome-form',
-        templateUrl:'templates/staff/staff_home.html',
-        controller:'shformCtrl',
+      .state('admin.adminBasicDetails',{
+        url:'/admin/adminBasicDetails',
+        templateUrl:'templates/admin/adminBasicDetails.html',
+        controller:'adminBasicDetailsCtrl',
+        data: {authenticate : true}
+      }) 
+      .state('admin.staffValidate',{
+        url:'/admin/staffValidate',
+        templateUrl:'templates/admin/staffValidate.html',
+        controller:'staffValidateCtrl',
         data: {authenticate : true}
       })
       .state('user',{
         abstract: true,
         // url:'/user',
         templateUrl:'templates/user/base.html',
+        data: {authenticate : true}
+      })
+       .state('admin',{
+        abstract: true,
+        // url:'/user',
+        templateUrl:'templates/admin/base.html',
         data: {authenticate : true}
       })
       .state('user.home',{
