@@ -31,9 +31,9 @@ var app = null;
         controller:'pformCtrl',
         data: {authenticate : true}
       })
-      .state('admin.adminHome',{
-        url:'/admin/adminHome',
-        templateUrl:'templates/admin/adminHome.html',
+      .state('admin.home',{
+        url:'/admin/home',
+        templateUrl:'templates/admin/home.html',
         controller:'adminHomeCtrl',
         data: {authenticate : true}
       })
@@ -41,6 +41,12 @@ var app = null;
         url:'/admin/adminBasicDetails',
         templateUrl:'templates/admin/adminBasicDetails.html',
         controller:'adminBasicDetailsCtrl',
+        data: {authenticate : true}
+      }) 
+      .state('admin.staffValidate',{
+        url:'/admin/staffValidate',
+        templateUrl:'templates/admin/staffValidate.html',
+        controller:'staffValidateCtrl',
         data: {authenticate : true}
       })
       .state('user',{
