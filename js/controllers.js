@@ -401,6 +401,64 @@
             };
 
      })
+   .controller('validateCertificateCtrl',function($scope,$mdDialog){
+        $scope.validateCertificate = function(data){
+        var $data = angular.toJson(data);
+        staffData.validateCertificate($scope,$data).then(function(data){
+
+
+          $scope.validateCertificateForm.$setUntouched();
+          $scope.user= " ";
+          $scope.validateCertificateForm.$setPristine();
+
+        });
+      }
+       $scope.students = [
+            { name: 'Sneha Kewlani', value: '1' },
+            { name: 'Kshitij Malhara', value: '2'},
+            { name: 'Priyanka Kakade', value:'3' },
+            { name: 'Rohit Keswani', value: '4' }
+           ];
+
+      $scope.certificates = [
+            { name: 'Java Certificate', wanted: false },
+            { name: 'German Certificate', wanted: false },
+            { name: 'Aptitude Certificate', wanted: false },
+            { name: 'Personality Development Certificate', wanted: false }
+           ];
+
+       $scope.showAdvanced = function(ev) {
+            $mdDialog.show({
+                controller: DialogController,
+                templateUrl: 'templates/staff/viewImage.tmpl.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose:true,
+                fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+            })
+            .then(function(answer) {
+               $scope.status = 'You said the information was "' + answer + '".';
+            }, function() {
+                $scope.status = 'You cancelled the dialog.';
+            });
+      };
+      
+       function DialogController($scope, $mdDialog) {
+    $scope.hide = function() {
+      $mdDialog.hide();
+    };
+
+    $scope.cancel = function() {
+      $mdDialog.cancel();
+    };
+
+    $scope.answer = function(answer) {
+      $mdDialog.hide(answer);
+    };
+  }
+
+
+})
      .controller('univExamCtrl',['$scope','univExamData',function($scope,univExamData){
        $scope.results = [
          {name:'Passed',value:'1'},
@@ -696,13 +754,24 @@
           return $http.post('/ksm/data/proctor/saveMeetingData.php',data);
         }
       }
-    }]).factory('ptgRecordData',['$http',function($http){
+    }])
+    .factory('ptgRecordData',['$http',function($http){
       return {
         storeSession: function(data){
           return $http.post('/ksm/data/proctor/storeSession.php',data);
         },
         saveData: function(data){
           return $http.post('/ksm/data/proctor/saveptgRecordData.php',data);
+        }
+      }
+    }])
+    .factory('validateCertificateData',['$http',function($http){
+      return {
+        storeSession: function(data){
+          return $http.post('/ksm/data/proctor/storeSession.php',data);
+        },
+        saveData: function(data){
+          return $http.post('/ksm/data/proctor/validateCertificateData.php',data);
         }
       }
     }]).factory('criticalAnalysis',['$http',function($http){
@@ -726,6 +795,7 @@
       }
     }])
     .factory('SelfDevData',['$http',function($http){
+
        return {
        SelfDevEntry: function(scope,data){
 

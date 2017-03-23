@@ -589,7 +589,6 @@
 
           <md-tab label="Self-Development">
           <md-card>
-
             <md-card-content ng-controller="SelfDevCtrl">
                 <div layout="column">
                   <form ng-submit="SelfDevEntry(SelfDevData)" name="SelfDevForm" novalidate>
@@ -610,9 +609,7 @@
                 </div>
                 <div flex="10"></div>
               </div>
-
-
-                    <div layout="column" ng-show="SelfDevData.choice1 == 1">
+         <div layout="column" ng-show="SelfDevData.choice1 == 1">
                     <div layout="row">
                       <md-input-container flex>
                             <label>Name</label>

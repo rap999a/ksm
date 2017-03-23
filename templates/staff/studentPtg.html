@@ -94,11 +94,12 @@
                   <div ng-show="serverResp">
                     <form  name="ptgRecordForm" ng-submit="saveData(choices)" novalidate >
                         <div data-ng-repeat="choice in choices" layout="column">
-                            <div layout="row">
+                          <div layout="row">
                             <md-input-container flex>
                               <label>Name of PTG</label>
-                              <input type="d" ng-model="choice.ptgName" autocomplete="off" ng-required="true"> </md-input-container>
-                            </div>
+                              <input type="d" ng-model="choice.ptgName" autocomplete="off" ng-required="true"> 
+                            </md-input-container>
+                          </div>
                            <div layout="row">
                             <md-input-container flex>
                               <label>Remark of PTG</label>
@@ -170,6 +171,56 @@
                 </div>
                 </md-card-content>          
               </md-card>
+          </md-tab>
+
+          <!--- - - - - - - - - - - - -  - TAB 4 Student Validation -->
+          <md-tab label="Validate Student ">
+              <!-- ##################### CARD 1 ######################-->
+              <md-card>
+             <md-card-title>
+                <md-card-title-text>
+                  <span class="md-headline">Certificate Validation</span>               
+                   </md-card-title-text>
+              </md-card-title>
+              <md-card-content>
+                <md-content class="md-padding" ng-controller="validateCertificateCtrl">
+                  <div layout="column">
+                    <form ng-submit="selectStudent(userData)" name="validateCertificateForm" novalidate>                    
+                      <div layout="row">
+                        <md-input-container class="md-block" flex-gt-sm>
+                                <label>Select Student</label>
+                                <md-select ng-model="userData.student">
+                                <md-option ng-value="student.value" ng-repeat="student in students" ng-required="true">{{student.name}}</md-option>
+                                </md-select>
+                        </md-input-container>
+                      </div>
+                      <md-button type="submit" class="md-primary">Submit</md-button>
+                     </form>
+                 </div>
+
+                   <div layout="column" >
+                      <form ng-submit="validateCertificate(certificateData)" novalidate>
+                        <div layout="row">
+                          <md-list  ng-cloak>
+                            <md-subheader class="md-no-sticky">List of achieved certificates</md-subheader>
+                              <md-list-item ng-repeat="certificate in certificates">
+                                <p> {{ certificate.name }} </p>
+                                 <md-button class="md-primary md-raised" ng-click="showAdvanced($event)">
+                                    View Image
+                                 </md-button>
+                                 <md-checkbox class="md-secondary" ng-model="certificateData.wanted"></md-checkbox>
+                              </md-list-item>
+                          </md-list>
+                        </div>
+                        <md-button type="submit" class="md-primary">Submit</md-button>
+                      </form>
+                    </div>
+                 
+
+    
+               </md-content>
+            </md-card-content>
+          </md-card>
           </md-tab>
         </md-tabs>
       </md-content>

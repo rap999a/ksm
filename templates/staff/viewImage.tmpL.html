@@ -1,0 +1,31 @@
+<md-dialog aria-label="Certificate">
+  <form ng-cloak>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Certificate</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <h2>Certificate</h2>
+        <img style="margin: auto; max-width: 100%;" alt="Certificate Image" src="img\macold.png">
+
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button ng-click="answer('Reject')">
+       Reject
+      </md-button>
+      <md-button ng-click="answer('Approve')">
+        Approve
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>
