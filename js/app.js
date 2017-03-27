@@ -48,6 +48,12 @@ var app = null;
         controller:'studentPtgCtrl',
         data: {authenticate : true}
       })
+      .state('staff.studentValidation',{
+        url:'/staff/studentValidation',
+        templateUrl:'templates/staff/studentValidation.html',
+        controller:'academicValidationCtrl',
+        data: {authenticate : true}
+      })
       .state('user',{
         abstract: true,
         // url:'/user',

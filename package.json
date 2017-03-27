@@ -12,9 +12,9 @@
     "grunt": "^1.0.1",
     "grunt-contrib-concat": "^1.0.1",
     "grunt-contrib-uglify": "^1.0.1"
-
   },
   "dependencies": {
-    "angular-material": "http://github.com/angular/bower-material/tarball/v1.1.0-rc2"
+    "angular-material": "http://github.com/angular/bower-material/tarball/v1.1.0-rc2",
+    "chart.js": "^2.5.0"
   }
 }

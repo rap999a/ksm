@@ -3,8 +3,9 @@
     .controller('mainPageCtrl',['$scope',function($scope){
         $scope.message = "This is amaziing!!!";
     }])
+  
     .controller('loginCtrl',['$scope','Authenticate','$http','$state','$mdToast',function($scope,Authenticate,$http,$state,$mdToast){
-
+      
       $scope.incorrectPassword = function() {
 	          	  $mdToast.show($mdToast.simple()
 	          	  	.textContent('Incorrect Password!!')
@@ -266,7 +267,7 @@
       $scope.submitAcademicInfo = function(data){
         var $data = angular.toJson(data);
         academicData.submitAcademicInfo($scope,$data).then(function(data){
-
+          
           $scope.negativeServResp = false;
           $scope.positiveServResp = false;
           $scope.thankYou = true;
@@ -568,10 +569,18 @@
       };
     }])
     .controller('acadAchievementCtrl',['$scope','achievementData',function($scope,achievementData){
-
-      $scope.achievementEntry = function() {
-
+        $scope.achievementEntry = function() {
       };
+    }])
+    .controller('academicValidationCtrl',['$scope','academicValidationData',function($scope,academicValidationData){
+        $scope.academicValidationEntry = function() {
+      };
+
+      $scope.approve = function() {
+          };
+
+          $scope.disapprove = function() {
+          };
     }])
     .controller('pracCtrl',['$scope','pracData',function($scope,pracData){
 
@@ -614,12 +623,9 @@
        $scope.removeChoice = function(item) {
          $scope.choices.splice(item, 1);
          };
+   }])
 
-
-    }])
-
-
-.controller('extraCurriDataCtrl',['$scope','extraCurriData',function($scope,extraCurriData){
+  .controller('extraCurriDataCtrl',['$scope','extraCurriData',function($scope,extraCurriData){
       $scope.extraCurriDataEntry = function() {
         
       };$scope.choices = [{}];
@@ -847,6 +853,13 @@
           return $http.post('/ksm/data/proctor/storeUnitTestData.php',data);
         }
 
+      }
+    }]) 
+    .factory('academicValidationData',['$http',function($http){
+      return {
+        academicValidationEntry: function($scope,data){
+          return $http.post('/ksm/data/proctor/academicValidationEntry.php',data);
+        }
       }
     }])
     .factory('univExamData',['$http',function($http){

@@ -9,6 +9,7 @@
       <li>The interactions between teachers and students are intended to address the issues related       to student psychology, stress, medical and motivational problems which may affect his/her       performance and well being as an individual.</li>
       <li>Identify and analyze the issues related to students at various levels and take necessary         actions to address these issues.</li>
     </ol>
+    
 
     <md-content>
         <md-tabs md-dynamic-height md-border-bottom>
@@ -17,17 +18,12 @@
             <md-content class="md-padding">
               <div layout="column">
                 <form ng-submit="saveProctor(user)" name="form1" novalidate>
-
-              <!-- fname : {{form1.firstname.$pristine}}
-              fname : {{form1.firstname.$untouched}} -->
-                <!-- <md-subheader class="md-primary">Unread Messages</md-subheader> -->
                 <div layout="row">
-
+                
                   <md-input-container flex>
                        <label>First Name</label>
                        <input ng-model="user.firstname" name="firstname" type="text" autocomplete="off" ng-required="true">
                   </md-input-container>
-
                   <md-input-container flex>
                        <label>Last Name</label>
                        <input ng-model="user.lastname" type="text" autocomplete="off" ng-required="true">
