@@ -71,6 +71,24 @@ var app = null;
         controller:'staffHomeCtrl',
         data: {authenticate : true}
       })
+      .state('staff.ptgData',{
+        url:'/staff/PTG-Data',
+        templateUrl:'templates/staff/ptgData.html',
+        controller:'ptgDataCtrl',
+        data: {authenticate : true}
+      })
+      .state('admin.approve',{
+        url:'/admin/approve-accounts',
+        templateUrl:'templates/admin/approveAccounts.html',
+        controller:'adminApproveAccountsCtrl',
+        data: {authenticate : true}
+      })
+      .state('admin.assignptg',{
+        url:'/admin/assign-PTG',
+        templateUrl:'templates/admin/assignPtg.html',
+        controller:'assignPtgCtrl',
+        data: {authenticate : true}
+      })
       .state('admin.home',{
         url:'/admin/home',
         templateUrl:'templates/admin/home.html',

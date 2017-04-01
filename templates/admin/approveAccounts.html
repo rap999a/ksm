@@ -1,0 +1,36 @@
+<div layout="column" layout-gt-md="row">
+  <div flex="20" style="max-width: 20%;"></div>
+  <div flex="60">
+    <br>
+    <br>
+    <md-card>
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">Approve Staff Accounts</span>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-content>
+        <md-content class="md-padding">
+
+                 <div layout="column">
+                    <form ng-submit="staffValidate(faculties)" novalidate>
+                      <div layout="row">
+                        <md-list  ng-cloak>
+
+                          <md-subheader class="md-no-sticky">List of Faculties for validation</md-subheader>
+                            <md-list-item ng-repeat="faculty in faculties">
+                              <p><h3 class="md-subhead"> {{ faculty.f_name }} {{ faculty.l_name }}</h3> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <h3 class="md-caption"> {{ faculty.username_pre }}@{{ faculty.username_suff }}</h3> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                              <md-checkbox class="md-secondary" aria-label="Verify" ng-model="faculty.verify[$index]"></md-checkbox>
+                            </md-list-item>
+                        </md-list>
+                      </div>
+                      <md-button type="submit" class="md-primary">Submit</md-button>
+                    </form>
+                  </div>
+
+             </md-content>
+      </md-card-content>
+    </md-card>
+  </div>
+  <div flex="20" style="max-width: 20%;"></div>
+</div>

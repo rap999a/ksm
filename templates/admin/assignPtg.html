@@ -1,0 +1,138 @@
+<div layout="column" layout-gt-md="row">
+  <div flex="20" style="max-width: 20%;"></div>
+  <div flex="60">
+    <br>
+    <br>
+    <md-card>
+        <md-card-title>
+            <md-card-title-text>
+              <span class="md-headline">Assign PTG to Students</span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+          <md-content class="md-padding">
+              <div layout="column">
+                <form ng-submit="checkUser(userData)" name="assignPtgForm" novalidate>
+                  <div layout="row">
+                       <md-input-container class="md-block" flex-gt-sm>
+                              <label>Branch</label>
+                              <md-select ng-model="userData.branch">
+                              <md-option ng-value="branch.value" ng-repeat="branch in branchList" ng-required="true">{{branch.name}}</md-option>
+                              </md-select>
+                       </md-input-container>
+                       <md-input-container flex>
+                              <label>Class</label>
+                              <md-select ng-model="userData.class">
+                                <md-option ng-value="class.value" ng-repeat="class in classes" ng-required="true">{{class.name}}</md-option>
+                              </md-select>
+                      </md-input-container>
+                    </div>
+                    <div layout="row">
+                      <md-input-container flex>
+                        <label>Semester</label>
+                        <md-select ng-model="userData.sem">
+                          <md-option ng-value="sem.value" ng-repeat="sem in semester" ng-required="true">{{sem.name}}</md-option>
+                        </md-select>
+                      </md-input-container>
+                      <md-input-container flex>
+                        <label>Current Division</label>
+                        <md-select ng-model="userData.div">
+                          <md-option ng-value="division.value" ng-repeat="division in divisions" ng-required="true">{{division.name}}</md-option>
+                        </md-select>
+                      </md-input-container>
+                    </div>
+                    <md-button type="submit" class="md-primary">Submit</md-button>
+                </form>
+              </div>
+
+               <div layout="column" ng-if="showList == 1">
+                   <form ng-submit=assignPtg(students,user) novalidate>
+                       <div layout="row">
+                         <md-list  ng-cloak>
+                          <md-subheader class="md-no-sticky">List of Students</md-subheader>
+                            <md-list-item ng-repeat="student in students">
+                              <p> {{ student.firstname }} {{student.lastname}}  &nbsp;&nbsp;</p>
+                              <md-checkbox class="md-secondary" ng-model="student.selected"></md-checkbox>
+                            </md-list-item>
+                         </md-list>
+                         <span flex></span>
+                         <md-radio-group ng-model="user.staff">
+                                <md-subheader class="md-no-sticky">List of Faculty</md-subheader>
+                                <md-radio-button value="{{staff.prim_id}}" class="md-primary" ng-repeat="staff in staffList">{{staff.f_name}} {{staff.l_name}}</md-radio-button>
+                         </md-radio-group>
+                       </div>
+                       <md-button type="submit" class="md-primary">Submit</md-button>
+                   </form>
+               </div>
+          </md-content>
+        </md-card-content>
+    </md-card>
+
+    <md-card>
+        <md-card-title>
+            <md-card-title-text>
+              <span class="md-headline">Edit PTG-Students</span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+          <md-content class="md-padding">
+              <div layout="column">
+                <form ng-submit="fetchData(user)" name="assignPtgForm" novalidate>
+                  <div layout="row">
+                       <md-input-container class="md-block" flex-gt-sm>
+                              <label>Branch</label>
+                              <md-select ng-model="user.branch">
+                              <md-option ng-value="branch.value" ng-repeat="branch in branchList" ng-required="true">{{branch.name}}</md-option>
+                              </md-select>
+                       </md-input-container>
+                       <md-input-container flex>
+                              <label>Class</label>
+                              <md-select ng-model="user.class">
+                                <md-option ng-value="class.value" ng-repeat="class in classes" ng-required="true">{{class.name}}</md-option>
+                              </md-select>
+                      </md-input-container>
+                      <md-input-container flex>
+                          <label>Semester</label>
+                          <md-select ng-model="user.sem">
+                            <md-option ng-value="sem.value" ng-repeat="sem in semester" ng-required="true">{{sem.name}}</md-option>
+                          </md-select>
+                      </md-input-container>
+                      <md-input-container flex>
+                          <label>Current Division</label>
+                          <md-select ng-model="user.div">
+                            <md-option ng-value="division.value" ng-repeat="division in divisions" ng-required="true">{{division.name}}</md-option>
+                          </md-select>
+                      </md-input-container>
+                    </div>
+                    <md-button type="submit" class="md-primary">Submit</md-button>
+                </form>
+              </div>
+
+               <div layout="column" ng-if="showList1 == 1">
+
+                       <div layout="row">
+                         <md-input-container flex>
+                           <label>PTG LIST</label>
+                           <md-select ng-model="ptgAssigned.id" md-on-close="fetchStudentOfPTG(ptgAssigned)">
+                             <md-option ng-value="ptg.sr_no" ng-repeat="ptg in ptgs" ng-required="true">{{ptg.firstname}} {{ptg.lastname}}</md-option>
+                           </md-select>
+                         </md-input-container>
+                       </div>
+
+                       <div layout="row">
+                         <md-list  ng-cloak flex>
+                          <md-subheader class="md-no-sticky">List of Students</md-subheader>
+                            <md-list-item ng-repeat="student in students1" flex>
+                              <p> {{ student.firstname }} {{student.lastname}}  &nbsp;&nbsp;</p>
+                              <md-button type="button" class="md-warn md-raised" ng-click="deleteStudent(students1,$index)">Delete</md-button>
+                              <!-- <md-checkbox class="md-secondary" ng-model="student.selected"></md-checkbox> -->
+                            </md-list-item>
+                         </md-list>
+                       </div>
+               </div>
+          </md-content>
+        </md-card-content>
+    </md-card>
+  </div>
+  <div flex="20" style="max-width: 20%;"></div>
+</div>

@@ -32,25 +32,27 @@
 		}
 		public function signUp($data){
 
-			$email = $data->email;
+			$email = $data['email'];
 			$email = explode("@",$email);
 			$email_pre = $email[0];
 		    $email_suff = $email[1];
-			$fname = ucfirst(strtolower($data->firstname));
-			$lname = ucfirst(strtolower($data->lastname));
+			$fname = ucfirst(strtolower($data['firstname']));
+			$lname = ucfirst(strtolower($data['lastname']));
 
-			$stmt = $this->pdo->prepare("INSERT INTO PM010001 (f_name,l_name,username_pre,username_suff,password) VALUES (:f_name,:l_name,:email_pre,:email_suff,:password) ");
+			$stmt = $this->pdo->prepare("INSERT INTO PM010001 (f_name,l_name,student_id,username_pre,username_suff,password,account_type) VALUES (:f_name,:l_name,:student_id,:email_pre,:email_suff,:password,:account_type) ");
 			$stmt->bindParam(":f_name",$fname,PDO::PARAM_STR);
 			$stmt->bindParam(":l_name",$lname,PDO::PARAM_STR);
+			$stmt->bindParam(":student_id",$data['student_id'],PDO::PARAM_STR);
 			$stmt->bindParam(":email_pre",$email_pre,PDO::PARAM_STR);
 			$stmt->bindParam(":email_suff",$email_suff,PDO::PARAM_STR);
-			$stmt->bindParam(":password",$data->password,PDO::PARAM_STR);
+			$stmt->bindParam(":password",$data['password'],PDO::PARAM_STR);
+			$stmt->bindParam(":account_type",$data['account_type'],PDO::PARAM_STR);
 			$stmt->execute();
 
       $stmt = $this->pdo->prepare("INSERT INTO PM010002 (firstname,lastname,studentID,email) VALUES (:firstname,:lastname,:studentID,:email)");
       $stmt->bindParam(":firstname",$data['firstname'],PDO::PARAM_STR);
       $stmt->bindParam(":lastname",$data['lastname'],PDO::PARAM_STR);
-      $stmt->bindParam(":studentID",$data['studentID'],PDO::PARAM_STR);
+      $stmt->bindParam(":studentID",$data['student_id'],PDO::PARAM_STR);
       $stmt->bindParam(":email",$data['email'],PDO::PARAM_STR);
       $stmt->execute();
 
@@ -74,7 +76,7 @@
 			  $email_suff = $email[1];
 
 				$this->pdo->exec("use ksm_plexus");
-				$stmt = $this->pdo->prepare("SELECT prim_id,student_id,f_name,l_name,account_type FROM PM010001 WHERE username_pre=:email_pre AND username_suff = :email_suff AND password = :password ");
+				$stmt = $this->pdo->prepare("SELECT prim_id,student_id,f_name,l_name,account_type,approve FROM PM010001 WHERE username_pre=:email_pre AND username_suff = :email_suff AND password = :password ");
 				$stmt->bindParam(":email_pre",$email_pre,PDO::PARAM_STR);
 				$stmt->bindParam(":email_suff",$email_suff,PDO::PARAM_STR);
 				$stmt->bindParam(":password",$data->password,PDO::PARAM_STR);
@@ -100,7 +102,7 @@
 				$student_id = $data->email;
 
 				$this->pdo->exec("use ksm_plexus");
-				$stmt = $this->pdo->prepare("SELECT prim_id,username_pre,username_suff,f_name,l_name,account_type FROM PM010001 WHERE student_id = :student_id AND password = :password ");
+				$stmt = $this->pdo->prepare("SELECT prim_id,username_pre,username_suff,f_name,l_name,account_type,approve FROM PM010001 WHERE student_id = :student_id AND password = :password ");
 				$stmt->bindParam(":student_id",$student_id,PDO::PARAM_STR);
 				$stmt->bindParam(":password",$data->password,PDO::PARAM_STR);
 				$stmt->execute();
@@ -288,6 +290,26 @@
 			}
 		else {
 			echo "Invalid Email";
+			}
+		}
+		public function uniqueID($student_id){
+
+		if(isset($student_id)){
+
+			$this->pdo->exec("use ksm_plexus");
+			$stmt = $this->pdo->prepare("SELECT prim_id FROM PM010001 WHERE  student_id = :student_id");
+			$stmt->bindParam(":student_id",$student_id,PDO::PARAM_STR);
+			$stmt->execute();
+			$row_count = $stmt->rowCount();
+			if($row_count == 0){
+				echo "0";
+			}
+			else {
+				echo "1";
+				}
+			}
+		else {
+			echo "Invalid ID";
 			}
 		}
 	}

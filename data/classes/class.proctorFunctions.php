@@ -284,11 +284,99 @@ class proctor {
         }
     }
 
+    public function fetchUnvalidatedStaff(){
+      $account_type = 1;
+      $approve = 0;
+      $stmt = $this->pdo->prepare("SELECT * FROM PM010001 WHERE account_type = :account_type AND approve = :approve");
+      $stmt->bindParam(":account_type",$account_type,PDO::PARAM_STR);
+      $stmt->bindParam(":approve",$approve,PDO::PARAM_STR);
+      $stmt->execute();
+      $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      echo json_encode($data);
+    }
+
+    public function validateStaff($data){
+      if (isset($data)) {
+        foreach ($data as $key => $value) {
+          $stmt = $this->pdo->prepare("UPDATE PM010001 SET approve = :approve WHERE prim_id = :prim_id");
+          $stmt->bindParam(":approve",$data[$key]['approve'],PDO::PARAM_STR);
+          $stmt->bindParam(":prim_id",$data[$key]['prim_id'],PDO::PARAM_STR);
+          $stmt->execute();
+        }
+      }
+    }
+
+    public function savePtgData($students,$staff,$date){
+      if (isset($students)){
+        foreach ($students as $key => $value) {
+          $stmt = $this->pdo->prepare("INSERT INTO PM010012 (student_id,staff_key_id,current_class,year) VALUES (:student_id,:staff_key_id,:current_class,:year)");
+          $stmt->bindParam(":student_id",$students[$key]['student_key_id'],PDO::PARAM_STR);
+          $stmt->bindParam(":staff_key_id",$staff,PDO::PARAM_STR);
+          $stmt->bindParam(":current_class",$students[$key]['sr_no'],PDO::PARAM_STR); // This is the primary key of 011 check 'fetchStudent' function below
+          $stmt->bindParam(":year",$date,PDO::PARAM_STR);
+          $stmt->execute();
+          echo "b";
+        }
+      }
+    }
+
+    public function fetchStaff($department){
+      $account_type = 1;
+      $stmt = $this->pdo->prepare("SELECT PM010001.f_name,PM010001.l_name,PM010001.prim_id,PM010002.branch FROM PM010001 INNER JOIN PM010002 ON PM010001.prim_id = PM010002.sr_no WHERE PM010001.account_type = :account_type AND PM010002.branch = :branch");
+      $stmt->bindParam(":account_type",$account_type,PDO::PARAM_STR);
+      $stmt->bindParam(":branch",$department,PDO::PARAM_STR);
+      $stmt->execute();
+      $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      return $data;
+    }
+    public function fetchStudent($class,$department,$division){
+      $account_type = 1;
+      $stmt = $this->pdo->prepare("SELECT PM010002.firstname,PM010002.lastname,PM010002.branch,PM010011.sr_no,PM010011.student_key_id FROM PM010002 INNER JOIN PM010011 ON PM010002.sr_no = PM010011.student_key_id WHERE PM010011.active = :active AND PM010002.branch = :branch AND class_id = :class AND division = :div");
+      $stmt->bindParam(":active",$account_type,PDO::PARAM_STR);
+      $stmt->bindParam(":branch",$department,PDO::PARAM_STR);
+      $stmt->bindParam(":class",$class,PDO::PARAM_STR);
+      $stmt->bindParam(":div",$division,PDO::PARAM_STR);
+      $stmt->execute();
+      $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      return $data;
+    }
+    public function fetchPTGs($data,$class,$division){
+      $account_type = 1;
+      $stmt = $this->pdo->prepare("SELECT DISTINCT PM010002.firstname,PM010002.lastname,PM010002.sr_no FROM PM010002 INNER JOIN PM010012 ON PM010012.staff_key_id = PM010002.sr_no INNER JOIN PM010011 ON PM010012.current_class = PM010011.sr_no WHERE PM010011.active = :active AND PM010002.branch = :branch AND PM010011.class_id = :class_id AND PM010011.division = :division");
+      $stmt->bindParam(":active",$account_type,PDO::PARAM_STR);
+      $stmt->bindParam(":branch",$data->branch,PDO::PARAM_STR);
+      $stmt->bindParam(":class_id",$class,PDO::PARAM_STR);
+      $stmt->bindParam(":division",$division,PDO::PARAM_STR);
+      $stmt->execute();
+      $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      return $data;
+    }
+    public function fetchMyPTG(){
+      $stmt = $this->pdo->prepare("SELECT PM010002.firstname,PM010002.lastname,PM010002.designation,PM010002.branch,PM010002.email,PM010002.phone FROM PM010002 INNER JOIN PM010012 ON PM010012.staff_key_id = PM010002.sr_no WHERE PM010012.student_id = :student_id");
+      $stmt->bindParam(":student_id",$_SESSION['user_plexus_id'],PDO::PARAM_STR);
+      $stmt->execute();
+      $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      return $data;
+    }
+    public function fetchStudentOfPTG($data){
+      $stmt = $this->pdo->prepare("SELECT PM010002.firstname,PM010002.lastname,PM010012.sr_no FROM PM010002 INNER JOIN PM010012 ON PM010012.student_id = PM010002.sr_no WHERE PM010012.staff_key_id = :id");
+      $stmt->bindParam(":id",$data->id,PDO::PARAM_STR);
+      $stmt->execute();
+      $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      return $data;
+    }
+
+    public function deleteStudent($data){
+      $stmt = $this->pdo->prepare("DELETE FROM PM010012 WHERE sr_no = :sr_no ");
+      $stmt->bindParam(":sr_no",$data->sr_no,PDO::PARAM_STR);
+      $stmt->execute();
+    }
+
     public function storeUTData($approvalFlag,$data){
-      $_SESSION['student_id'] = "123123C2312";
+
       if ($approvalFlag == 0) {
         $stmt = $this->pdo->prepare("INSERT INTO PM010005 (student_id,class_id,total_sub,appeared,passed,failed) VALUES (:student_id,:class_id,:total_sub,:appeared,:passed,:failed)");
-        $stmt->bindParam(":student_id",$_SESSION['student_id'],PDO::PARAM_STR);
+        $stmt->bindParam(":student_id",$_SESSION['studentId'],PDO::PARAM_STR);
         $stmt->bindParam(":class_id",$_SESSION['classID'],PDO::PARAM_STR);
         $stmt->bindParam(":total_sub",$data->subjects,PDO::PARAM_STR);
         $stmt->bindParam(":appeared",$data->appeared,PDO::PARAM_STR);

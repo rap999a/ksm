@@ -1,5 +1,3 @@
 <?php
-  if(strpos("rohan@gmail.com","@")) {
-    echo "1";
-  }
+echo Date('m-Y');
  ?>
