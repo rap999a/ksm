@@ -795,16 +795,28 @@
           }
 
      })
-     .controller('validateCertificateCtrl',function($scope,$mdDialog){
+     .controller('validateCertificateCtrl',function($scope,$mdDialog,adminFunctions){
+       $scope.serverResp = 0;
+       adminFunctions.fetchMyStudents().then(function(data){
+         $scope.students = data.data;
+       });
+
+        $scope.selectStudent = function(data){
+          var $data = angular.toJson(data);
+          adminFunctions.fetchCertificates($data).then(function(data){
+            $scope.certificates = data.data;
+            $scope.serverResp = 1;
+            console.log(data.data);
+          })
+        }
         $scope.validateCertificate = function(data){
         var $data = angular.toJson(data);
-        staffData.validateCertificate($scope,$data).then(function(data){
-
-
+        adminFunctions.validateCertificate($data).then(function(data){
+          console.log(data.data);
           $scope.validateCertificateForm.$setUntouched();
-          $scope.user= " ";
+          $scope.certificates= " ";
           $scope.validateCertificateForm.$setPristine();
-
+        //
         });
       }
        $scope.students = [
@@ -814,19 +826,16 @@
             { name: 'Rohit Keswani', value: '4' }
            ];
 
-      $scope.certificates = [
-            { name: 'Java Certificate', wanted: false },
-            { name: 'German Certificate', wanted: false },
-            { name: 'Aptitude Certificate', wanted: false },
-            { name: 'Personality Development Certificate', wanted: false }
-           ];
-
-       $scope.showAdvanced = function(ev) {
+           $scope.hello = "as";
+       $scope.showAdvanced = function(path) {
             $mdDialog.show({
                 controller: DialogController,
                 templateUrl: 'templates/staff/viewImage.tmpl.html',
                 parent: angular.element(document.body),
-                targetEvent: ev,
+                locals: {
+                  path: path
+                },
+                // targetEvent: ev,
                 clickOutsideToClose:true,
                 fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
             })
@@ -837,7 +846,8 @@
             });
       };
 
-       function DialogController($scope, $mdDialog) {
+       function DialogController($scope, $mdDialog, path) {
+         $scope.path = path;
     $scope.hide = function() {
       $mdDialog.hide();
     };
@@ -1331,6 +1341,12 @@
         },
         storeCriticalAnalysis: function(data){
           return $http.post('/ksm/data/staffFunctions/savecriticalAnalysisData.php',data);
+        },
+        fetchCertificates: function(data){
+          return $http.post('/ksm/data/staffFunctions/fetchCertificates.php',data);
+        },
+        validateCertificate: function(data){
+          return $http.post('/ksm/data/staffFunctions/validateCertificate.php',data);
         }
       }
 

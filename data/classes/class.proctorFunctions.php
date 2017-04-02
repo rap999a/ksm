@@ -86,6 +86,26 @@ class proctor {
       $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
       return $data;
     }
+    public function fetchCertificatesForValidation($studentID){
+      $approve = 0;
+      $stmt = $this->pdo->prepare("SELECT * FROM PM010015 WHERE student_id = :student_id AND approval = :notApproved");
+      $stmt->bindParam(":student_id",$studentID,PDO::PARAM_STR);
+      $stmt->bindParam(":notApproved",$approve,PDO::PARAM_STR);
+      $stmt->execute();
+      $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      return $data;
+    }
+    public function validateCertificate($data){
+      $approve = 1;
+      foreach ($data as $key => $value) {
+        if (isset($data[$key]['approval']) && $data[$key]['approval'] == true ) {
+          $stmt = $this->pdo->prepare("UPDATE PM010015 SET approval = :approve WHERE sr_no = :id");
+          $stmt->bindParam(":approve",$approve,PDO::PARAM_STR);
+          $stmt->bindParam(":id",$data[$key]['id'],PDO::PARAM_STR);
+          $stmt->execute();
+        }
+      }
+    }
 
     public function fetchAllAttendance(){
       $stmt = $this->pdo->prepare("SELECT * FROM PM010007 WHERE student_id = :student_id");

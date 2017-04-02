@@ -77,6 +77,12 @@ var app = null;
         controller:'ptgDataCtrl',
         data: {authenticate : true}
       })
+      .state('staff.approveCertificates',{
+        url:'/staff/approve-certificates',
+        templateUrl:'templates/staff/approveCertificates.html',
+        controller:'validateCertificateCtrl',
+        data: {authenticate : true}
+      })
       .state('admin.approve',{
         url:'/admin/approve-accounts',
         templateUrl:'templates/admin/approveAccounts.html',
