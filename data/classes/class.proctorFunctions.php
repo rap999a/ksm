@@ -69,6 +69,14 @@ class proctor {
 
 
   }
+    public function getCurrentClass($student_id,$class_id){
+      $stmt = $this->pdo->prepare("SELECT sr_no FROM PM010011 WHERE student_key_id = :student_id AND class_id = :class_id ");
+      $stmt->bindParam(":student_id",$student_id,PDO::PARAM_STR);
+      $stmt->bindParam(":class_id",$class_id,PDO::PARAM_STR);
+      $stmt->execute();
+      $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      return $data;
+    }
     public function fetchCertificates($classId){
 
       $stmt = $this->pdo->prepare("SELECT * FROM PM010015 WHERE student_id = :student_id AND class_id = :class_id");
@@ -269,20 +277,6 @@ class proctor {
       }
 
     }
-    public function saveMeetingData($data){
-        $count = sizeof($data);
-        $_SESSION['student_id'] = "123123C2312";
-
-        for ($i=0; $i < $count; $i++) {
-          $stmt = $this->pdo->prepare("INSERT INTO PM010009 (student_id,class,date,discussion,remarks) VALUES (:student_id,:class,:date,:discussion,:remarks)");
-          $stmt->bindParam(":student_id",$_SESSION['student_id'],PDO::PARAM_STR);
-          $stmt->bindParam(":class",$_SESSION['classID'],PDO::PARAM_STR);
-          $stmt->bindParam(":date",$data[$i]->dom,PDO::PARAM_STR);
-          $stmt->bindParam(":discussion",$data[$i]->meetingDetails,PDO::PARAM_STR);
-          $stmt->bindParam(":remarks",$data[$i]->remarks,PDO::PARAM_STR);
-          $stmt->execute();
-        }
-    }
 
     public function fetchUnvalidatedStaff(){
       $account_type = 1;
@@ -351,6 +345,49 @@ class proctor {
       $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
       return $data;
     }
+    public function fetchPTG($data,$class){
+      $account_type = 1;
+      foreach ($class as $key => $value) {
+        $stmt = $this->pdo->prepare("SELECT PM010002.firstname,PM010002.lastname,PM010002.phone,PM010002.email FROM PM010002 INNER JOIN PM010012 ON PM010012.staff_key_id = PM010002.sr_no WHERE PM010012.student_id = :student_id AND PM010012.current_class = :class");
+        $stmt->bindParam(":student_id",$data->sr_no,PDO::PARAM_STR);
+        $stmt->bindParam(":class",$class[$key]['sr_no'],PDO::PARAM_STR);
+        $stmt->execute();
+      }
+
+      $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      return $data;
+    }
+    public function savecriticalAnalysisData($data,$studentID,$class,$month){
+      foreach ($data as $key => $value) {
+        $stmt = $this->pdo->prepare("INSERT INTO PM010014 (student_id,staff_id,month,class_id,type,feedback) VALUES (:student_id,:staff_id,:month,:class_id,:type,:feedback)");
+        $stmt->bindParam(":student_id",$studentID,PDO::PARAM_STR);
+        $stmt->bindParam(":staff_id",$_SESSION['user_plexus_id'],PDO::PARAM_STR);
+        $stmt->bindParam(":month",$month,PDO::PARAM_STR);
+        $stmt->bindParam(":class_id",$class,PDO::PARAM_STR);
+        $stmt->bindParam(":type",$data[$key]['type'],PDO::PARAM_STR);
+        $stmt->bindParam(":feedback",$data[$key]['measures'],PDO::PARAM_STR);
+        $stmt->execute();
+      }
+    }
+    public function saveMeetingData($data,$studentID,$class,$date,$month){
+      foreach ($data as $key => $value) {
+        $receivedMonth = explode("-",$data[$key]['dom']);
+        if ($data[$key]['dom'] >= $date && (($receivedMonth[1] > 0 && $receivedMonth < 4) || ($receivedMonth[1] > 7 && $receivedMonth < 10))) {
+          $stmt = $this->pdo->prepare("INSERT INTO PM010013 (student_id,staff_id,current_class,date,month,discussion,remarks) VALUES (:student_id,:staff_id,current_class,:date,:month,:discussion,:remarks)");
+          $stmt->bindParam(":student_id",$studentID,PDO::PARAM_STR);
+          $stmt->bindParam(":staff_id",$_SESSION['user_plexus_id'],PDO::PARAM_STR);
+          $stmt->bindParam(":current_class",$class,PDO::PARAM_STR);
+          $stmt->bindParam(":date",$data[$key]['dom'],PDO::PARAM_STR);
+          $stmt->bindParam(":month",$date,PDO::PARAM_STR);
+          $stmt->bindParam(":discussion",$data[$key]['meetingDetails'],PDO::PARAM_STR);
+          $stmt->bindParam(":remarks",$data[$key]['remarks'],PDO::PARAM_STR);
+          $stmt->execute();
+        }
+        else {
+          echo "0";
+        }
+      }
+    }
     public function fetchMyPTG(){
       $stmt = $this->pdo->prepare("SELECT PM010002.firstname,PM010002.lastname,PM010002.designation,PM010002.branch,PM010002.email,PM010002.phone FROM PM010002 INNER JOIN PM010012 ON PM010012.staff_key_id = PM010002.sr_no WHERE PM010012.student_id = :student_id");
       $stmt->bindParam(":student_id",$_SESSION['user_plexus_id'],PDO::PARAM_STR);
@@ -361,6 +398,13 @@ class proctor {
     public function fetchStudentOfPTG($data){
       $stmt = $this->pdo->prepare("SELECT PM010002.firstname,PM010002.lastname,PM010012.sr_no FROM PM010002 INNER JOIN PM010012 ON PM010012.student_id = PM010002.sr_no WHERE PM010012.staff_key_id = :id");
       $stmt->bindParam(":id",$data->id,PDO::PARAM_STR);
+      $stmt->execute();
+      $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      return $data;
+    }
+    public function fetchMyStudents(){
+      $stmt = $this->pdo->prepare("SELECT PM010002.firstname,PM010002.lastname,PM010012.student_id,PM010012.current_class FROM PM010002 INNER JOIN PM010012 ON PM010012.student_id = PM010002.sr_no WHERE PM010012.staff_key_id = :id");
+      $stmt->bindParam(":id",$_SESSION['user_plexus_id'],PDO::PARAM_STR);
       $stmt->execute();
       $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
       return $data;

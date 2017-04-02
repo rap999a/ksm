@@ -12,24 +12,15 @@
           <md-card>
               <md-card-content ng-controller="studentMeetDataCtrl">
                 <div layout="column">
-                  <form ng-submit="studMeetEntry(studentMeetData)" name="meetingForm" novalidate>
+                  <form ng-submit="saveData(user,choices)" name="meetingForm" novalidate>
                     <div layout="row">
-                        <md-input-container flex>
-                            <label>Class</label>
-                            <md-select ng-model="studentMeetData.class">
-                            <md-option ng-value="class.value" ng-repeat="class in classes" ng-required="true">{{class.name}}</md-option>
-                        </md-input-container>
-
-                        <md-input-container flex>
-                            <label>Semester</label>
-                            <md-select ng-model="studentMeetData.sem">
-                            <md-option ng-value="sem.value" ng-repeat="sem in semester" ng-required="true">{{sem.name}}</md-option>
-                        </md-input-container>
+                      <md-input-container flex>
+                          <label>Student</label>
+                          <md-select ng-model="user.sr_no">
+                          <md-option ng-value="student.student_id+'@'+student.current_class" ng-repeat="student in students" ng-required="true">{{student.firstname}} {{student.lastname}}</md-option>
+                      </md-input-container>
                     </div>
-                    <md-button type="submit" class="md-primary">Submit</md-button>
-                  </form>
-                  <div ng-show="serverResp">
-                    <form  name="studMeetForm" ng-submit="saveData(choices)" novalidate >
+                  <div>
                       <div data-ng-repeat="choice in choices" layout="column">
                         <div layout="row">
                           <md-input-container flex>
@@ -50,7 +41,7 @@
                        <div layout="row">
                       <md-button type="submit">Save</md-button>
                         </div>
-                      </form>
+
                     <div layout="row">
                       <md-button ng-click="addNewChoice()">Add</md-button>
                       <md-button button  ng-click="removeChoice($index)">Delete</md-button>
@@ -84,37 +75,20 @@
                         </md-input-container>
 
                         <md-input-container flex>
-                            <label>Academic Year</label>
-                            <md-select ng-model="ptgRecordData.sem">
-                            <md-option ng-value="academic.value" ng-repeat="year in years" ng-required="true">{{year.name}}</md-option>
+                            <label>Student</label>
+                            <md-select ng-model="ptgRecordData.sr_no">
+                            <md-option ng-value="student.student_id" ng-repeat="student in students" ng-required="true">{{student.firstname}} {{student.lastname}}</md-option>
                         </md-input-container>
                     </div>
                     <md-button type="submit" class="md-primary">Submit</md-button>
                   </form>
                   <div ng-show="serverResp">
-                    <form  name="ptgRecordForm" ng-submit="saveData(choices)" novalidate >
-                        <div data-ng-repeat="choice in choices" layout="column">
-                          <div layout="row">
-                            <md-input-container flex>
-                              <label>Name of PTG</label>
-                              <input type="d" ng-model="choice.ptgName" autocomplete="off" ng-required="true">
-                            </md-input-container>
-                          </div>
-                           <div layout="row">
-                            <md-input-container flex>
-                              <label>Remark of PTG</label>
-                              <input type="d" ng-model="choice.remarks" autocomplete="off" ng-required="true">
-                            </md-input-container>
-                          </div>
-                        </div>
-                          <div layout="row">
-                            <md-button type="submit">Save</md-button>
-                          </div>
-                      </form>
-                    <div layout="row">
-                      <md-button ng-click="addNewChoice()">Add</md-button>
-                      <md-button button  ng-click="removeChoice($index)">Delete</md-button>
-                    </div>
+                    <md-subheader class="md-no-sticky">List of PTGs</md-subheader>
+                    <md-list  ng-cloak flex>
+                       <md-list-item ng-repeat="staff in staffs">
+                         <p> {{ staff.firstname }} {{staff.lastname}}  &nbsp;&nbsp;&nbsp; {{staff.phone}} &nbsp;&nbsp;&nbsp; {{staff.email}}</p>
+                       </md-list-item>
+                    </md-list>
                   </div>
                 </div>
                 </md-card-content>
@@ -127,47 +101,40 @@
               <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
                 <md-card-content ng-controller="criticalAnalysisDataCtrl">
                 <div layout="column">
-                  <form ng-submit="criticalAnalysisEntry(criticalAnalysisData)" name="criticalForm" novalidate>
+                  <form ng-submit="criticalAnalysisEntry(user,choices)" name="criticalForm" novalidate>
                     <div layout="row">
                         <md-input-container flex>
-                            <label>Class</label>
-                            <md-select ng-model="criticalAnalysisData.class">
-                            <md-option ng-value="class.value" ng-repeat="class in classes" ng-required="true">{{class.name}}</md-option>
-                        </md-input-container>
-
-                        <md-input-container flex>
-                            <label>Semester</label>
-                            <md-select ng-model="criticalAnalysisData.sem">
-                            <md-option ng-value="sem.value" ng-repeat="sem in semester" ng-required="true">{{sem.name}}</md-option>
+                            <label>Student</label>
+                            <md-select ng-model="user.sr_no">
+                            <md-option ng-value="student.student_id+'@'+student.current_class" ng-repeat="student in students" ng-required="true">{{student.firstname}} {{student.lastname}}</md-option>
                         </md-input-container>
                     </div>
-                    <md-button type="submit" class="md-primary">Submit</md-button>
-                  </form>
-                  <div ng-show="serverResp">
-                    <form  name="criticalForm" ng-submit="saveData(choices)" novalidate >
+
                       <div data-ng-repeat="choice in choices" layout="column">
                         <div layout="row">
                           <md-input-container flex>
-                            <label>Appreciations, Disciplinary Actions, Motivational/ Psychological/ Medical/ Personal issues etc</label>
-                            <input type="d" ng-model="choice.appreciations" autocomplete="off" ng-required="true">
+                            <label>Type of Feedback</label>
+                            <md-select ng-model="choice.type">
+                            <md-option ng-value="type.value" ng-repeat="type in types" ng-required="true">{{type.name}}</md-option>
+                            </md-select>
                           </md-input-container>
                           </div>
                          <div layout="row">
                           <md-input-container flex>
-                            <label>Measures / Actions suggested by PTG and their review</label>
+                            <label>Feedback by PTG</label>
                             <input type="d" ng-model="choice.measures" autocomplete="off" ng-required="true">
                           </md-input-container>
                         </div>
                         </div>
                         <div layout="row">
-                          <md-button type="submit">Save</md-button>
+                          <md-button type="submit" class="md-primary">Save</md-button>
                         </div>
                       </form>
                       <div layout="row">
                         <md-button ng-click="addNewChoice()">Add</md-button>
                         <md-button button  ng-click="removeChoice($index)">Delete</md-button>
                       </div>
-                  </div>
+
                 </div>
                 </md-card-content>
               </md-card>
@@ -211,7 +178,7 @@
                                  <md-checkbox ng-model="data.cb1" aria-label="Approve">
                                     Checkbox 1: {{ data.cb1 }}
                                  </md-checkbox>
-                                 <md-checkbox class="md-secondary" ng-model="certificateData.wanted"></md-checkbox>
+                                 <md-checkbox class="md-secondary" aria-label="Certificates" ng-model="certificateData.wanted"></md-checkbox>
                               </md-list-item>
                           </md-list>
                         </div>

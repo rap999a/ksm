@@ -269,8 +269,10 @@
         });
       }
     }])
-    .controller('studentMeetDataCtrl',function($scope,studentMeeting){
-    $scope.serverResp = 0;
+    .controller('studentMeetDataCtrl',function($scope,studentMeeting,adminFunctions,$mdDialog){
+      adminFunctions.fetchMyStudents().then(function(data){
+        $scope.students = data.data;
+      });
     $scope.classes = [
       { name: 'First Year', value: '1' },
       { name: 'Second Year', value: '2' },
@@ -281,21 +283,33 @@
       { name: 'I', value: '1' },
       { name: 'II', value: '2' }
     ];
-          $scope.studMeetEntry = function(data){
-            var $data = angular.toJson(data);
-            studentMeeting.storeSession($data).then(function(){
-                $scope.serverResp = 1;
-                // console.log("hasd");
-            });
-          }
-          $scope.saveData = function(data){
-            var $data = angular.toJson(data);
-            studentMeeting.saveData(data).then(function(data){
-              console.log(data);
+                $scope.errorThrow = function() {
+                  $mdDialog.show(
+                    $mdDialog.alert()
+                    .clickOutsideToClose(true)
+                    .title('Oops Something went wrong!')
+                    .textContent('This is dialog is because you tried to make a back dated entry or you making an entry after the alloted time viz (JAN - MARCH & JULY - SEP)')
+                    .ariaLabel('Error Dialog!')
+                    .ok('OK!!')
+                    // You can specify either sting with query selector
+                    // or an element
+                  );
+                };
+
+          $scope.saveData = function(user,data){
+            var toServer = [];
+            toServer[0] = user;
+            toServer[1] = data;
+            var $data = angular.toJson(toServer);
+            studentMeeting.saveData($data).then(function(data){
+
+              if (data.data == 0) {
+                $scope.errorThrow();
+              }
               $scope.serverResp = 0;
-              $scope.studMeetForm.$setUntouched();
-              $scope.choices= " ";
-              $scope.studMeetForm.$setPristine();
+              $scope.meetingForm.$setUntouched();
+              $scope.choices= [{}];
+              $scope.meetingForm.$setPristine();
             });
           }
           $scope.choices = [{}];
@@ -705,8 +719,11 @@
     .controller('ptgDataCtrl',['$scope',function(){
 
     }])
-    .controller('criticalAnalysisDataCtrl',function($scope,criticalAnalysis){
+    .controller('criticalAnalysisDataCtrl',function($scope,criticalAnalysis,adminFunctions){
     $scope.serverResp = 0;
+    adminFunctions.fetchMyStudents().then(function(data){
+      $scope.students = data.data;
+    });
     $scope.classes = [
       { name: 'First Year', value: '1' },
       { name: 'Second Year', value: '2' },
@@ -717,21 +734,24 @@
       { name: 'I', value: '1' },
       { name: 'II', value: '2' }
     ];
-          $scope.criticalAnalysisEntry = function(data){
-            var $data = angular.toJson(data);
-            criticalAnalysis.storeSession($data).then(function(){
-                $scope.serverResp = 1;
-                // console.log("hasd");
+      $scope.types = [
+      { name: 'Appreciation,Disciplinary Actions, Motivational/ Psychological/ Medical/ Personal issues', value: '0' },
+      { name: 'Measures / Actions suggested by PTG and their review', value: '1' }
+    ];
+          $scope.criticalAnalysisEntry = function(student,remarks){
+            var toServer = [];
+            toServer[0] = student;
+            toServer[1] = remarks;
+            var $data = angular.toJson(toServer);
+            adminFunctions.storeCriticalAnalysis($data).then(function(data){
+              $scope.choices=[{}];
             });
           }
           $scope.saveData = function(data){
             var $data = angular.toJson(data);
-            criticalAnalysis.saveData(data).then(function(data){
               console.log(data);
-              $scope.serverResp = 0;
-              $scope.criticalForm.$setUntouched();
-              $scope.choices= " ";
-              $scope.criticalForm.$setPristine();
+            criticalAnalysis.saveData(data).then(function(data){
+            //   $scope.serverResp = 0;
             });
           }
           $scope.choices = [{}];
@@ -744,8 +764,11 @@
             };
 
      })
-    .controller('ptgRecordDataCtrl',function($scope,ptgRecordData){
+    .controller('ptgRecordDataCtrl',function($scope,ptgRecordData,adminFunctions){ //adaaaaaaaaaaaaa
     $scope.serverResp = 0;
+    adminFunctions.fetchMyStudents().then(function(data){
+      $scope.students = data.data;
+    });
     $scope.classes = [
       { name: 'First Year', value: '1' },
       { name: 'Second Year', value: '2' },
@@ -764,29 +787,12 @@
     ];
           $scope.ptgRecordEntry = function(data){
             var $data = angular.toJson(data);
-            ptgRecordData.storeSession($data).then(function(){
+            ptgRecordData.fetchPTG($data).then(function(data){
                 $scope.serverResp = 1;
+                $scope.staffs = data.data;
 
             });
           }
-          $scope.saveData = function(data){
-            var $data = angular.toJson(data);
-            ptgRecordData.saveData(data).then(function(data){
-              console.log(data);
-              $scope.serverResp = 0;
-              $scope.ptgRecordForm.$setUntouched();
-              $scope.choices= " ";
-              $scope.ptgRecordForm.$setPristine();
-            });
-          }
-          $scope.choices = [{}];
-          $scope.addNewChoice = function() {
-            $scope.choices.push({});
-          };
-
-          $scope.removeChoice = function(item) {
-            $scope.choices.splice(item, 1);
-            };
 
      })
      .controller('validateCertificateCtrl',function($scope,$mdDialog){
@@ -1280,7 +1286,7 @@
           return $http.post('/ksm/data/proctor/storeSession.php',data);
         },
         saveData: function(data){
-          return $http.post('/ksm/data/proctor/saveMeetingData.php',data);
+          return $http.post('/ksm/data/staffFunctions/saveMeetingData.php',data);
         }
       }
     }])
@@ -1290,7 +1296,7 @@
           return $http.post('/ksm/data/proctor/storeSession.php',data);
         },
         saveData: function(data){
-          return $http.post('/ksm/data/proctor/savecriticalAnalysisData.php',data);
+          return $http.post('/ksm/data/staffFunctions/savecriticalAnalysisData.php',data);
         }
       }
     }])
@@ -1319,6 +1325,12 @@
         },
         fetchMyPTG: function(){
           return $http.post('/ksm/data/adminFunctions/fetchMyPTG.php');
+        },
+        fetchMyStudents: function(){
+          return $http.post('/ksm/data/adminFunctions/fetchMyStudents.php');
+        },
+        storeCriticalAnalysis: function(data){
+          return $http.post('/ksm/data/staffFunctions/savecriticalAnalysisData.php',data);
         }
       }
 
@@ -1378,8 +1390,8 @@
    }])
    .factory('ptgRecordData',['$http',function($http){
       return {
-        storeSession: function(data){
-          return $http.post('/ksm/data/proctor/storeSession.php',data);
+        fetchPTG: function(data){
+          return $http.post('/ksm/data/staffFunctions/fetchPTG.php',data);
         },
         saveData: function(data){
           return $http.post('/ksm/data/proctor/saveptgRecordData.php',data);
