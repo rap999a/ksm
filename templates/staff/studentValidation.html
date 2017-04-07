@@ -1,0 +1,1567 @@
+<div layout="column" layout-gt-md="row">
+  <div flex="20" style="max-width: 20%;"></div>
+  <div flex="60">
+    <br>
+    <br>
+    <br>
+            <md-card>
+                  <md-card-title>
+                      <md-card-title-text>
+                          <span class="md-headline">F.E.</span>
+                      </md-card-title-text>
+                  </md-card-title>
+                  <md-card-content>
+                    <md-tabs md-dynamic-height md-border-bottom>
+                        <md-tab label="Academic Performance">
+                          <md-content class="md-padding">
+                            <div layout="column" layout-gt-md="row">
+                              <div flex="5" style="max-width: 5%;"></div>
+                              <div flex="90">
+                                <p class="md-headline">1. Continuous Assessment</p>
+                                <div layout="row" style="margin-top:-30px;">
+                                    <div flex="25">
+                                        <h6 style="font-size:13px;">Attendance</h6>
+                                    </div>
+                                    <div flex="25" style="margin-top:-3px;">
+                                        <h6 style="font-size:13px;" class="md-subhead">{{ feacad.attendance[0].attendance_percentage }}</h6>
+                                    </div>
+                                    <div flex="25">
+                                        <h6 style="font-size:13px;">Unit Test Performance</h6>
+                                    </div>
+                                    <div flex="25" style="margin-top:-3px;">
+                                        <h6 style="font-size:13px;" class="md-subhead">{{feacad.ut[0].percentage }} : Passed - {{feacad.ut[0].passed}}</h6>
+                                    </div>
+                                </div>
+                                <div layout="row" style="margin-top:-45px;">
+                                    <div flex="25">
+                                      <h6 style="font-size:13px;">Practical Performance</h6>
+                                    </div>
+                                    <div flex="25" style="margin-top:-3px;">
+                                      <h6 style="font-size:13px;" class="md-subhead">{{feacad.prac.percentage}} : Passed - {{feacad.prac.passed}}</h6>
+                                    </div>
+                                  </div>
+                                  <br>
+                                <div layout="row" style="margin-top:-30px;">
+                                  <div flex="50">
+                                    <p class="md-headline">2. Endsem Assessment</p>
+                                  </div>
+                                  <div flex="50" style="margin-top:-3px;">
+                                    <h6 style="font-size:13px;" class="md-subhead">{{feacad.endsem.percentage }} : Passed - {{feacad.endsem.passed}}</h6>
+                                  </div>
+                                </div>
+                                <p class="md-headline">3. Academic Achievements</p>
+                                <div layout="row" style="margin-top:-30px;">
+                                    <div flex="25">
+                                        <h6 style="font-size:13px;">University Rank Holder</h6>
+                                    </div>
+                                    <div flex="25" style="margin-top:-3px;">
+                                      <div ng-repeat="project in feacad.acad | filter : {ques_type : 1}">
+                                        <h6 style="font-size:13px;" class="md-subhead">{{project.answer}}</h6>
+                                      </div>
+                                    </div>
+                                    <div flex="25">
+                                        <h6 style="font-size:13px;">Year Topper</h6>
+                                    </div>
+                                    <div flex="25" style="margin-top:-3px;">
+                                      <div ng-repeat="project in feacad.acad | filter : {ques_type : 2}">
+                                        <h6 style="font-size:13px;" class="md-subhead">{{project.answer}}</h6>
+                                      </div>
+                                    </div>
+                                </div>
+                                <div layout="row" style="margin-top:-30px;">
+                                    <div flex="25">
+                                        <h6 style="font-size:13px;">Subject Topper</h6>
+                                    </div>
+                                    <div flex="25" style="margin-top:-3px;">
+                                      <div ng-repeat="project in feacad.acad | filter : {ques_type : 3}">
+                                        <h6 style="font-size:13px;" class="md-subhead">{{project.answer}}</h6>
+                                      </div>
+                                    </div>
+                                    <div flex="25">
+                                        <h6 style="font-size:13px;">Distinction</h6>
+                                    </div>
+                                    <div flex="25" style="margin-top:-3px;">
+                                      <div ng-repeat="project in feacad.acad | filter : {ques_type : 4}">
+                                        <h6 style="font-size:13px;" class="md-subhead">{{project.answer}}</h6>
+                                      </div>
+                                    </div>
+                                </div>
+                                <div layout="row" style="margin-top:-30px;">
+                                    <div flex="25">
+                                      <h6 style="font-size:13px;">First Class </h6>
+                                    </div>
+                                    <div flex="25" style="margin-top:-3px;">
+                                      <div ng-repeat="project in feacad.acad | filter : {ques_type : 5}">
+                                        <h6 style="font-size:13px;" class="md-subhead">{{project.answer}}</h6>
+                                      </div>
+                                    </div>
+                                </div>
+                              </div>
+                              <div flex="5" style="max-width: 5%;"></div>
+                            </div>
+                          </md-content>
+                        </md-tab>
+
+
+              <md-tab label="Research and Innovation">
+                <md-content class="md-padding">
+                  <div layout="column" layout-gt-md="row">
+                    <div flex="5" style="max-width: 5%;"></div>
+                    <div flex="90">
+                      <p class="md-headline">1. Project/ model making/ poster development/ competition </p><br>
+                      <div layout="row" style="margin-top:-30px;">
+                          <div flex="50">
+                              <h6 style="font-size:13px;">Major Project(Apart from University Project)</h6>
+                          </div>
+                          <div flex="50" style="margin-top:-3px;">
+                            <div ng-repeat="project in feresearch | filter : {research_type : 1,research_sub_type:1}">
+                              <p><b>{{project.name}}</b> ---
+                              {{project.details}}</p>
+                            </div>
+                          </div>
+                      </div>
+                      <div layout="row" style="margin-top:-30px;">
+                          <div flex="50">
+                              <h6 style="font-size:13px;">Mini Project(Apart from University Project)</h6>
+                          </div>
+                          <div flex="50" style="margin-top:-3px;">
+                            <div ng-repeat="project in feresearch | filter : {research_type : 1,research_sub_type:2}">
+                              <p><b>{{project.name}}</b> ---
+                              {{project.details}}</p>
+                            </div>
+                          </div>
+                      </div>
+                      <br>
+                      <div layout="row" style="margin-top:-45px;">
+                          <div flex="50">
+                            <h6 style="font-size:13px;">Technical Exhibition / Competition (International / National Level) such as SAE, BAJA, SUPRA, ROBOTICS</h6>
+                          </div>
+                          <div flex="50" style="margin-top:-3px;">
+                            <div ng-repeat="project in feresearch | filter : {research_type : 1,research_sub_type:3}">
+                              <p><b>{{project.name}}</b> ---
+                              {{project.details}}</p>
+                            </div>
+                          </div>
+                        </div>
+                      <div layout="row" style="margin-top:-30px;">
+                          <div flex="50">
+                              <h6 style="font-size:13px;">Technical Exhibition (At University / College Level) such as Techligent, Spectrum</h6>
+                          </div>
+                          <div flex="50" style="margin-top:-3px;">
+                            <div ng-repeat="project in feresearch | filter : {research_type : 1,research_sub_type:4}">
+                              <p><b>{{project.name}}</b> ---
+                              {{project.details}}</p>
+                            </div>
+                          </div>
+                      </div>
+                        <br>
+                      <div layout="row" style="margin-top:-30px;">
+                        <div flex="75">
+                          <p class="md-headline">2. Patent / IPR / Revenue Generation</p>
+                        </div>
+                        <div flex="25" style="margin-top:-3px;">
+                          <div flex="50" style="margin-top:-3px;">
+                            <div ng-repeat="project in feresearch | filter : {research_type : 2,research_sub_type:1}">
+                              <p><b>{{project.name}}</b> ---
+                              {{project.details}}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <p class="md-headline">3. Research Publication</p>
+                      <div layout="row" style="margin-top:-30px;">
+                          <div flex="50">
+                              <h6 style="font-size:13px;">Presentation in International Conference or Journal</h6>
+                          </div>
+                          <div flex="50" style="margin-top:-3px;">
+                            <div ng-repeat="project in feresearch | filter : {research_type : 3,research_sub_type:1}">
+                              <p><b>{{project.name}}</b> ---
+                              {{project.details}}</p>
+                            </div>
+                          </div>
+                        </div>
+                      <div layout="row" style="margin-top:-30px;">
+                          <div flex="50">
+                              <h6 style="font-size:13px;">Presentation in National Conference or Journal</h6>
+                          </div>
+                          <div flex="50" style="margin-top:-3px;">
+                            <div ng-repeat="project in feresearch | filter : {research_type : 3,research_sub_type:2}">
+                              <p><b>{{project.name}}</b> ---
+                              {{project.details}}</p>
+                            </div>
+                          </div>
+                      </div>
+                      <div layout="row" style="margin-top:-30px;">
+                          <div flex="50">
+                              <h6 style="font-size:13px;">Presentation in State / University Level</h6>
+                          </div>
+                          <div flex="50" style="margin-top:-3px;">
+                            <div ng-repeat="project in feresearch | filter : {research_type : 3,research_sub_type:3}">
+                              <p><b>{{project.name}}</b> ---
+                              {{project.details}}</p>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                    <div flex="5" style="max-width: 5%;"></div>
+                  </div>
+                </md-content>
+              </md-tab>
+
+
+
+              <md-tab label="Self-Development">
+                    <md-content class="md-padding">
+                      <div layout="column" layout-gt-md="row">
+                        <div flex="5" style="max-width: 5%;"></div>
+                        <div flex="90">
+                          <div layout="row" style="margin-top:-30px;">
+                              <div flex="50">
+                                  <h6 style="font-size:13px;">1. Communication Skill Development</h6>
+                              </div>
+                              <div flex="50" style="margin-top:-3px;">
+                                <div ng-repeat="project in feselfdev | filter : {improve_type : 1}">
+                                  <p><b>{{project.name}}</b> ---
+                                  {{project.details}}</p>
+                                </div>
+                              </div>
+                          </div>
+                          <div layout="row" style="margin-top:-30px;">
+                              <div flex="50">
+                                  <h6 style="font-size:13px;">2. Aptitude Training</h6>
+                              </div>
+                              <div flex="50" style="margin-top:-3px;">
+                                <div ng-repeat="project in feselfdev | filter : {improve_type : 2}">
+                                  <p><b>{{project.name}}</b> ---
+                                  {{project.details}}</p>
+                                </div>
+                              </div>
+                          </div>
+                          <br>
+                          <div layout="row" style="margin-top:-45px;">
+                              <div flex="50">
+                                <h6 style="font-size:13px;">3.Technical Skill Development</h6>
+                              </div>
+                              <div flex="50" style="margin-top:-3px;">
+                                <div ng-repeat="project in feselfdev | filter : {improve_type : 3}">
+                                  <p><b>{{project.name}}</b> ---
+                                  {{project.details}}</p>
+                                </div>
+                              </div>
+                            </div>
+                          <div layout="row" style="margin-top:-30px;">
+                              <div flex="50">
+                                  <h6 style="font-size:13px;">4. Preparation for Higher Study</h6>
+                              </div>
+                              <div flex="50" style="margin-top:-3px;">
+                                <div ng-repeat="project in feselfdev | filter : {improve_type : 4}">
+                                  <p><b>{{project.name}}</b> ---
+                                  {{project.details}}</p>
+                                </div>
+                              </div>
+                          </div>
+
+                          <div layout="row" style="margin-top:-30px;">
+                              <div flex="50">
+                                  <h6 style="font-size:13px;">5. Entrepreneurship Development Program</h6>
+                              </div>
+                              <div flex="50" style="margin-top:-3px;">
+                                <div ng-repeat="project in feselfdev | filter : {improve_type : 5}">
+                                  <p><b>{{project.name}}</b> ---
+                                  {{project.details}}</p>
+                                </div>
+                              </div>
+                            </div>
+                          <div layout="row" style="margin-top:-30px;">
+                              <div flex="50">
+                                  <h6 style="font-size:13px;">6. Language Training</h6>
+                              </div>
+                              <div flex="50" style="margin-top:-3px;">
+                                <div ng-repeat="project in feselfdev | filter : {improve_type : 6}">
+                                  <p><b>{{project.name}}</b> ---
+                                  {{project.details}}</p>
+                                </div>
+                              </div>
+                          </div>
+                          <div layout="row" style="margin-top:-30px;">
+                              <div flex="50">
+                                  <h6 style="font-size:13px;">7.Finishing School</h6>
+                              </div>
+                              <div flex="50" style="margin-top:-3px;">
+                                <div ng-repeat="project in feselfdev | filter : {improve_type : 7}">
+                                  <p><b>{{project.name}}</b> ---
+                                  {{project.details}}</p>
+                                </div>
+                              </div>
+                          </div>
+                          <div layout="row" style="margin-top:-30px;">
+                              <div flex="50">
+                                  <h6 style="font-size:13px;">8.Spiritual and Holistic Development Program</h6>
+                              </div>
+                              <div flex="50" style="margin-top:-3px;">
+                                <div ng-repeat="project in feselfdev | filter : {improve_type : 8}">
+                                  <p><b>{{project.name}}</b> ---
+                                  {{project.details}}</p>
+                                </div>
+                              </div>
+                          </div>
+                          <div layout="row" style="margin-top:-30px;">
+                              <div flex="50">
+                                  <h6 style="font-size:13px;">9. Internship or Summer Training</h6>
+                              </div>
+                              <div flex="50" style="margin-top:-3px;">
+                                <div ng-repeat="project in feselfdev | filter : {improve_type : 9}">
+                                  <p><b>{{project.name}}</b> ---
+                                  {{project.details}}</p>
+                                </div>
+                              </div>
+                          </div>
+                        </div>
+                        <div flex="5" style="max-width: 5%;"></div>
+                      </div>
+
+                    </md-content>
+                </md-tab>
+
+
+
+              <md-tab label="Extracurricular Activities">
+                  <md-content class="md-padding">
+                    <div layout="column" layout-gt-md="row">
+                      <div flex="5" style="max-width: 5%;"></div>
+                      <div flex="90">
+                        <div layout="row" style="margin-top:-30px;">
+                            <div flex="50">
+                                <h6 style="font-size:13px;">1. Performing Art</h6>
+                            </div>
+                            <div flex="50" style="margin-top:-3px;">
+                              <div ng-repeat="project in feextra | filter : {activity_type : 1}">
+                                <p><b>{{project.name}}</b> ---
+                                {{project.details}}</p>
+                              </div>
+                            </div>
+                        </div>
+                        <div layout="row" style="margin-top:-30px;">
+                            <div flex="50">
+                                <h6 style="font-size:13px;">2. Visual and Litrary Art</h6>
+                            </div>
+                            <div flex="50" style="margin-top:-3px;">
+                              <div ng-repeat="project in feextra | filter : {activity_type : 2}">
+                                <p><b>{{project.name}}</b> ---
+                                {{project.details}}</p>
+                              </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div layout="row" style="margin-top:-45px;">
+                            <div flex="50">
+                              <h6 style="font-size:13px;">3.Sports</h6>
+                            </div>
+                            <div flex="50" style="margin-top:-3px;">
+                              <div ng-repeat="project in feextra | filter : {activity_type : 3}">
+                                <p><b>{{project.name}}</b> ---
+                                {{project.details}}</p>
+                              </div>
+                            </div>
+                          </div>
+                        <div layout="row" style="margin-top:-30px;">
+                            <div flex="50">
+                                <h6 style="font-size:13px;">4. Social Service</h6>
+                            </div>
+                            <div flex="50" style="margin-top:-3px;">
+                              <div ng-repeat="project in feextra | filter : {activity_type : 4}">
+                                <p><b>{{project.name}}</b> ---
+                                {{project.details}}</p>
+                              </div>
+                            </div>
+                        </div>
+
+                        <div layout="row" style="margin-top:-30px;">
+                            <div flex="50">
+                                <h6 style="font-size:13px;">5. Leadership Development Activities</h6>
+                            </div>
+                            <div flex="50" style="margin-top:-3px;">
+                              <div ng-repeat="project in feextra | filter : {activity_type : 5}">
+                                <p><b>{{project.name}}</b> ---
+                                {{project.details}}</p>
+                              </div>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+                </md-content>
+                </md-tab>
+
+          </md-tabs>
+        </md-card-content>
+      </md-card>
+
+      <md-card>
+          <md-card-title>
+              <md-card-title-text>
+                  <span class="md-headline">S.E.</span>
+              </md-card-title-text>
+          </md-card-title>
+          <md-card-content>
+            <md-tabs md-dynamic-height md-border-bottom>
+                <md-tab label="Academic Performance">
+                  <md-content class="md-padding">
+                    <div layout="column" layout-gt-md="row">
+                      <div flex="5" style="max-width: 5%;"></div>
+                      <div flex="90">
+                        <p class="md-headline">1. Continuous Assessment</p>
+                        <div layout="row" style="margin-top:-30px;">
+                            <div flex="25">
+                                <h6 style="font-size:13px;">Attendance</h6>
+                            </div>
+                            <div flex="25" style="margin-top:-3px;">
+                                <h6 style="font-size:13px;" class="md-subhead">{{ seacad.attendance[0].attendance_percentage }}</h6>
+                            </div>
+                            <div flex="25">
+                                <h6 style="font-size:13px;">Unit Test Performance</h6>
+                            </div>
+                            <div flex="25" style="margin-top:-3px;">
+                                <h6 style="font-size:13px;" class="md-subhead">{{seacad.ut[0].percentage }} : Passed - {{seacad.ut[0].passed}}</h6>
+                            </div>
+                        </div>
+                        <div layout="row" style="margin-top:-45px;">
+                            <div flex="25">
+                              <h6 style="font-size:13px;">Practical Performance</h6>
+                            </div>
+                            <div flex="25" style="margin-top:-3px;">
+                              <h6 style="font-size:13px;" class="md-subhead">{{seacad.prac.percentage}} : Passed - {{seacad.prac.passed}}</h6>
+                            </div>
+                          </div>
+                          <br>
+                        <div layout="row" style="margin-top:-30px;">
+                          <div flex="50">
+                            <p class="md-headline">2. Endsem Assessment</p>
+                          </div>
+                          <div flex="50" style="margin-top:-3px;">
+                            <h6 style="font-size:13px;" class="md-subhead">{{seacad.endsem.percentage }} : Passed - {{seacad.endsem.passed}}</h6>
+                          </div>
+                        </div>
+                        <p class="md-headline">3. Academic Achievements</p>
+                        <div layout="row" style="margin-top:-30px;">
+                            <div flex="25">
+                                <h6 style="font-size:13px;">University Rank Holder</h6>
+                            </div>
+                            <div flex="25" style="margin-top:-3px;">
+                              <div ng-repeat="project in seacad.acad | filter : {ques_type : 1}">
+                                <h6 style="font-size:13px;" class="md-subhead">{{project.answer}}</h6>
+                              </div>
+                            </div>
+                            <div flex="25">
+                                <h6 style="font-size:13px;">Year Topper</h6>
+                            </div>
+                            <div flex="25" style="margin-top:-3px;">
+                              <div ng-repeat="project in seacad.acad | filter : {ques_type : 2}">
+                                <h6 style="font-size:13px;" class="md-subhead">{{project.answer}}</h6>
+                              </div>
+                            </div>
+                        </div>
+                        <div layout="row" style="margin-top:-30px;">
+                            <div flex="25">
+                                <h6 style="font-size:13px;">Subject Topper</h6>
+                            </div>
+                            <div flex="25" style="margin-top:-3px;">
+                              <div ng-repeat="project in seacad.acad | filter : {ques_type : 3}">
+                                <h6 style="font-size:13px;" class="md-subhead">{{project.answer}}</h6>
+                              </div>
+                            </div>
+                            <div flex="25">
+                                <h6 style="font-size:13px;">Distinction</h6>
+                            </div>
+                            <div flex="25" style="margin-top:-3px;">
+                              <div ng-repeat="project in seacad.acad | filter : {ques_type : 4}">
+                                <h6 style="font-size:13px;" class="md-subhead">{{project.answer}}</h6>
+                              </div>
+                            </div>
+                        </div>
+                        <div layout="row" style="margin-top:-30px;">
+                            <div flex="25">
+                              <h6 style="font-size:13px;">First Class </h6>
+                            </div>
+                            <div flex="25" style="margin-top:-3px;">
+                              <div ng-repeat="project in seacad.acad | filter : {ques_type : 5}">
+                                <h6 style="font-size:13px;" class="md-subhead">{{project.answer}}</h6>
+                              </div>
+                            </div>
+                        </div>
+                      </div>
+                      <div flex="5" style="max-width: 5%;"></div>
+                    </div>
+                  </md-content>
+                </md-tab>
+
+
+      <md-tab label="Research and Innovation">
+        <md-content class="md-padding">
+          <div layout="column" layout-gt-md="row">
+            <div flex="5" style="max-width: 5%;"></div>
+            <div flex="90">
+              <p class="md-headline">1. Project/ model making/ poster development/ competition </p><br>
+              <div layout="row" style="margin-top:-30px;">
+                  <div flex="50">
+                      <h6 style="font-size:13px;">Major Project(Apart from University Project)</h6>
+                  </div>
+                  <div flex="50" style="margin-top:-3px;">
+                    <div ng-repeat="project in seresearch | filter : {research_type : 1,research_sub_type:1}">
+                      <p><b>{{project.name}}</b> ---
+                      {{project.details}}</p>
+                    </div>
+                  </div>
+              </div>
+              <div layout="row" style="margin-top:-30px;">
+                  <div flex="50">
+                      <h6 style="font-size:13px;">Mini Project(Apart from University Project)</h6>
+                  </div>
+                  <div flex="50" style="margin-top:-3px;">
+                    <div ng-repeat="project in seresearch | filter : {research_type : 1,research_sub_type:2}">
+                      <p><b>{{project.name}}</b> ---
+                      {{project.details}}</p>
+                    </div>
+                  </div>
+              </div>
+              <br>
+              <div layout="row" style="margin-top:-45px;">
+                  <div flex="50">
+                    <h6 style="font-size:13px;">Technical Exhibition / Competition (International / National Level) such as SAE, BAJA, SUPRA, ROBOTICS</h6>
+                  </div>
+                  <div flex="50" style="margin-top:-3px;">
+                    <div ng-repeat="project in seresearch | filter : {research_type : 1,research_sub_type:3}">
+                      <p><b>{{project.name}}</b> ---
+                      {{project.details}}</p>
+                    </div>
+                  </div>
+                </div>
+              <div layout="row" style="margin-top:-30px;">
+                  <div flex="50">
+                      <h6 style="font-size:13px;">Technical Exhibition (At University / College Level) such as Techligent, Spectrum</h6>
+                  </div>
+                  <div flex="50" style="margin-top:-3px;">
+                    <div ng-repeat="project in seresearch | filter : {research_type : 1,research_sub_type:4}">
+                      <p><b>{{project.name}}</b> ---
+                      {{project.details}}</p>
+                    </div>
+                  </div>
+              </div>
+                <br>
+              <div layout="row" style="margin-top:-30px;">
+                <div flex="75">
+                  <p class="md-headline">2. Patent / IPR / Revenue Generation</p>
+                </div>
+                <div flex="25" style="margin-top:-3px;">
+                  <div flex="50" style="margin-top:-3px;">
+                    <div ng-repeat="project in seresearch | filter : {research_type : 2,research_sub_type:1}">
+                      <p><b>{{project.name}}</b> ---
+                      {{project.details}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <p class="md-headline">3. Research Publication</p>
+              <div layout="row" style="margin-top:-30px;">
+                  <div flex="50">
+                      <h6 style="font-size:13px;">Presentation in International Conference or Journal</h6>
+                  </div>
+                  <div flex="50" style="margin-top:-3px;">
+                    <div ng-repeat="project in seresearch | filter : {research_type : 3,research_sub_type:1}">
+                      <p><b>{{project.name}}</b> ---
+                      {{project.details}}</p>
+                    </div>
+                  </div>
+                </div>
+              <div layout="row" style="margin-top:-30px;">
+                  <div flex="50">
+                      <h6 style="font-size:13px;">Presentation in National Conference or Journal</h6>
+                  </div>
+                  <div flex="50" style="margin-top:-3px;">
+                    <div ng-repeat="project in seresearch | filter : {research_type : 3,research_sub_type:2}">
+                      <p><b>{{project.name}}</b> ---
+                      {{project.details}}</p>
+                    </div>
+                  </div>
+              </div>
+              <div layout="row" style="margin-top:-30px;">
+                  <div flex="50">
+                      <h6 style="font-size:13px;">Presentation in State / University Level</h6>
+                  </div>
+                  <div flex="50" style="margin-top:-3px;">
+                    <div ng-repeat="project in seresearch | filter : {research_type : 3,research_sub_type:3}">
+                      <p><b>{{project.name}}</b> ---
+                      {{project.details}}</p>
+                    </div>
+                  </div>
+              </div>
+            </div>
+            <div flex="5" style="max-width: 5%;"></div>
+          </div>
+        </md-content>
+      </md-tab>
+
+
+
+      <md-tab label="Self-Development">
+            <md-content class="md-padding">
+              <div layout="column" layout-gt-md="row">
+                <div flex="5" style="max-width: 5%;"></div>
+                <div flex="90">
+                  <div layout="row" style="margin-top:-30px;">
+                      <div flex="50">
+                          <h6 style="font-size:13px;">1. Communication Skill Development</h6>
+                      </div>
+                      <div flex="50" style="margin-top:-3px;">
+                        <div ng-repeat="project in seselfdev | filter : {improve_type : 1}">
+                          <p><b>{{project.name}}</b> ---
+                          {{project.details}}</p>
+                        </div>
+                      </div>
+                  </div>
+                  <div layout="row" style="margin-top:-30px;">
+                      <div flex="50">
+                          <h6 style="font-size:13px;">2. Aptitude Training</h6>
+                      </div>
+                      <div flex="50" style="margin-top:-3px;">
+                        <div ng-repeat="project in seselfdev | filter : {improve_type : 2}">
+                          <p><b>{{project.name}}</b> ---
+                          {{project.details}}</p>
+                        </div>
+                      </div>
+                  </div>
+                  <br>
+                  <div layout="row" style="margin-top:-45px;">
+                      <div flex="50">
+                        <h6 style="font-size:13px;">3.Technical Skill Development</h6>
+                      </div>
+                      <div flex="50" style="margin-top:-3px;">
+                        <div ng-repeat="project in seselfdev | filter : {improve_type : 3}">
+                          <p><b>{{project.name}}</b> ---
+                          {{project.details}}</p>
+                        </div>
+                      </div>
+                    </div>
+                  <div layout="row" style="margin-top:-30px;">
+                      <div flex="50">
+                          <h6 style="font-size:13px;">4. Preparation for Higher Study</h6>
+                      </div>
+                      <div flex="50" style="margin-top:-3px;">
+                        <div ng-repeat="project in seselfdev | filter : {improve_type : 4}">
+                          <p><b>{{project.name}}</b> ---
+                          {{project.details}}</p>
+                        </div>
+                      </div>
+                  </div>
+
+                  <div layout="row" style="margin-top:-30px;">
+                      <div flex="50">
+                          <h6 style="font-size:13px;">5. Entrepreneurship Development Program</h6>
+                      </div>
+                      <div flex="50" style="margin-top:-3px;">
+                        <div ng-repeat="project in seselfdev | filter : {improve_type : 5}">
+                          <p><b>{{project.name}}</b> ---
+                          {{project.details}}</p>
+                        </div>
+                      </div>
+                    </div>
+                  <div layout="row" style="margin-top:-30px;">
+                      <div flex="50">
+                          <h6 style="font-size:13px;">6. Language Training</h6>
+                      </div>
+                      <div flex="50" style="margin-top:-3px;">
+                        <div ng-repeat="project in seselfdev | filter : {improve_type : 6}">
+                          <p><b>{{project.name}}</b> ---
+                          {{project.details}}</p>
+                        </div>
+                      </div>
+                  </div>
+                  <div layout="row" style="margin-top:-30px;">
+                      <div flex="50">
+                          <h6 style="font-size:13px;">7.Finishing School</h6>
+                      </div>
+                      <div flex="50" style="margin-top:-3px;">
+                        <div ng-repeat="project in seselfdev | filter : {improve_type : 7}">
+                          <p><b>{{project.name}}</b> ---
+                          {{project.details}}</p>
+                        </div>
+                      </div>
+                  </div>
+                  <div layout="row" style="margin-top:-30px;">
+                      <div flex="50">
+                          <h6 style="font-size:13px;">8.Spiritual and Holistic Development Program</h6>
+                      </div>
+                      <div flex="50" style="margin-top:-3px;">
+                        <div ng-repeat="project in seselfdev | filter : {improve_type : 8}">
+                          <p><b>{{project.name}}</b> ---
+                          {{project.details}}</p>
+                        </div>
+                      </div>
+                  </div>
+                  <div layout="row" style="margin-top:-30px;">
+                      <div flex="50">
+                          <h6 style="font-size:13px;">9. Internship or Summer Training</h6>
+                      </div>
+                      <div flex="50" style="margin-top:-3px;">
+                        <div ng-repeat="project in seselfdev | filter : {improve_type : 9}">
+                          <p><b>{{project.name}}</b> ---
+                          {{project.details}}</p>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+                <div flex="5" style="max-width: 5%;"></div>
+              </div>
+
+            </md-content>
+        </md-tab>
+
+
+
+      <md-tab label="Extracurricular Activities">
+          <md-content class="md-padding">
+            <div layout="column" layout-gt-md="row">
+              <div flex="5" style="max-width: 5%;"></div>
+              <div flex="90">
+                <div layout="row" style="margin-top:-30px;">
+                    <div flex="50">
+                        <h6 style="font-size:13px;">1. Performing Art</h6>
+                    </div>
+                    <div flex="50" style="margin-top:-3px;">
+                      <div ng-repeat="project in seextra | filter : {activity_type : 1}">
+                        <p><b>{{project.name}}</b> ---
+                        {{project.details}}</p>
+                      </div>
+                    </div>
+                </div>
+                <div layout="row" style="margin-top:-30px;">
+                    <div flex="50">
+                        <h6 style="font-size:13px;">2. Visual and Litrary Art</h6>
+                    </div>
+                    <div flex="50" style="margin-top:-3px;">
+                      <div ng-repeat="project in seextra | filter : {activity_type : 2}">
+                        <p><b>{{project.name}}</b> ---
+                        {{project.details}}</p>
+                      </div>
+                    </div>
+                </div>
+                <br>
+                <div layout="row" style="margin-top:-45px;">
+                    <div flex="50">
+                      <h6 style="font-size:13px;">3.Sports</h6>
+                    </div>
+                    <div flex="50" style="margin-top:-3px;">
+                      <div ng-repeat="project in seextra | filter : {activity_type : 3}">
+                        <p><b>{{project.name}}</b> ---
+                        {{project.details}}</p>
+                      </div>
+                    </div>
+                  </div>
+                <div layout="row" style="margin-top:-30px;">
+                    <div flex="50">
+                        <h6 style="font-size:13px;">4. Social Service</h6>
+                    </div>
+                    <div flex="50" style="margin-top:-3px;">
+                      <div ng-repeat="project in seextra | filter : {activity_type : 4}">
+                        <p><b>{{project.name}}</b> ---
+                        {{project.details}}</p>
+                      </div>
+                    </div>
+                </div>
+
+                <div layout="row" style="margin-top:-30px;">
+                    <div flex="50">
+                        <h6 style="font-size:13px;">5. Leadership Development Activities</h6>
+                    </div>
+                    <div flex="50" style="margin-top:-3px;">
+                      <div ng-repeat="project in seextra | filter : {activity_type : 5}">
+                        <p><b>{{project.name}}</b> ---
+                        {{project.details}}</p>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+        </md-content>
+        </md-tab>
+
+  </md-tabs>
+</md-card-content>
+</md-card>
+
+<md-card>
+    <md-card-title>
+        <md-card-title-text>
+            <span class="md-headline">T.E.</span>
+        </md-card-title-text>
+    </md-card-title>
+    <md-card-content>
+      <md-tabs md-dynamic-height md-border-bottom>
+          <md-tab label="Academic Performance">
+            <md-content class="md-padding">
+              <div layout="column" layout-gt-md="row">
+                <div flex="5" style="max-width: 5%;"></div>
+                <div flex="90">
+                  <p class="md-headline">1. Continuous Assessment</p>
+                  <div layout="row" style="margin-top:-30px;">
+                      <div flex="25">
+                          <h6 style="font-size:13px;">Attendance</h6>
+                      </div>
+                      <div flex="25" style="margin-top:-3px;">
+                          <h6 style="font-size:13px;" class="md-subhead">{{ teacad.attendance[0].attendance_percentage }}</h6>
+                      </div>
+                      <div flex="25">
+                          <h6 style="font-size:13px;">Unit Test Performance</h6>
+                      </div>
+                      <div flex="25" style="margin-top:-3px;">
+                          <h6 style="font-size:13px;" class="md-subhead">{{teacad.ut[0].percentage }} : Passed - {{teacad.ut[0].passed}}</h6>
+                      </div>
+                  </div>
+                  <div layout="row" style="margin-top:-45px;">
+                      <div flex="25">
+                        <h6 style="font-size:13px;">Practical Performance</h6>
+                      </div>
+                      <div flex="25" style="margin-top:-3px;">
+                        <h6 style="font-size:13px;" class="md-subhead">{{teacad.prac.percentage}} : Passed - {{teacad.prac.passed}}</h6>
+                      </div>
+                    </div>
+                    <br>
+                  <div layout="row" style="margin-top:-30px;">
+                    <div flex="50">
+                      <p class="md-headline">2. Endsem Assessment</p>
+                    </div>
+                    <div flex="50" style="margin-top:-3px;">
+                      <h6 style="font-size:13px;" class="md-subhead">{{teacad.endsem.percentage }} : Passed - {{teacad.endsem.passed}}</h6>
+                    </div>                  </div>
+                  <p class="md-headline">3. Academic Achievements</p>
+                  <div layout="row" style="margin-top:-30px;">
+                      <div flex="25">
+                          <h6 style="font-size:13px;">University Rank Holder</h6>
+                      </div>
+                      <div flex="25" style="margin-top:-3px;">
+                        <div ng-repeat="project in teacad.acad | filter : {ques_type : 1}">
+                          <h6 style="font-size:13px;" class="md-subhead">{{project.answer}}</h6>
+                        </div>
+                      </div>
+                      <div flex="25">
+                          <h6 style="font-size:13px;">Year Topper</h6>
+                      </div>
+                      <div flex="25" style="margin-top:-3px;">
+                        <div ng-repeat="project in teacad.acad | filter : {ques_type : 2}">
+                          <h6 style="font-size:13px;" class="md-subhead">{{project.answer}}</h6>
+                        </div>
+                      </div>
+                  </div>
+                  <div layout="row" style="margin-top:-30px;">
+                      <div flex="25">
+                          <h6 style="font-size:13px;">Subject Topper</h6>
+                      </div>
+                      <div flex="25" style="margin-top:-3px;">
+                        <div ng-repeat="project in teacad.acad | filter : {ques_type : 3}">
+                          <h6 style="font-size:13px;" class="md-subhead">{{project.answer}}</h6>
+                        </div>
+                      </div>
+                      <div flex="25">
+                          <h6 style="font-size:13px;">Distinction</h6>
+                      </div>
+                      <div flex="25" style="margin-top:-3px;">
+                        <div ng-repeat="project in teacad.acad | filter : {ques_type : 4}">
+                          <h6 style="font-size:13px;" class="md-subhead">{{project.answer}}</h6>
+                        </div>
+                      </div>
+                  </div>
+                  <div layout="row" style="margin-top:-30px;">
+                      <div flex="25">
+                        <h6 style="font-size:13px;">First Class </h6>
+                      </div>
+                      <div flex="25" style="margin-top:-3px;">
+                        <div ng-repeat="project in teacad.acad | filter : {ques_type : 5}">
+                          <h6 style="font-size:13px;" class="md-subhead">{{project.answer}}</h6>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+                <div flex="5" style="max-width: 5%;"></div>
+              </div>
+            </md-content>
+          </md-tab>
+
+
+<md-tab label="Research and Innovation">
+  <md-content class="md-padding">
+    <div layout="column" layout-gt-md="row">
+      <div flex="5" style="max-width: 5%;"></div>
+      <div flex="90">
+        <p class="md-headline">1. Project/ model making/ poster development/ competition </p><br>
+        <div layout="row" style="margin-top:-30px;">
+            <div flex="50">
+                <h6 style="font-size:13px;">Major Project(Apart from University Project)</h6>
+            </div>
+            <div flex="50" style="margin-top:-3px;">
+              <div ng-repeat="project in teresearch | filter : {research_type : 1,research_sub_type:1}">
+                <p><b>{{project.name}}</b> ---
+                {{project.details}}</p>
+              </div>
+            </div>
+        </div>
+        <div layout="row" style="margin-top:-30px;">
+            <div flex="50">
+                <h6 style="font-size:13px;">Mini Project(Apart from University Project)</h6>
+            </div>
+            <div flex="50" style="margin-top:-3px;">
+              <div ng-repeat="project in teresearch | filter : {research_type : 1,research_sub_type:2}">
+                <p><b>{{project.name}}</b> ---
+                {{project.details}}</p>
+              </div>
+            </div>
+        </div>
+        <br>
+        <div layout="row" style="margin-top:-45px;">
+            <div flex="50">
+              <h6 style="font-size:13px;">Technical Exhibition / Competition (International / National Level) such as SAE, BAJA, SUPRA, ROBOTICS</h6>
+            </div>
+            <div flex="50" style="margin-top:-3px;">
+              <div ng-repeat="project in teresearch | filter : {research_type : 1,research_sub_type:3}">
+                <p><b>{{project.name}}</b> ---
+                {{project.details}}</p>
+              </div>
+            </div>
+          </div>
+        <div layout="row" style="margin-top:-30px;">
+            <div flex="50">
+                <h6 style="font-size:13px;">Technical Exhibition (At University / College Level) such as Techligent, Spectrum</h6>
+            </div>
+            <div flex="50" style="margin-top:-3px;">
+              <div ng-repeat="project in teresearch | filter : {research_type : 1,research_sub_type:4}">
+                <p><b>{{project.name}}</b> ---
+                {{project.details}}</p>
+              </div>
+            </div>
+        </div>
+          <br>
+        <div layout="row" style="margin-top:-30px;">
+          <div flex="75">
+            <p class="md-headline">2. Patent / IPR / Revenue Generation</p>
+          </div>
+          <div flex="25" style="margin-top:-3px;">
+            <div flex="50" style="margin-top:-3px;">
+              <div ng-repeat="project in teresearch | filter : {research_type : 2,research_sub_type:1}">
+                <p><b>{{project.name}}</b> ---
+                {{project.details}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="md-headline">3. Research Publication</p>
+        <div layout="row" style="margin-top:-30px;">
+            <div flex="50">
+                <h6 style="font-size:13px;">Presentation in International Conference or Journal</h6>
+            </div>
+            <div flex="50" style="margin-top:-3px;">
+              <div ng-repeat="project in teresearch | filter : {research_type : 3,research_sub_type:1}">
+                <p><b>{{project.name}}</b> ---
+                {{project.details}}</p>
+              </div>
+            </div>
+          </div>
+        <div layout="row" style="margin-top:-30px;">
+            <div flex="50">
+                <h6 style="font-size:13px;">Presentation in National Conference or Journal</h6>
+            </div>
+            <div flex="50" style="margin-top:-3px;">
+              <div ng-repeat="project in teresearch | filter : {research_type : 3,research_sub_type:2}">
+                <p><b>{{project.name}}</b> ---
+                {{project.details}}</p>
+              </div>
+            </div>
+        </div>
+        <div layout="row" style="margin-top:-30px;">
+            <div flex="50">
+                <h6 style="font-size:13px;">Presentation in State / University Level</h6>
+            </div>
+            <div flex="50" style="margin-top:-3px;">
+              <div ng-repeat="project in teresearch | filter : {research_type : 3,research_sub_type:3}">
+                <p><b>{{project.name}}</b> ---
+                {{project.details}}</p>
+              </div>
+            </div>
+        </div>
+      </div>
+      <div flex="5" style="max-width: 5%;"></div>
+    </div>
+  </md-content>
+</md-tab>
+
+
+
+<md-tab label="Self-Development">
+      <md-content class="md-padding">
+        <div layout="column" layout-gt-md="row">
+          <div flex="5" style="max-width: 5%;"></div>
+          <div flex="90">
+            <div layout="row" style="margin-top:-30px;">
+                <div flex="50">
+                    <h6 style="font-size:13px;">1. Communication Skill Development</h6>
+                </div>
+                <div flex="50" style="margin-top:-3px;">
+                  <div ng-repeat="project in teselfdev | filter : {improve_type : 1}">
+                    <p><b>{{project.name}}</b> ---
+                    {{project.details}}</p>
+                  </div>
+                </div>
+            </div>
+            <div layout="row" style="margin-top:-30px;">
+                <div flex="50">
+                    <h6 style="font-size:13px;">2. Aptitude Training</h6>
+                </div>
+                <div flex="50" style="margin-top:-3px;">
+                  <div ng-repeat="project in teselfdev | filter : {improve_type : 2}">
+                    <p><b>{{project.name}}</b> ---
+                    {{project.details}}</p>
+                  </div>
+                </div>
+            </div>
+            <br>
+            <div layout="row" style="margin-top:-45px;">
+                <div flex="50">
+                  <h6 style="font-size:13px;">3.Technical Skill Development</h6>
+                </div>
+                <div flex="50" style="margin-top:-3px;">
+                  <div ng-repeat="project in teselfdev | filter : {improve_type : 3}">
+                    <p><b>{{project.name}}</b> ---
+                    {{project.details}}</p>
+                  </div>
+                </div>
+              </div>
+            <div layout="row" style="margin-top:-30px;">
+                <div flex="50">
+                    <h6 style="font-size:13px;">4. Preparation for Higher Study</h6>
+                </div>
+                <div flex="50" style="margin-top:-3px;">
+                  <div ng-repeat="project in teselfdev | filter : {improve_type : 4}">
+                    <p><b>{{project.name}}</b> ---
+                    {{project.details}}</p>
+                  </div>
+                </div>
+            </div>
+
+            <div layout="row" style="margin-top:-30px;">
+                <div flex="50">
+                    <h6 style="font-size:13px;">5. Entrepreneurship Development Program</h6>
+                </div>
+                <div flex="50" style="margin-top:-3px;">
+                  <div ng-repeat="project in teselfdev | filter : {improve_type : 5}">
+                    <p><b>{{project.name}}</b> ---
+                    {{project.details}}</p>
+                  </div>
+                </div>
+              </div>
+            <div layout="row" style="margin-top:-30px;">
+                <div flex="50">
+                    <h6 style="font-size:13px;">6. Language Training</h6>
+                </div>
+                <div flex="50" style="margin-top:-3px;">
+                  <div ng-repeat="project in teselfdev | filter : {improve_type : 6}">
+                    <p><b>{{project.name}}</b> ---
+                    {{project.details}}</p>
+                  </div>
+                </div>
+            </div>
+            <div layout="row" style="margin-top:-30px;">
+                <div flex="50">
+                    <h6 style="font-size:13px;">7.Finishing School</h6>
+                </div>
+                <div flex="50" style="margin-top:-3px;">
+                  <div ng-repeat="project in teselfdev | filter : {improve_type : 7}">
+                    <p><b>{{project.name}}</b> ---
+                    {{project.details}}</p>
+                  </div>
+                </div>
+            </div>
+            <div layout="row" style="margin-top:-30px;">
+                <div flex="50">
+                    <h6 style="font-size:13px;">8.Spiritual and Holistic Development Program</h6>
+                </div>
+                <div flex="50" style="margin-top:-3px;">
+                  <div ng-repeat="project in teselfdev | filter : {improve_type : 8}">
+                    <p><b>{{project.name}}</b> ---
+                    {{project.details}}</p>
+                  </div>
+                </div>
+            </div>
+            <div layout="row" style="margin-top:-30px;">
+                <div flex="50">
+                    <h6 style="font-size:13px;">9. Internship or Summer Training</h6>
+                </div>
+                <div flex="50" style="margin-top:-3px;">
+                  <div ng-repeat="project in teselfdev | filter : {improve_type : 9}">
+                    <p><b>{{project.name}}</b> ---
+                    {{project.details}}</p>
+                  </div>
+                </div>
+            </div>
+          </div>
+          <div flex="5" style="max-width: 5%;"></div>
+        </div>
+
+      </md-content>
+  </md-tab>
+
+
+
+<md-tab label="Extracurricular Activities">
+    <md-content class="md-padding">
+      <div layout="column" layout-gt-md="row">
+        <div flex="5" style="max-width: 5%;"></div>
+        <div flex="90">
+          <div layout="row" style="margin-top:-30px;">
+              <div flex="50">
+                  <h6 style="font-size:13px;">1. Performing Art</h6>
+              </div>
+              <div flex="50" style="margin-top:-3px;">
+                <div ng-repeat="project in teextra | filter : {activity_type : 1}">
+                  <p><b>{{project.name}}</b> ---
+                  {{project.details}}</p>
+                </div>
+              </div>
+          </div>
+          <div layout="row" style="margin-top:-30px;">
+              <div flex="50">
+                  <h6 style="font-size:13px;">2. Visual and Litrary Art</h6>
+              </div>
+              <div flex="50" style="margin-top:-3px;">
+                <div ng-repeat="project in teextra | filter : {activity_type : 2}">
+                  <p><b>{{project.name}}</b> ---
+                  {{project.details}}</p>
+                </div>
+              </div>
+          </div>
+          <br>
+          <div layout="row" style="margin-top:-45px;">
+              <div flex="50">
+                <h6 style="font-size:13px;">3.Sports</h6>
+              </div>
+              <div flex="50" style="margin-top:-3px;">
+                <div ng-repeat="project in teextra | filter : {activity_type : 3}">
+                  <p><b>{{project.name}}</b> ---
+                  {{project.details}}</p>
+                </div>
+              </div>
+            </div>
+          <div layout="row" style="margin-top:-30px;">
+              <div flex="50">
+                  <h6 style="font-size:13px;">4. Social Service</h6>
+              </div>
+              <div flex="50" style="margin-top:-3px;">
+                <div ng-repeat="project in teextra | filter : {activity_type : 4}">
+                  <p><b>{{project.name}}</b> ---
+                  {{project.details}}</p>
+                </div>
+              </div>
+          </div>
+
+          <div layout="row" style="margin-top:-30px;">
+              <div flex="50">
+                  <h6 style="font-size:13px;">5. Leadership Development Activities</h6>
+              </div>
+              <div flex="50" style="margin-top:-3px;">
+                <div ng-repeat="project in teextra | filter : {activity_type : 5}">
+                  <p><b>{{project.name}}</b> ---
+                  {{project.details}}</p>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+  </md-content>
+  </md-tab>
+
+</md-tabs>
+</md-card-content>
+</md-card>
+
+<md-card>
+    <md-card-title>
+        <md-card-title-text>
+            <span class="md-headline">B.E.</span>
+        </md-card-title-text>
+    </md-card-title>
+    <md-card-content>
+      <md-tabs md-dynamic-height md-border-bottom>
+          <md-tab label="Academic Performance">
+            <md-content class="md-padding">
+              <div layout="column" layout-gt-md="row">
+                <div flex="5" style="max-width: 5%;"></div>
+                <div flex="90">
+                  <p class="md-headline">1. Continuous Assessment</p>
+                  <div layout="row" style="margin-top:-30px;">
+                      <div flex="25">
+                          <h6 style="font-size:13px;">Attendance</h6>
+                      </div>
+                      <div flex="25" style="margin-top:-3px;">
+                          <h6 style="font-size:13px;" class="md-subhead">{{ beacad.attendance[0].attendance_percentage }}</h6>
+                      </div>
+                      <div flex="25">
+                          <h6 style="font-size:13px;">Unit Test Performance</h6>
+                      </div>
+                      <div flex="25" style="margin-top:-3px;">
+                          <h6 style="font-size:13px;" class="md-subhead">{{beacad.ut[0].percentage }} : Passed - {{beacad.ut[0].passed}}</h6>
+                      </div>
+                  </div>
+                  <div layout="row" style="margin-top:-45px;">
+                      <div flex="25">
+                        <h6 style="font-size:13px;">Practical Performance</h6>
+                      </div>
+                      <div flex="25" style="margin-top:-3px;">
+                        <h6 style="font-size:13px;" class="md-subhead">{{beacad.prac.percentage}} : Passed - {{beacad.prac.passed}}</h6>
+                      </div>
+                    </div>
+                    <br>
+                  <div layout="row" style="margin-top:-30px;">
+                    <div flex="50">
+                      <p class="md-headline">2. Endsem Assessment</p>
+                    </div>
+                    <div flex="50" style="margin-top:-3px;">
+                      <h6 style="font-size:13px;" class="md-subhead">{{beacad.endsem.percentage }} : Passed - {{beacad.endsem.passed}}</h6>
+                    </div>
+                  </div>
+                  <p class="md-headline">3. Academic Achievements</p>
+                  <div layout="row" style="margin-top:-30px;">
+                      <div flex="25">
+                          <h6 style="font-size:13px;">University Rank Holder</h6>
+                      </div>
+                      <div flex="25" style="margin-top:-3px;">
+                        <div ng-repeat="project in beacad.acad | filter : {ques_type : 1}">
+                          <h6 style="font-size:13px;" class="md-subhead">{{project.answer}}</h6>
+                        </div>
+                      </div>
+                      <div flex="25">
+                          <h6 style="font-size:13px;">Year Topper</h6>
+                      </div>
+                      <div flex="25" style="margin-top:-3px;">
+                        <div ng-repeat="project in beacad.acad | filter : {ques_type : 2}">
+                          <h6 style="font-size:13px;" class="md-subhead">{{project.answer}}</h6>
+                        </div>
+                      </div>
+                  </div>
+                  <div layout="row" style="margin-top:-30px;">
+                      <div flex="25">
+                          <h6 style="font-size:13px;">Subject Topper</h6>
+                      </div>
+                      <div flex="25" style="margin-top:-3px;">
+                        <div ng-repeat="project in beacad.acad | filter : {ques_type : 3}">
+                          <h6 style="font-size:13px;" class="md-subhead">{{project.answer}}</h6>
+                        </div>
+                      </div>
+                      <div flex="25">
+                          <h6 style="font-size:13px;">Distinction</h6>
+                      </div>
+                      <div flex="25" style="margin-top:-3px;">
+                        <div ng-repeat="project in beacad.acad | filter : {ques_type : 4}">
+                          <h6 style="font-size:13px;" class="md-subhead">{{project.answer}}</h6>
+                        </div>
+                      </div>
+                  </div>
+                  <div layout="row" style="margin-top:-30px;">
+                      <div flex="25">
+                        <h6 style="font-size:13px;">First Class </h6>
+                      </div>
+                      <div flex="25" style="margin-top:-3px;">
+                        <div ng-repeat="project in beacad.acad | filter : {ques_type : 5}">
+                          <h6 style="font-size:13px;" class="md-subhead">{{project.answer}}</h6>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+                <div flex="5" style="max-width: 5%;"></div>
+              </div>
+            </md-content>
+          </md-tab>
+
+
+<md-tab label="Research and Innovation">
+  <md-content class="md-padding">
+    <div layout="column" layout-gt-md="row">
+      <div flex="5" style="max-width: 5%;"></div>
+      <div flex="90">
+        <p class="md-headline">1. Project/ model making/ poster development/ competition </p><br>
+        <div layout="row" style="margin-top:-30px;">
+            <div flex="50">
+                <h6 style="font-size:13px;">Major Project(Apart from University Project)</h6>
+            </div>
+            <div flex="50" style="margin-top:-3px;">
+                <h6 style="font-size:13px;" class="md-subhead">{{user.majorproject}}</h6>
+            </div>
+        </div>
+        <div layout="row" style="margin-top:-30px;">
+            <div flex="50">
+                <h6 style="font-size:13px;">Mini Project(Apart from University Project)</h6>
+            </div>
+            <div flex="50" style="margin-top:-3px;">
+                <h6 style="font-size:13px;" class="md-subhead">{{user.miniproject}}</h6>
+            </div>
+        </div>
+        <br>
+        <div layout="row" style="margin-top:-45px;">
+            <div flex="50">
+              <h6 style="font-size:13px;">Technical Exhibition / Competition (International / National Level) such as SAE, BAJA, SUPRA, ROBOTICS</h6>
+            </div>
+            <div flex="50" style="margin-top:-3px;">
+              <h6 style="font-size:13px;" class="md-subhead">{{user.techinternational}}</h6>
+            </div>
+          </div>
+        <div layout="row" style="margin-top:-30px;">
+            <div flex="50">
+                <h6 style="font-size:13px;">Technical Exhibition (At University / College Level) such as Techligent, Spectrum</h6>
+            </div>
+            <div flex="50" style="margin-top:-3px;">
+                <h6 style="font-size:13px;" class="md-subhead">{{user.techunivlevel}}</h6>
+            </div>
+        </div>
+          <br>
+        <div layout="row" style="margin-top:-30px;">
+          <div flex="75">
+            <p class="md-headline">2. Patent / IPR / Revenue Generation</p>
+          </div>
+          <div flex="25" style="margin-top:-3px;">
+            <div flex="50" style="margin-top:-3px;">
+              <div ng-repeat="project in beresearch | filter : {research_type : 2,research_sub_type:1}">
+                <p><b>{{project.name}}</b> ---
+                {{project.details}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="md-headline">3. Research Publication</p>
+        <div layout="row" style="margin-top:-30px;">
+            <div flex="50">
+                <h6 style="font-size:13px;">Presentation in International Conference or Journal</h6>
+            </div>
+            <div flex="50" style="margin-top:-3px;">
+              <div ng-repeat="project in beresearch | filter : {research_type : 3,research_sub_type:1}">
+                <p><b>{{project.name}}</b> ---
+                {{project.details}}</p>
+              </div>
+            </div>
+          </div>
+        <div layout="row" style="margin-top:-30px;">
+            <div flex="50">
+                <h6 style="font-size:13px;">Presentation in National Conference or Journal</h6>
+            </div>
+            <div flex="50" style="margin-top:-3px;">
+              <div ng-repeat="project in beresearch | filter : {research_type : 3,research_sub_type:2}">
+                <p><b>{{project.name}}</b> ---
+                {{project.details}}</p>
+              </div>
+            </div>
+        </div>
+        <div layout="row" style="margin-top:-30px;">
+            <div flex="50">
+                <h6 style="font-size:13px;">Presentation in State / University Level</h6>
+            </div>
+            <div flex="50" style="margin-top:-3px;">
+              <div ng-repeat="project in beresearch | filter : {research_type : 3,research_sub_type:3}">
+                <p><b>{{project.name}}</b> ---
+                {{project.details}}</p>
+              </div>
+            </div>
+        </div>
+      </div>
+      <div flex="5" style="max-width: 5%;"></div>
+    </div>
+  </md-content>
+</md-tab>
+
+
+
+<md-tab label="Self-Development">
+      <md-content class="md-padding">
+        <div layout="column" layout-gt-md="row">
+          <div flex="5" style="max-width: 5%;"></div>
+          <div flex="90">
+            <div layout="row" style="margin-top:-30px;">
+                <div flex="50">
+                    <h6 style="font-size:13px;">1. Communication Skill Development</h6>
+                </div>
+                <div flex="50" style="margin-top:-3px;">
+                  <div ng-repeat="project in beselfdev | filter : {improve_type : 1}">
+                    <p><b>{{project.name}}</b> ---
+                    {{project.details}}</p>
+                  </div>
+                </div>
+            </div>
+            <div layout="row" style="margin-top:-30px;">
+                <div flex="50">
+                    <h6 style="font-size:13px;">2. Aptitude Training</h6>
+                </div>
+                <div flex="50" style="margin-top:-3px;">
+                  <div ng-repeat="project in beselfdev | filter : {improve_type : 2}">
+                    <p><b>{{project.name}}</b> ---
+                    {{project.details}}</p>
+                  </div>
+                </div>
+            </div>
+            <br>
+            <div layout="row" style="margin-top:-45px;">
+                <div flex="50">
+                  <h6 style="font-size:13px;">3.Technical Skill Development</h6>
+                </div>
+                <div flex="50" style="margin-top:-3px;">
+                  <div ng-repeat="project in beselfdev | filter : {improve_type : 3}">
+                    <p><b>{{project.name}}</b> ---
+                    {{project.details}}</p>
+                  </div>
+                </div>
+              </div>
+            <div layout="row" style="margin-top:-30px;">
+                <div flex="50">
+                    <h6 style="font-size:13px;">4. Preparation for Higher Study</h6>
+                </div>
+                <div flex="50" style="margin-top:-3px;">
+                  <div ng-repeat="project in beselfdev | filter : {improve_type : 4}">
+                    <p><b>{{project.name}}</b> ---
+                    {{project.details}}</p>
+                  </div>
+                </div>
+            </div>
+
+            <div layout="row" style="margin-top:-30px;">
+                <div flex="50">
+                    <h6 style="font-size:13px;">5. Entrepreneurship Development Program</h6>
+                </div>
+                <div flex="50" style="margin-top:-3px;">
+                  <div ng-repeat="project in beselfdev | filter : {improve_type : 5}">
+                    <p><b>{{project.name}}</b> ---
+                    {{project.details}}</p>
+                  </div>
+                </div>
+              </div>
+            <div layout="row" style="margin-top:-30px;">
+                <div flex="50">
+                    <h6 style="font-size:13px;">6. Language Training</h6>
+                </div>
+                <div flex="50" style="margin-top:-3px;">
+                  <div ng-repeat="project in beselfdev | filter : {improve_type : 6}">
+                    <p><b>{{project.name}}</b> ---
+                    {{project.details}}</p>
+                  </div>
+                </div>
+            </div>
+            <div layout="row" style="margin-top:-30px;">
+                <div flex="50">
+                    <h6 style="font-size:13px;">7.Finishing School</h6>
+                </div>
+                <div flex="50" style="margin-top:-3px;">
+                  <div ng-repeat="project in beselfdev | filter : {improve_type : 7}">
+                    <p><b>{{project.name}}</b> ---
+                    {{project.details}}</p>
+                  </div>
+                </div>
+            </div>
+            <div layout="row" style="margin-top:-30px;">
+                <div flex="50">
+                    <h6 style="font-size:13px;">8.Spiritual and Holistic Development Program</h6>
+                </div>
+                <div flex="50" style="margin-top:-3px;">
+                  <div ng-repeat="project in beselfdev | filter : {improve_type : 8}">
+                    <p><b>{{project.name}}</b> ---
+                    {{project.details}}</p>
+                  </div>
+                </div>
+            </div>
+            <div layout="row" style="margin-top:-30px;">
+                <div flex="50">
+                    <h6 style="font-size:13px;">9. Internship or Summer Training</h6>
+                </div>
+                <div flex="50" style="margin-top:-3px;">
+                  <div ng-repeat="project in beselfdev | filter : {improve_type : 9}">
+                    <p><b>{{project.name}}</b> ---
+                    {{project.details}}</p>
+                  </div>
+                </div>
+            </div>
+          </div>
+          <div flex="5" style="max-width: 5%;"></div>
+        </div>
+
+      </md-content>
+  </md-tab>
+
+
+
+<md-tab label="Extracurricular Activities">
+    <md-content class="md-padding">
+      <div layout="column" layout-gt-md="row">
+        <div flex="5" style="max-width: 5%;"></div>
+        <div flex="90">
+          <div layout="row" style="margin-top:-30px;">
+              <div flex="50">
+                  <h6 style="font-size:13px;">1. Performing Art</h6>
+              </div>
+              <div flex="50" style="margin-top:-3px;">
+                <div ng-repeat="project in beextra | filter : {activity_type : 1}">
+                  <p><b>{{project.name}}</b> ---
+                  {{project.details}}</p>
+                </div>
+              </div>
+          </div>
+          <div layout="row" style="margin-top:-30px;">
+              <div flex="50">
+                  <h6 style="font-size:13px;">2. Visual and Litrary Art</h6>
+              </div>
+              <div flex="50" style="margin-top:-3px;">
+                <div ng-repeat="project in beextra | filter : {activity_type : 2}">
+                  <p><b>{{project.name}}</b> ---
+                  {{project.details}}</p>
+                </div>
+              </div>
+          </div>
+          <br>
+          <div layout="row" style="margin-top:-45px;">
+              <div flex="50">
+                <h6 style="font-size:13px;">3.Sports</h6>
+              </div>
+              <div flex="50" style="margin-top:-3px;">
+                <div ng-repeat="project in beextra | filter : {activity_type : 3}">
+                  <p><b>{{project.name}}</b> ---
+                  {{project.details}}</p>
+                </div>
+              </div>
+            </div>
+          <div layout="row" style="margin-top:-30px;">
+              <div flex="50">
+                  <h6 style="font-size:13px;">4. Social Service</h6>
+              </div>
+              <div flex="50" style="margin-top:-3px;">
+                <div ng-repeat="project in beextra | filter : {activity_type : 4}">
+                  <p><b>{{project.name}}</b> ---
+                  {{project.details}}</p>
+                </div>
+              </div>
+          </div>
+
+          <div layout="row" style="margin-top:-30px;">
+              <div flex="50">
+                  <h6 style="font-size:13px;">5. Leadership Development Activities</h6>
+              </div>
+              <div flex="50" style="margin-top:-3px;">
+                <div ng-repeat="project in beextra | filter : {activity_type : 5}">
+                  <p><b>{{project.name}}</b> ---
+                  {{project.details}}</p>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+  </md-content>
+  </md-tab>
+</md-tabs>
+</md-card-content>
+</md-card>
+
+  </md-tab>
+  </md-tabs>
+    </md-card-content>
+  </md-card>
+  </div>
+  <div flex="20" style="max-width: 20%;"></div>
+</div>

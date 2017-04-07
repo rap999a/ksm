@@ -95,6 +95,20 @@ var app = null;
         controller:'assignPtgCtrl',
         data: {authenticate : true}
       })
+      .state('staff.validateStudent',{
+        url:'/staff/validate-student/:ID',
+        templateUrl:'templates/staff/studentValidation.html',
+        params: {id :null,ID:null},
+        controller:'academicValidationCtrl',
+        data: {authenticate : true}
+      })
+      .state('staff.studentProfile',{
+        url:'/staff/my-student/:ID',
+        templateUrl:'templates/staff/studentProfile.html',
+        params: {id :null,ID:null},
+        controller:'studentProfileCtrl',
+        data: {authenticate : true}
+      })
       .state('admin.home',{
         url:'/admin/home',
         templateUrl:'templates/admin/home.html',

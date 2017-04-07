@@ -159,6 +159,7 @@
           $scope.checkUserEntry= function(userData){
             var $Udata = angular.toJson(userData);
             unitTestData.checkEntryUnitTest($scope,$Udata).then(function(userData){
+              console.log(userData.data);
               if(userData.data==0){
                   $scope.serverRespFalse = false;
                   $scope.serverRespTrue = true;
@@ -764,36 +765,41 @@
             };
 
      })
-    .controller('ptgRecordDataCtrl',function($scope,ptgRecordData,adminFunctions){ //adaaaaaaaaaaaaa
-    $scope.serverResp = 0;
-    adminFunctions.fetchMyStudents().then(function(data){
-      $scope.students = data.data;
-    });
-    $scope.classes = [
-      { name: 'First Year', value: '1' },
-      { name: 'Second Year', value: '2' },
-      { name: 'Third Year', value: '3' },
-      { name: 'Fourth Year', value: '4' }
-    ];
-    $scope.years = [
-      { name: '2014-15', value: '1' },
-      { name: '2015-16', value: '2' },
-      { name: '2016-17', value: '3' },
-      { name: '2017-18', value: '4' }
-    ];
-      $scope.semester = [
-      { name: 'I', value: '1' },
-      { name: 'II', value: '2' }
-    ];
-          $scope.ptgRecordEntry = function(data){
-            var $data = angular.toJson(data);
-            ptgRecordData.fetchPTG($data).then(function(data){
-                $scope.serverResp = 1;
-                $scope.staffs = data.data;
+    .controller('ptgRecordDataCtrl',function($scope,ptgRecordData,adminFunctions){
+      $scope.serverResp = 0;
+      adminFunctions.fetchMyStudents().then(function(data){
+        $scope.students = data.data;
+        console.log(data.data);
+      });
+      $scope.ptgRecord = function(data){
+        var $data = angular.toJson(data);
+        ptgRecordData.fetchPTG($data).then(function(data){
+            $scope.serverResp = 1;
+            $scope.staffs = data.data;
+        })
+      }
+      $scope.classes = [
+        { name: 'First Year', value: '1' },
+        { name: 'Second Year', value: '2' },
+        { name: 'Third Year', value: '3' },
+        { name: 'Fourth Year', value: '4' }
+      ];
+      $scope.years = [
+        { name: '2014-15', value: '1' },
+        { name: '2015-16', value: '2' },
+        { name: '2016-17', value: '3' },
+        { name: '2017-18', value: '4' }
+      ];
+        $scope.semester = [
+        { name: 'I', value: '1' },
+        { name: 'II', value: '2' }
+      ];
 
-            });
-          }
-
+     })
+     .controller('myStudentsCtrl', function($scope,adminFunctions){
+       adminFunctions.fetchMyStudents().then(function(data){
+         $scope.students = data.data;
+       });
      })
      .controller('validateCertificateCtrl',function($scope,$mdDialog,adminFunctions){
        $scope.serverResp = 0;
@@ -1002,6 +1008,52 @@
 
 
     }])
+    .controller('academicValidationCtrl',['$scope','$state','$stateParams','studentData',function($scope,$state,$stateParams,studentData){
+      $scope.id = $stateParams.id;
+      $scope.ID = $stateParams.ID;
+      studentData.fetchFEAcad($scope,$scope.id);
+      studentData.fetchFEResearch($scope,$scope.id);
+      studentData.fetchFESelfDev($scope,$scope.id);
+      studentData.fetchFEExtra($scope,$scope.id);
+
+      studentData.fetchSEAcad($scope,$scope.id);
+      studentData.fetchSEResearch($scope,$scope.id);
+      studentData.fetchSESelfDev($scope,$scope.id);
+      studentData.fetchSEExtra($scope,$scope.id);
+
+      studentData.fetchTEAcad($scope,$scope.id);
+      studentData.fetchTEResearch($scope,$scope.id);
+      studentData.fetchTESelfDev($scope,$scope.id);
+      studentData.fetchTEExtra($scope,$scope.id);
+
+      studentData.fetchBEAcad($scope,$scope.id);
+      studentData.fetchBEResearch($scope,$scope.id);
+      studentData.fetchBESelfDev($scope,$scope.id);
+      studentData.fetchBEExtra($scope,$scope.id);
+
+        $scope.academicValidationEntry = function() {
+      };
+
+      $scope.approve = function() {
+          };
+
+          $scope.disapprove = function() {
+          };
+    }])
+    .controller('studentProfileCtrl',['$scope','$state','$stateParams','myStudentProfile',function($scope,$state,$stateParams,myStudentProfile){
+      $scope.id = $stateParams.id;
+      $scope.ID = $stateParams.ID;
+      myStudentProfile.fetchProctorBasic($scope,$scope.id);
+      myStudentProfile.fetchProctorRest($scope,$scope.id);
+      myStudentProfile.fetchPrevAcademic($scope,$scope.id);
+      myStudentProfile.fetchCurrentClass($scope,$scope.id);
+      myStudentProfile.fetchPhoto($scope,$scope.id);
+
+
+    }])
+    .controller('myStudentsAssessmentCtrl',['$scope','myStudentsAssessment',function($scope,myStudentsAssessment){
+      myStudentsAssessment.fetchAssessment($scope);
+    }])
     .controller('assignPtgCtrl',['$scope','adminFunctions',function($scope,adminFunctions){
             $scope.showList = 0;
             $scope.showList1 = 0;
@@ -1193,7 +1245,7 @@
    					// scope.user.myDate = data.data.date;
    					}
 
-           });;
+           });
          },
          fetchProctorRest : function(scope){
            $http.post('/ksm/data/users/fetchProctorRest.php').then(function(data) {
@@ -1310,6 +1362,91 @@
         }
       }
     }])
+    .factory('myStudentProfile',['$http',function($http){
+      return{
+        fetchProctorBasic: function(scope,data){
+          $http.post('/ksm/data/staffFunctions/fetchProctorBasic.php',data).then(function(data){
+            scope.user = data.data[0];
+            if(data.data[0].date == "0000-00-00"){
+             scope.user.myDate = "";
+           }
+           else{
+           scope.user.myDate = new Date(data.data[0].myDate);
+           scope.user.phone = parseInt(data.data[0].phone);
+           // scope.user.myDate = data.data.date;
+           }
+
+          });
+        },
+        fetchProctorRest: function(scope,data){
+          $http.post('/ksm/data/staffFunctions/fetchProctorRest.php',data).then(function(data){
+            console.log(data.data);
+            scope.user.fathername = data.data[0].father_name;
+            scope.user.foccupation = data.data[0].father_occ;
+            scope.user.fcontact = data.data[0].father_contact;
+
+            scope.user.mothername = data.data[0].mother_name;
+            scope.user.moccupation = data.data[0].mother_occ;
+            scope.user.mcontact = data.data[0].mother_contact;
+
+            scope.user.guardianname = data.data[0].l_guardian_name;
+            scope.user.gcontact = data.data[0].l_guardian_contact;
+
+            scope.user.docname = data.data[0].doc_name;
+            scope.user.docContact = data.data[0].doc_contact;
+
+            scope.user.medicalHistory = data.data[0].med_history;
+            scope.user.Personality = data.data[0].personality_traits;
+
+            scope.user.interests = data.data[0].interest_hobbies;
+            scope.user.awards = data.data[0].awards;
+            scope.user.roleModel = data.data[0].inspiration;
+          });
+        },
+        fetchCurrentClass: function(scope,data){
+          $http.post('/ksm/data/staffFunctions/fetchCurrentClass.php',data).then(function(data){
+            scope.user.class = data.data.class;
+            scope.user.division = data.data.division;
+          });
+
+        },
+        fetchPrevAcademic: function(scope,data){
+          $http.post('/ksm/data/staffFunctions/fetchPrevAcademic.php',data).then(function(data){
+            scope.user.yop = data.data[0].yop;
+            scope.user.institute = data.data[0].institute;
+            scope.user.percentage = data.data[0].percentage;
+            scope.user.subjects = data.data[0].subjects;
+            scope.user.achievements = data.data[0].achievements;
+            scope.user.problems = data.data[0].problems;
+
+            scope.user.yop1 = data.data[1].yop;
+            scope.user.institute1 = data.data[1].institute;
+            scope.user.percentage1 = data.data[1].percentage;
+            scope.user.subjects1 = data.data[1].subjects;
+            scope.user.achievements1 = data.data[1].achievements;
+            scope.user.problems1 = data.data[1].problems;
+          });
+
+        },
+        fetchPhoto: function(scope,data){
+          $http.post('/ksm/data/staffFunctions/fetchPhoto.php',data).then(function(data){
+            scope.user.photo = data.data[0].photo;
+          });
+
+        }
+
+      }
+    }])
+    .factory('myStudentsAssessment',['$http',function($http){
+      return{
+        fetchAssessment: function(scope){
+          $http.post('/ksm/data/kmeans/Test.php').then(function(data){
+            scope.assessment = data.data;
+            console.log(data.data);
+          });
+        }
+      }
+    }])
     .factory('adminFunctions',['$http',function($http){
       return {
         fetchUnvalidatedStaff: function(){
@@ -1419,6 +1556,91 @@
         submitData: function($data){
           return $http.post('/ksm/data/proctor/storeUnivData.php',$data);
         }
+      }
+    }])
+    .factory('studentData',['$http',function($http){
+      return {
+        fetchFEAcad: function(scope,$data){
+          $http.post('/ksm/data/staffFunctions/fetchFEAcad.php',$data).then(function(data){
+            scope.feacad = data.data;
+          });
+        },
+        fetchFEResearch: function(scope,$data){
+          $http.post('/ksm/data/staffFunctions/fetchFEResearch.php',$data).then(function(data){
+            scope.feresearch = data.data;
+          });
+        },
+        fetchFESelfDev: function(scope,$data){
+          $http.post('/ksm/data/staffFunctions/fetchFESelfDev.php',$data).then(function(data){
+            scope.feselfdev = data.data;
+          });
+        },
+        fetchFEExtra: function(scope,$data){
+          $http.post('/ksm/data/staffFunctions/fetchFEExtra.php',$data).then(function(data){
+            scope.feextra = data.data;
+          });
+        },
+        fetchSEAcad: function(scope,$data){
+          $http.post('/ksm/data/staffFunctions/fetchSEAcad.php',$data).then(function(data){
+            scope.seacad = data.data;
+          });
+        },
+        fetchSEResearch: function(scope,$data){
+          $http.post('/ksm/data/staffFunctions/fetchSEResearch.php',$data).then(function(data){
+            scope.seresearch = data.data;
+          });
+        },
+        fetchSESelfDev: function(scope,$data){
+          $http.post('/ksm/data/staffFunctions/fetchSESelfDev.php',$data).then(function(data){
+            scope.seselfdev = data.data;
+          });
+        },
+        fetchSEExtra: function(scope,$data){
+          $http.post('/ksm/data/staffFunctions/fetchSEExtra.php',$data).then(function(data){
+            scope.seextra = data.data;
+          });
+        },
+        fetchTEAcad: function(scope,$data){
+          $http.post('/ksm/data/staffFunctions/fetchTEAcad.php',$data).then(function(data){
+            scope.teacad = data.data;
+          });
+        },
+        fetchTEResearch: function(scope,$data){
+          $http.post('/ksm/data/staffFunctions/fetchTEResearch.php',$data).then(function(data){
+            scope.teresearch = data.data;
+          });
+        },
+        fetchTESelfDev: function(scope,$data){
+          $http.post('/ksm/data/staffFunctions/fetchTESelfDev.php',$data).then(function(data){
+            scope.teselfdev = data.data;
+          });
+        },
+        fetchTEExtra: function(scope,$data){
+          $http.post('/ksm/data/staffFunctions/fetchTEExtra.php',$data).then(function(data){
+            scope.teextra = data.data;
+          });
+        },
+        fetchBEAcad: function(scope,$data){
+          $http.post('/ksm/data/staffFunctions/fetchBEAcad.php',$data).then(function(data){
+            scope.beacad = data.data;
+          });
+        },
+        fetchBEResearch: function(scope,$data){
+          $http.post('/ksm/data/staffFunctions/fetchBEResearch.php',$data).then(function(data){
+            scope.beresearch = data.data;
+          });
+        },
+        fetchBESelfDev: function(scope,$data){
+          $http.post('/ksm/data/staffFunctions/fetchBESelfDev.php',$data).then(function(data){
+            scope.beselfdev = data.data;
+          });
+        },
+        fetchBEExtra: function(scope,$data){
+          $http.post('/ksm/data/staffFunctions/fetchBEExtra.php',$data).then(function(data){
+            scope.beextra = data.data;
+          });
+        }
+
       }
     }])
     .factory('attendanceData',['$http',function($http){

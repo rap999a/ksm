@@ -77,6 +77,56 @@ class proctor {
       $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
       return $data;
     }
+
+    public function fetchPhoto($id){
+      $stmt = $this->pdo->prepare("SELECT photo FROM PM010001 WHERE prim_id = :student_id");
+      $stmt->bindParam(":student_id",$id,PDO::PARAM_STR);
+      $stmt->execute();
+      $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      return $row;
+    }
+
+    public function fetchProctorBasic($id){
+
+      $stmt = $this->pdo->prepare("SELECT * FROM PM010002 WHERE sr_no = :student_id");
+      $stmt->bindParam(":student_id",$id,PDO::PARAM_STR);
+      $stmt->execute();
+      $count = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      return $count;
+    }
+
+    public function fetchProctorRest($id){
+
+      $stmt = $this->pdo->prepare("SELECT * FROM PM010003 WHERE student_key_id = :student_id");
+      $stmt->bindParam(":student_id",$id,PDO::PARAM_STR);
+      $stmt->execute();
+      $count = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      return $count;
+    }
+
+    public function fetchCurrentClass($id){
+      $active = 1;
+      $stmt = $this->pdo->prepare("SELECT class_id,division FROM PM010011 WHERE student_key_id = :student_id AND active = :active");
+      $stmt->bindParam(":student_id",$id,PDO::PARAM_STR);
+      $stmt->bindParam(":active",$active,PDO::PARAM_STR);
+      $stmt->execute();
+      $count = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      return $count;
+    }
+
+    public function fetchPrevAcademic($id){
+      $stmt = $this->pdo->prepare("SELECT student_id FROM PM010001 WHERE prim_id = :student_id");
+      $stmt->bindParam(":student_id",$id,PDO::PARAM_STR);
+      $stmt->execute();
+      $count = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+      $stmt = $this->pdo->prepare("SELECT * FROM PM010008 WHERE student_id = :student_id");
+      $stmt->bindParam(":student_id",$count[0]['student_id'],PDO::PARAM_STR);
+      $stmt->execute();
+      $count = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      return $count;
+    }
+
     public function fetchCertificates($classId){
 
       $stmt = $this->pdo->prepare("SELECT * FROM PM010015 WHERE student_id = :student_id AND class_id = :class_id");
@@ -154,6 +204,21 @@ class proctor {
       }
       echo json_encode($count);
     }
+
+    public function checkEntryUT($table,$classId){
+      $stmt = $this->pdo->prepare("SELECT prim_id,approved FROM ".$table." WHERE class_id = :class_id AND student_id = :student_id");
+      $stmt->bindParam(":class_id",$classId,PDO::PARAM_STR);
+      $stmt->bindParam(":student_id",$_SESSION['studentId'],PDO::PARAM_STR);
+      $stmt->execute();
+      $dbData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      $count = $stmt->rowCount();
+      if ($count == 1) {
+        $_SESSION['approved'] = $dbData[0]['approved'];
+      }
+      echo json_encode($count);
+    }
+
+
     public function checkEntryAttendance($table,$classId){
       $fnight = "f_".$classId[0]['fortnight'];
       $null = 0;
@@ -423,7 +488,7 @@ class proctor {
       return $data;
     }
     public function fetchMyStudents(){
-      $stmt = $this->pdo->prepare("SELECT PM010002.firstname,PM010002.lastname,PM010012.student_id,PM010012.current_class FROM PM010002 INNER JOIN PM010012 ON PM010012.student_id = PM010002.sr_no WHERE PM010012.staff_key_id = :id");
+      $stmt = $this->pdo->prepare("SELECT PM010002.firstname,PM010002.lastname,PM010012.student_id,PM010012.current_class,PM010002.studentID,PM010002.email FROM PM010002 INNER JOIN PM010012 ON PM010012.student_id = PM010002.sr_no WHERE PM010012.staff_key_id = :id");
       $stmt->bindParam(":id",$_SESSION['user_plexus_id'],PDO::PARAM_STR);
       $stmt->execute();
       $data = $stmt->fetchAll(PDO::FETCH_ASSOC);

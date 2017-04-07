@@ -1,0 +1,280 @@
+<div layout="column" layout-gt-md="row">
+  <div flex="20" style="max-width: 20%;"></div>
+  <div flex="60">
+    <br>
+    <br>
+    <md-card>
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">{{user.firstname}} {{user.lastname}}</span>
+          <span class="md-subhead">{{user.studentID}}</span>
+           <span class="md-subhead">{{user.class}}   Div : {{user.division}}</span>
+           <span class="md-subhead">{{user.branch}} Department</span>
+           <span class="md-subhead">{{user.email}}</span>
+           <span class="md-subhead">+91 {{user.phone}}</span>
+        </md-card-title-text>
+        <md-card-title-media>
+            <div class="md-media-lg card-media">
+              <img src="{{user.photo}}" alt="">
+            </div>
+          </md-card-title-media>
+      </md-card-title>
+      <md-card-content>
+        <md-tabs md-dynamic-height md-border-bottom>
+          //$############################## 1 ###############################
+            <md-tab label="Personal Information">
+              <br>
+              <div layout="column" layout-gt-md="row">
+                  <div flex="10" style="max-width: 10%;"></div>
+                  <div flex="80">
+                    <p class="md-headline">Residential Details</p>
+                    <div layout="row" style="margin-top:-30px;">
+                        <div flex="30">
+                            <h6 style="font-size:14px;">Local Address</h6>
+                        </div>
+                        <div flex="70" style="margin-top:-3px;">
+                            <h6 style="font-size:14px;" class="md-subhead">{{user.Laddress}}</h6>
+                        </div>
+                    </div>
+                    <div layout="row" style="margin-top:-45px;">
+                        <div flex="30">
+                          <h6 style="font-size:14px;">Permanent Address</h6>
+                        </div>
+                        <div flex="70" style="margin-top:-3px;">
+                          <h6 style="font-size:14px;" class="md-subhead">{{user.Paddress}}</h6>
+                        </div>
+                    </div>
+
+                    <p class="md-headline">Family Details</p>
+                    <div layout="row" style="margin-top:-30px;">
+                        <div flex="25">
+                            <h6 style="font-size:14px;">Father's Name</h6>
+                        </div>
+                        <div flex="25" style="margin-top:-3px;">
+                            <h6 style="font-size:14px;" class="md-subhead">{{user.fathername}} </h6>
+                        </div>
+                        <div flex="25">
+                            <h6 style="font-size:14px;">Mother's Name</h6>
+                        </div>
+                        <div flex="25" style="margin-top:-3px;">
+                            <h6 style="font-size:14px;" class="md-subhead">{{user.mothername}}</h6>
+                        </div>
+                    </div>
+                    <div layout="row" style="margin-top:-45px;">
+                        <div flex="25">
+                          <h6 style="font-size:14px;">Father's Occupation</h6>
+                        </div>
+                        <div flex="25" style="margin-top:-3px;">
+                          <h6 style="font-size:14px;" class="md-subhead">{{user.foccupation}}</h6>
+                        </div>
+                        <div flex="25">
+                          <h6 style="font-size:14px;">Mother's Occupation</h6>
+                        </div>
+                        <div flex="25" style="margin-top:-3px;">
+                          <h6 style="font-size:14px;" class="md-subhead">{{user.moccupation}}</h6>
+                        </div>
+                    </div>
+                    <div layout="row" style="margin-top:-45px;">
+                        <div flex="25">
+                          <h6 style="font-size:14px;">Father's Contact</h6>
+                        </div>
+                        <div flex="25" style="margin-top:-3px;">
+                          <h6 style="font-size:14px;" class="md-subhead">{{user.fcontact}}</h6>
+                        </div>
+                        <div flex="25">
+                          <h6 style="font-size:14px;">Mother's Contact</h6>
+                        </div>
+                        <div flex="25" style="margin-top:-3px;">
+                          <h6 style="font-size:14px;" class="md-subhead">{{user.mcontact}}</h6>
+                        </div>
+                    </div>
+                  </div>
+                  <div flex="10" style="max-width: 10%;"></div>
+              </div>
+            </md-tab>
+
+          //$############################## 2 ###############################
+
+            <md-tab label="Basic Details">
+              <br>
+              <div layout="column" layout-gt-md="row">
+                <div flex="10" style="max-width: 10%;"></div>
+                <div flex="80">
+                  <p class="md-headline">Basic Details</p>
+                  <div layout="row" style="margin-top:-30px;">
+                      <div flex="25">
+                          <h6 style="font-size:14px;">Local Guardian</h6>
+                      </div>
+                      <div flex="25" style="margin-top:-3px;">
+                          <h6 style="font-size:14px;" class="md-subhead">{{user.guardianname}} </h6>
+                      </div>
+                      <div flex="25">
+                          <h6 style="font-size:14px;">Contact</h6>
+                      </div>
+                      <div flex="25" style="margin-top:-3px;">
+                          <h6 style="font-size:14px;" class="md-subhead">{{user.gcontact}}</h6>
+                      </div>
+                  </div>
+                  <div layout="row" style="margin-top:-45px;">
+                      <div flex="25">
+                        <h6 style="font-size:14px;">Family Doctor</h6>
+                      </div>
+                      <div flex="25" style="margin-top:-3px;">
+                        <h6 style="font-size:14px;" class="md-subhead">{{user.docname}}</h6>
+                      </div>
+                      <div flex="25">
+                        <h6 style="font-size:14px;">Contact</h6>
+                      </div>
+                      <div flex="25" style="margin-top:-3px;">
+                        <h6 style="font-size:14px;" class="md-subhead">{{user.docContact}}</h6>
+                      </div>
+                  </div>
+                  <div layout="row" style="margin-top:-30px;">
+                      <div flex="30">
+                          <h6 style="font-size:14px;">Medical History</h6>
+                      </div>
+                      <div flex="70" style="margin-top:-3px;">
+                          <h6 style="font-size:14px;" class="md-subhead">{{user.medicalHistory}}</h6>
+                      </div>
+                  </div>
+                  <div layout="row" style="margin-top:-30px;">
+                      <div flex="30">
+                          <h6 style="font-size:14px;">Personality Traits</h6>
+                      </div>
+                      <div flex="70" style="margin-top:-3px;">
+                          <h6 style="font-size:14px;" class="md-subhead">{{user.Personality}}</h6>
+                      </div>
+                  </div>
+                  <div layout="row" style="margin-top:-45px;">
+                      <div flex="30">
+                        <h6 style="font-size:14px;">Interests / Hobbies</h6>
+                      </div>
+                      <div flex="70" style="margin-top:-3px;">
+                        <h6 style="font-size:14px;" class="md-subhead">{{user.interests}}</h6>
+                      </div>
+                  </div>
+                  <div layout="row" style="margin-top:-45px;">
+                      <div flex="30">
+                        <h6 style="font-size:14px;">Awards / Achievements</h6>
+                      </div>
+                      <div flex="70" style="margin-top:-3px;">
+                        <h6 style="font-size:14px;" class="md-subhead">{{user.awards}}</h6>
+                      </div>
+                  </div>
+                  <div layout="row" style="margin-top:-45px;">
+                      <div flex="30">
+                        <h6 style="font-size:14px;">Role Model / Inspiration</h6>
+                      </div>
+                      <div flex="70" style="margin-top:-3px;">
+                        <h6 style="font-size:14px;" class="md-subhead">{{user.roleModel}}</h6>
+                      </div>
+                  </div>
+                </div>
+                <div flex="10" style="max-width: 10%;"></div>
+              </div>
+            </md-tab>
+
+          //$############################## 3 ###############################
+
+            <md-tab label="Academic Details">
+              <br>
+              <div layout="column" layout-gt-md="row">
+                <div flex="5" style="max-width: 5%;"></div>
+                <div flex="90">
+                  <p class="md-headline">SSC Details</p>
+                  <div layout="row" style="margin-top:-30px;">
+                      <div flex="25">
+                          <h6 style="font-size:13px;">Year Of Passing</h6>
+                      </div>
+                      <div flex="25" style="margin-top:-3px;">
+                          <h6 style="font-size:13px;" class="md-subhead">{{user.yop}}</h6>
+                      </div>
+                      <div flex="25">
+                          <h6 style="font-size:13px;">Subject Of Interests</h6>
+                      </div>
+                      <div flex="25" style="margin-top:-3px;">
+                          <h6 style="font-size:13px;" class="md-subhead">{{user.subjects}}</h6>
+                      </div>
+                  </div>
+                  <div layout="row" style="margin-top:-45px;">
+                      <div flex="25">
+                        <h6 style="font-size:13px;">School Attended</h6>
+                      </div>
+                      <div flex="25" style="margin-top:-3px;">
+                        <h6 style="font-size:13px;" class="md-subhead">{{user.institute}}</h6>
+                      </div>
+                      <div flex="25">
+                        <h6 style="font-size:13px;">Achievements / Activites</h6>
+                      </div>
+                      <div flex="25" style="margin-top:-3px;">
+                        <h6 style="font-size:13px;" class="md-subhead">{{user.achievements}}</h6>
+                      </div>
+                  </div>
+                  <div layout="row" style="margin-top:-45px;">
+                      <div flex="25">
+                        <h6 style="font-size:13px;">Percentage</h6>
+                      </div>
+                      <div flex="25" style="margin-top:-3px;">
+                        <h6 style="font-size:13px;" class="md-subhead">{{user.percentage}}</h6>
+                      </div>
+                      <div flex="25">
+                        <h6 style="font-size:13px;">Problems / Difficulties</h6>
+                      </div>
+                      <div flex="25" style="margin-top:-3px;">
+                        <h6 style="font-size:13px;" class="md-subhead">{{user.problems}}</h6>
+                      </div>
+                  </div>
+                  <p class="md-headline">HSC Details</p>
+                  <div layout="row" style="margin-top:-30px;">
+                      <div flex="25">
+                          <h6 style="font-size:13px;">Year Of Passing</h6>
+                      </div>
+                      <div flex="25" style="margin-top:-3px;">
+                          <h6 style="font-size:13px;" class="md-subhead">{{user.yop1}}</h6>
+                      </div>
+                      <div flex="25">
+                          <h6 style="font-size:13px;">Subject Of Interests</h6>
+                      </div>
+                      <div flex="25" style="margin-top:-3px;">
+                          <h6 style="font-size:13px;" class="md-subhead">{{user.subjects1}}</h6>
+                      </div>
+                  </div>
+                  <div layout="row" style="margin-top:-45px;">
+                      <div flex="25">
+                        <h6 style="font-size:13px;">School Attended</h6>
+                      </div>
+                      <div flex="25" style="margin-top:-3px;">
+                        <h6 style="font-size:13px;" class="md-subhead">{{user.institute1}}</h6>
+                      </div>
+                      <div flex="25">
+                        <h6 style="font-size:13px;">Achievements / Activites</h6>
+                      </div>
+                      <div flex="25" style="margin-top:-3px;">
+                        <h6 style="font-size:13px;" class="md-subhead">{{user.achievements1}}</h6>
+                      </div>
+                  </div>
+                  <div layout="row" style="margin-top:-45px;">
+                      <div flex="25">
+                        <h6 style="font-size:13px;">Percentage</h6>
+                      </div>
+                      <div flex="25" style="margin-top:-3px;">
+                        <h6 style="font-size:13px;" class="md-subhead">{{user.percentage1}}</h6>
+                      </div>
+                      <div flex="25">
+                        <h6 style="font-size:13px;">Problems / Difficulties</h6>
+                      </div>
+                      <div flex="25" style="margin-top:-3px;">
+                        <h6 style="font-size:13px;" class="md-subhead">{{user.problems1}}</h6>
+                      </div>
+                  </div>
+
+                </div>
+                <div flex="5" style="max-width: 5%;"></div>
+              </div>
+            </md-tab>
+        </md-tabs>
+      </md-card-content>
+    </md-card>
+  </div>
+  <div flex="20" style="max-width: 20%;"></div>
+</div>

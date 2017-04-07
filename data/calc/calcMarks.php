@@ -11,6 +11,16 @@ $allResearchData = $obj->fetchAllResearch();
 $allSelfDevData = $obj->fetchAllSelfDev();
 $ExtraCurricularData = $obj->fetchExtraCurricularData();
 
+$fecontinuous = 0;
+$secontinuous = 0;
+$tecontinuous = 0;
+$becontinuous = 0;
+
+$feacad = 18;
+$seacad = 18;
+$teacad = 18;
+$beacad = 18;
+
 $feAttendance = ($allAttendance[0]['attendance_percentage'] + $allAttendance[1]['attendance_percentage'])/2;
 $seAttendance = ($allAttendance[2]['attendance_percentage'] + $allAttendance[3]['attendance_percentage'])/2;
 $teAttendance = ($allAttendance[4]['attendance_percentage'] + $allAttendance[5]['attendance_percentage'])/2;
@@ -25,21 +35,27 @@ $beAttendance = ($allAttendance[6]['attendance_percentage'] + $allAttendance[7][
   $beUnitTest = ($allUnitTest[12]['percentage'] + $allUnitTest[13]['percentage'] + $allUnitTest[14]['percentage'] + $allUnitTest[15]['percentage'])/4;
 
   $fePracPerf = 491;
+  $feese = 100;
+  $seese = 100;
+  $teese = 100;
+  $beese = 100;
 
   if ($feAttendance > 74 && $feAttendance < 86  ) {
     $marks_total += 3;
+    $fecontinuous += 3;
   }
   else if ($feAttendance > 84 && $feAttendance < 91) {
     $marks_total += 5;
+    $fecontinuous += 5;
 
   }
   else if ($feAttendance > 90 && $feAttendance < 96) {
     $marks_total += 7;
-
+    $fecontinuous +=7;
   }
   else if ($feAttendance > 94 && $feAttendance < 101) {
     $marks_total += 10;
-
+    $fecontinuous += 10;
   }
   else {
     $marks_total += 0;
@@ -48,17 +64,21 @@ $beAttendance = ($allAttendance[6]['attendance_percentage'] + $allAttendance[7][
 
   if ($seAttendance > 74 && $seAttendance < 86  ) {
     $marks_total += 3;
+    $secontinuous += 3;
   }
   else if ($seAttendance > 84 && $seAttendance < 91) {
     $marks_total += 5;
+    $secontinuous += 5;
 
   }
   else if ($seAttendance > 90 && $seAttendance < 96) {
     $marks_total += 7;
+    $secontinuous += 7;
 
   }
   else if ($seAttendance > 94 && $seAttendance < 101) {
     $marks_total += 10;
+    $secontinuous += 10;
 
   }
   else {
@@ -68,17 +88,21 @@ $beAttendance = ($allAttendance[6]['attendance_percentage'] + $allAttendance[7][
 
   if ($teAttendance > 74 && $teAttendance < 86  ) {
     $marks_total += 3;
+    $tecontinuous += 3;
   }
   else if ($teAttendance > 84 && $teAttendance < 91) {
     $marks_total += 5;
+    $tecontinuous += 5;
 
   }
   else if ($teAttendance > 90 && $teAttendance < 96) {
+    $tecontinuous += 7;
     $marks_total += 7;
 
   }
   else if ($teAttendance > 94 && $teAttendance < 101) {
     $marks_total += 10;
+    $tecontinuous += 10;
 
   }
   else {
@@ -88,17 +112,21 @@ $beAttendance = ($allAttendance[6]['attendance_percentage'] + $allAttendance[7][
 
   if ($beAttendance > 74 && $beAttendance < 86  ) {
     $marks_total += 3;
+    $becontinuous += 3;
   }
   else if ($beAttendance > 84 && $beAttendance < 91) {
     $marks_total += 5;
+    $becontinuous += 5;
 
   }
   else if ($beAttendance > 90 && $beAttendance < 96) {
     $marks_total += 7;
+    $becontinuous += 7;
 
   }
   else if ($beAttendance > 94 && $beAttendance < 101) {
     $marks_total += 10;
+    $becontinuous += 10;
 
   }
   else {
@@ -109,17 +137,21 @@ $beAttendance = ($allAttendance[6]['attendance_percentage'] + $allAttendance[7][
 
   if ($feUnitTest > 50 && $feUnitTest < 61  ) {
     $marks_total += 3;
+    $fecontinuous += 3;
   }
   else if ($feUnitTest > 60 && $feUnitTest < 71) {
     $marks_total += 5;
+    $fecontinuous += 5;
 
   }
   else if ($feUnitTest > 70 && $feUnitTest < 91) {
     $marks_total += 7;
+    $fecontinuous += 7;
 
   }
   else if ($feUnitTest > 90 && $feUnitTest < 101) {
     $marks_total += 10;
+    $fecontinuous += 10;
 
   }
   else {
@@ -129,17 +161,21 @@ $beAttendance = ($allAttendance[6]['attendance_percentage'] + $allAttendance[7][
 
   if ($seUnitTest > 50 && $seUnitTest < 61  ) {
     $marks_total += 3;
+    $secontinuous += 3;
   }
   else if ($seUnitTest > 60 && $seUnitTest < 71) {
     $marks_total += 5;
+    $secontinuous += 5;
 
   }
   else if ($seUnitTest > 70 && $seUnitTest < 91) {
     $marks_total += 7;
+    $secontinuous += 7;
 
   }
   else if ($seUnitTest > 90 && $seUnitTest < 101) {
     $marks_total += 10;
+    $secontinuous += 10;
 
   }
   else {
@@ -149,17 +185,21 @@ $beAttendance = ($allAttendance[6]['attendance_percentage'] + $allAttendance[7][
 
   if ($teUnitTest > 50 && $teUnitTest < 61  ) {
     $marks_total += 3;
+    $tecontinuous += 3;
   }
   else if ($teUnitTest > 60 && $teUnitTest < 71) {
     $marks_total += 5;
+    $tecontinuous += 5;
 
   }
   else if ($teUnitTest > 70 && $teUnitTest < 91) {
     $marks_total += 7;
+    $tecontinuous += 7;
 
   }
   else if ($teUnitTest > 90 && $teUnitTest < 101) {
     $marks_total += 10;
+    $tecontinuous += 10;
 
   }
   else {
@@ -169,18 +209,22 @@ $beAttendance = ($allAttendance[6]['attendance_percentage'] + $allAttendance[7][
 
   if ($beUnitTest > 50 && $beUnitTest <= 60  ) {
     $marks_total += 3;
+    $becontinuous += 3;
   }
   else if ($beUnitTest > 60 && $beUnitTest <= 70) {
     $marks_total += 5;
+    $becontinuous += 5;
 
   }
   else if ($beUnitTest > 70 && $beUnitTest <= 90) {
     $marks_total += 7;
+    $becontinuous += 7;
 
 
   }
   else if ($beUnitTest > 90 && $beUnitTest < 101) {
     $marks_total += 10;
+    $becontinuous += 10;
 
   }
   else {
@@ -349,30 +393,43 @@ $beAttendance = ($allAttendance[6]['attendance_percentage'] + $allAttendance[7][
 
    if($feresearchMarks >= 10){
      $researchMarks += 10;
+     $feresearchMarks = 10;
    }
    else {
      $researchMarks += $feresearchMarks;
+
+
    }
 
    if($seresearchMarks >= 30){
      $researchMarks += 30;
+     $seresearchMarks = 30;
+
    }
    else {
      $researchMarks += $seresearchMarks;
+
+
    }
 
    if($teresearchMarks >= 60){
      $researchMarks += 60;
+     $teresearchMarks = 60;
    }
    else {
      $researchMarks += $teresearchMarks;
+
+
    }
 
    if($beresearchMarks >= 60){
      $researchMarks += 60;
+     $beresearchMarks = 60;
    }
    else {
      $researchMarks += $beresearchMarks;
+
+
    }
 
   $feselfdevdata = 0;
@@ -682,30 +739,44 @@ $beAttendance = ($allAttendance[6]['attendance_percentage'] + $allAttendance[7][
 
   if($feselfdevdata >= 20){
     $SelfDevData += 20;
+    $feselfdevdata = 20;
   }
   else {
     $SelfDevData += $feselfdevdata;
+
+
   }
 
   if($seselfdevdata >= 50){
     $SelfDevData += 50;
+    $seselfdevdata = 50;
+
   }
   else {
     $SelfDevData += $seselfdevdata;
+
+
   }
 
   if($teselfdevdata >= 50){
     $SelfDevData += 50;
+    $teselfdevdata = 50;
+
   }
   else {
     $SelfDevData += $teselfdevdata;
+
+
   }
 
   if($beselfdevdata >= 30){
     $SelfDevData += 30;
+    $beselfdevdata = 30;
+
   }
   else {
     $SelfDevData += $beselfdevdata;
+
   }
 
   $feextracurriMarks = 0;
@@ -929,27 +1000,40 @@ $beAttendance = ($allAttendance[6]['attendance_percentage'] + $allAttendance[7][
 
   if($feextracurriMarks >= 10){
     $extracurriMarks += 10;
+    $feextracurriMarks = 10;
   }
   else {
     $extracurriMarks += $feextracurriMarks;
+
+
   }
 
   if($seextracurriMarks >= 35){
     $extracurriMarks += 35;
+    $seextracurriMarks = 35;
+
   }
   else {
     $extracurriMarks += $seextracurriMarks;
+
+
   }
 
   if($teextracurriMarks >= 35){
     $extracurriMarks += 35;
+    $teextracurriMarks = 35;
+
   }
   else {
     $extracurriMarks += $teextracurriMarks;
+
+
   }
 
   if($beextracurriMarks >= 20){
     $extracurriMarks += 20;
+    $beextracurriMarks = 20;
+
   }
   else {
     $extracurriMarks += $beextracurriMarks;
@@ -960,6 +1044,45 @@ $returnArray['academic'] = $marks_total;
 $returnArray['research'] = $researchMarks;
 $returnArray['selfDev'] = $SelfDevData;
 $returnArray['Extracurriculars'] = $extracurriMarks;
+
+$returnArray['fe']['continuous'] = $fecontinuous;
+$returnArray['se']['continuous'] = $secontinuous;
+$returnArray['te']['continuous'] = $tecontinuous;
+$returnArray['be']['continuous'] = $becontinuous;
+
+$returnArray['be']['acad'] = $beacad;
+$returnArray['se']['acad'] = $seacad;
+$returnArray['te']['acad'] = $teacad;
+$returnArray['fe']['acad'] = $feacad;
+
+$returnArray['fe']['ese'] = $feese;
+$returnArray['se']['ese'] = $seese;
+$returnArray['te']['ese'] = $teese;
+$returnArray['be']['ese'] = $beese;
+
+$returnArray['fe']['research'] = $feresearchMarks;
+$returnArray['se']['research'] = $seresearchMarks;
+$returnArray['te']['research'] = $teresearchMarks;
+$returnArray['be']['research'] = $beresearchMarks;
+
+$returnArray['fe']['selfdev'] = $feselfdevdata;
+$returnArray['se']['selfdev'] = $seselfdevdata;
+$returnArray['te']['selfdev'] = $teselfdevdata;
+$returnArray['be']['selfdev'] = $beselfdevdata;
+
+$returnArray['fe']['extra'] = $feextracurriMarks;
+$returnArray['se']['extra'] = $seextracurriMarks;
+$returnArray['te']['extra'] = $teextracurriMarks;
+$returnArray['be']['extra'] = $beextracurriMarks;
+
+
+
+
+
+
+
+
+
 echo json_encode ($returnArray);
 
  ?>

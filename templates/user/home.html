@@ -291,7 +291,7 @@
             </md-tab>
             <md-tab label="Assessment">
               <md-content class="md-padding" ng-controller="assessmentCtrl">
-                <div layout="column" layout-gt-md="row">
+                <!-- <div layout="column" layout-gt-md="row">
                   <div flex="5" style="max-width: 5%;"></div>
                   <div flex="90">
                     <div layout="row" style="margin-top:-45px;">
@@ -336,7 +336,267 @@
                     </div>
                   </div>
                   <div flex="5" style="max-width: 5%;"></div>
-                </div>
+                </div> -->
+                <md-card>
+                <div layout="column" layout-gt-md="row">
+                  <div flex="5" style="max-width: 5%;"></div>
+                  <div flex="90">
+                    <p class="md-headline"> First Year ( Total Marks 190) </p>
+                      <div flex="75">
+                              <h6 style="font-size:17px;">Academic Performance (150) </h6>
+                      </div>
+                    <div layout="row" style="margin-top:-30px;">
+                        <div flex="30">
+                            <h6 style="font-size:13px;">Continuous Assessment(30)</h6>
+                        </div>
+                        <div flex="30" style="margin-top:-3px;">
+                            <h6 style="font-size:13px;" class="md-subhead">{{marks.fe.continuous}}</h6>
+                        </div>
+                        <div flex="25">
+                            <h6 style="font-size:13px;">End-Sem Assessment (100)</h6>
+                        </div>
+                        <div flex="15" style="margin-top:-3px;">
+                            <h6 style="font-size:13px;" class="md-subhead">{{marks.fe.ese}}</h6>
+                        </div>
+                    </div>
+                    <div layout="row" style="margin-top:-30px;">
+                        <div flex="30">
+                          <h6 style="font-size:13px;">Academic Achievement (20) </h6>
+                        </div>
+                        <div flex="30" style="margin-top:-3px;">
+                          <h6 style="font-size:13px;" class="md-subhead">{{marks.fe.acad}}</h6>
+                        </div>
+                    </div>
+                      <div flex="75">
+                              <h6 style="font-size:17px;">Research And Innovation (10) </h6>
+                      </div>
+                    <div layout="row" style="margin-top:-30px;">
+                        <div flex="75">
+                            <h6 style="font-size:13px;"> Marks scored (10) </h6>
+                        </div>
+                        <div flex="25" style="margin-top:-3px;">
+                            <h6 style="font-size:13px;" class="md-subhead">{{marks.fe.research}}</h6>
+                        </div>
+                    </div>
+                    <div layout="row">
+                      <div flex="75">
+                              <h6 style="font-size:17px;">Self Development (20 )</h6>
+                      </div>
+                      <div flex="25">
+                          <h6 style="font-size:13px;" class="md-subhead">{{marks.fe.selfdev}}</h6>
+                      </div>
+                    </div>
+
+                  <div flex="75">
+                        <h6 style="font-size:17px;"> Extra-Curricular (10 )</h6>
+                  </div>
+                    <div layout="row" style="margin-top:-30px;">
+                        <div flex="75">
+                            <h6 style="font-size:13px;"> Marks scored (10) </h6>
+                        </div>
+                        <div flex="25" style="margin-top:-3px;">
+                            <h6 style="font-size:13px;" class="md-subhead">{{marks.fe.extra}}</h6>
+                        </div>
+                    </div>
+                  </div>
+                <div flex="5" style="max-width: 5%;"></div>
+               </div>
+              </md-card>
+              <md-card>
+                <div layout="column" layout-gt-md="row">
+                  <div flex="5" style="max-width: 5%;"></div>
+                  <div flex="90">
+                    <p class="md-headline"> Second Year ( Total Marks 265) </p>
+                      <div flex="75">
+                              <h6 style="font-size:17px;">Academic Performance (150)</h6>
+                      </div>
+                    <div layout="row" style="margin-top:-30px;">
+                        <div flex="30">
+                            <h6 style="font-size:13px;">Continuous Assessment (30)</h6>
+                        </div>
+                        <div flex="30" style="margin-top:-3px;">
+                            <h6 style="font-size:13px;" class="md-subhead">{{marks.se.continuous}}</h6>
+                        </div>
+                        <div flex="25">
+                            <h6 style="font-size:13px;">End-Sem Assessment (100)</h6>
+                        </div>
+                        <div flex="15" style="margin-top:-3px;">
+                            <h6 style="font-size:13px;" class="md-subhead">{{marks.se.ese}}</h6>
+                        </div>
+                    </div>
+                    <div layout="row" style="margin-top:-30px;">
+                        <div flex="30">
+                          <h6 style="font-size:13px;">Academic Achievement (20) </h6>
+                        </div>
+                        <div flex="30" style="margin-top:-3px;">
+                          <h6 style="font-size:13px;" class="md-subhead">{{marks.se.acad}}</h6>
+                        </div>
+                    </div>
+                      <div flex="75">
+                              <h6 style="font-size:17px;">Research And Innovation (30) </h6>
+                      </div>
+                    <div layout="row" style="margin-top:-30px;">
+                        <div flex="75">
+                            <h6 style="font-size:13px;"> Marks scored (30) </h6>
+                        </div>
+                        <div flex="25" style="margin-top:-3px;">
+                            <h6 style="font-size:13px;" class="md-subhead">{{marks.se.research}}</h6>
+                        </div>
+                    </div>
+                    <div layout="row">
+                      <div flex="75">
+                              <h6 style="font-size:17px;">Self Development (50 )</h6>
+                      </div>
+                      <div flex="25" style="margin-top:-3px;">
+                          <h6 style="font-size:13px;" class="md-subhead">{{marks.se.selfdev}}</h6>
+                      </div>
+                    </div>
+
+                  <div flex="75">
+                        <h6 style="font-size:17px;"> Extra-Curricular (35 )</h6>
+                  </div>
+                    <div layout="row" style="margin-top:-30px;">
+                        <div flex="75">
+                            <h6 style="font-size:13px;"> Marks scored (35) </h6>
+                        </div>
+                        <div flex="25" style="margin-top:-3px;">
+                            <h6 style="font-size:13px;" class="md-subhead">{{marks.se.extra}}</h6>
+                        </div>
+                    </div>
+                  </div>
+                <div flex="5" style="max-width: 5%;"></div>
+               </div>
+              </md-card>
+              <md-card>
+                <div layout="column" layout-gt-md="row">
+                  <div flex="5" style="max-width: 5%;"></div>
+                  <div flex="90">
+                    <p class="md-headline"> Third Year ( Total Marks 295) </p>
+                      <div flex="75">
+                              <h6 style="font-size:17px;">Academic Performance (150)</h6>
+                      </div>
+                    <div layout="row" style="margin-top:-30px;">
+                        <div flex="30">
+                            <h6 style="font-size:13px;">Continuous Assessment (30)</h6>
+                        </div>
+                        <div flex="30" style="margin-top:-3px;">
+                            <h6 style="font-size:13px;" class="md-subhead">{{marks.te.continuous}}</h6>
+                        </div>
+                        <div flex="25">
+                            <h6 style="font-size:13px;">End-Sem Assessment (100)</h6>
+                        </div>
+                        <div flex="15" style="margin-top:-3px;">
+                            <h6 style="font-size:13px;" class="md-subhead">{{marks.te.ese}}</h6>
+                        </div>
+                    </div>
+                    <div layout="row" style="margin-top:-30px;">
+                        <div flex="30">
+                          <h6 style="font-size:13px;">Academic Achievement (20) </h6>
+                        </div>
+                        <div flex="30" style="margin-top:-3px;">
+                          <h6 style="font-size:13px;" class="md-subhead">{{marks.te.acad}}</h6>
+                        </div>
+                    </div>
+                      <div flex="75">
+                              <h6 style="font-size:17px;">Research And Innovation (60) </h6>
+                      </div>
+                    <div layout="row" style="margin-top:-30px;">
+                        <div flex="75">
+                            <h6 style="font-size:13px;"> Marks scored (60) </h6>
+                        </div>
+                        <div flex="25" style="margin-top:-3px;">
+                            <h6 style="font-size:13px;" class="md-subhead">{{marks.te.research}}</h6>
+                        </div>
+                    </div>
+                    <div layout="row">
+                      <div flex="75">
+                              <h6 style="font-size:17px;">Self Development (50 )</h6>
+                      </div>
+                      <div flex="25" style="margin-top:-3px;">
+                          <h6 style="font-size:13px;" class="md-subhead">{{marks.te.selfdev}}</h6>
+                      </div>
+                    </div>
+
+                  <div flex="75">
+                        <h6 style="font-size:17px;"> Extra-Curricular (35 )</h6>
+                  </div>
+                    <div layout="row" style="margin-top:-30px;">
+                        <div flex="75">
+                            <h6 style="font-size:13px;"> Marks scored (35) </h6>
+                        </div>
+                        <div flex="25" style="margin-top:-3px;">
+                            <h6 style="font-size:13px;" class="md-subhead">{{marks.te.extra}}</h6>
+                        </div>
+                    </div>
+                  </div>
+                <div flex="5" style="max-width: 5%;"></div>
+               </div>
+              </md-card>
+              <md-card>
+                <div layout="column" layout-gt-md="row">
+                  <div flex="5" style="max-width: 5%;"></div>
+                  <div flex="90">
+                    <p class="md-headline"> Final Year ( Total Marks 250) </p>
+                      <div flex="75">
+                              <h6 style="font-size:17px;">Academic Performance (150)</h6>
+                      </div>
+                    <div layout="row" style="margin-top:-30px;">
+                        <div flex="30">
+                            <h6 style="font-size:13px;">Continuous Assessment (30)</h6>
+                        </div>
+                        <div flex="30" style="margin-top:-3px;">
+                            <h6 style="font-size:13px;" class="md-subhead">{{marks.be.continuous}}</h6>
+                        </div>
+                        <div flex="25">
+                            <h6 style="font-size:13px;">End-Sem Assessment (100)</h6>
+                        </div>
+                        <div flex="15" style="margin-top:-3px;">
+                            <h6 style="font-size:13px;" class="md-subhead">{{marks.be.ese}}</h6>
+                        </div>
+                    </div>
+                    <div layout="row" style="margin-top:-30px;">
+                        <div flex="30">
+                          <h6 style="font-size:13px;">Academic Achievement (20) </h6>
+                        </div>
+                        <div flex="30" style="margin-top:-3px;">
+                          <h6 style="font-size:13px;" class="md-subhead">{{marks.be.acad}}</h6>
+                        </div>
+                    </div>
+                      <div flex="75">
+                              <h6 style="font-size:17px;">Research And Innovation (50) </h6>
+                      </div>
+                    <div layout="row" style="margin-top:-30px;">
+                        <div flex="75">
+                            <h6 style="font-size:13px;"> Marks scored (50) </h6>
+                        </div>
+                        <div flex="25" style="margin-top:-3px;">
+                            <h6 style="font-size:13px;" class="md-subhead">{{marks.be.research}}</h6>
+                        </div>
+                    </div>
+                    <div layout="row" style="margin-top:-30px;">
+                      <div flex="75">
+                              <h6 style="font-size:17px;">Self Development (50 )</h6>
+                      </div>
+                        <div flex="25" style="margin-top:-3px;">
+                            <h6 style="font-size:13px;" class="md-subhead">{{marks.be.selfdev}}</h6>
+                        </div>
+                    </div>
+
+                  <div flex="75">
+                        <h6 style="font-size:17px;"> Extra-Curricular (20)</h6>
+                  </div>
+                    <div layout="row" style="margin-top:-30px;">
+                        <div flex="75">
+                            <h6 style="font-size:13px;"> Marks scored (20) </h6>
+                        </div>
+                        <div flex="25" style="margin-top:-3px;">
+                            <h6 style="font-size:13px;" class="md-subhead">{{marks.be.extra}}</h6>
+                        </div>
+                    </div>
+                  </div>
+                <div flex="5" style="max-width: 5%;"></div>
+               </div>
+              </md-card>
               </md-content>
             </md-tab>
         </md-tabs>
